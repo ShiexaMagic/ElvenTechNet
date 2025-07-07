@@ -156,6 +156,29 @@
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Fireresistant Solutions for Construction - Elven Sheets</h2>
                 <p class="text-gray-600 mb-6">Our advanced fireresistant materials are revolutionizing the construction industry, providing unparalleled protection against fire hazards while maintaining structural integrity and aesthetic appeal.</p>
+                
+                <!-- Mini Gallery for Elven Sheets -->
+                <div class="mb-8">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="cursor-pointer hover:opacity-80 transition-opacity construction-gallery-item">
+                            <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
+                                 alt="Elven Sheet Sample 1" 
+                                 class="rounded-lg shadow-sm w-full h-auto">
+                        </div>
+                        <div class="cursor-pointer hover:opacity-80 transition-opacity construction-gallery-item">
+                            <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
+                                 alt="Elven Sheet Sample 2" 
+                                 class="rounded-lg shadow-sm w-full h-auto">
+                        </div>
+                        <div class="cursor-pointer hover:opacity-80 transition-opacity construction-gallery-item">
+                            <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
+                                 alt="Elven Sheet Sample 3" 
+                                 class="rounded-lg shadow-sm w-full h-auto">
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2 text-center md:text-left">Click images to view larger</p>
+                </div>
+                
                 <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 justify-center md:justify-start">
                     <a href="#" class="sample-cta bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Get a Sample</a>
                     <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
@@ -1237,25 +1260,10 @@
             }
         }
         
-        // Auto-play functionality
-        let slideInterval = setInterval(goToNextSlide, 5000);
+        // Fullscreen gallery functionality
+        let fullscreenCurrentSlide = 0;
         
-        const galleryCarousel = document.getElementById('gallery-carousel');
-        galleryCarousel.addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
-        });
-        
-        galleryCarousel.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(goToNextSlide, 5000);
-        });
-        
-        // Fullscreen functionality
         fullscreenButton.addEventListener('click', () => {
-            // Create a fullscreen gallery view
-            const galleryModal = document.createElement('div');
-            galleryModal.classList.add('fixed', 'inset-0', 'z-50', 'bg-black', 'bg-opacity-90', 'flex', 'items-center', 'justify-center', 'p-4');
-            document.body.appendChild(galleryModal);
-            
             // Create a container for the gallery
             const galleryContainer = document.createElement('div');
             galleryContainer.classList.add('w-full', 'max-w-6xl', 'h-full', 'flex', 'flex-col');
