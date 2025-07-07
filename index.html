@@ -146,8 +146,8 @@
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Fireproof Solutions for Construction</h2>
                 <p class="text-gray-600 mb-6">Our advanced fireproof materials are revolutionizing the construction industry, providing unparalleled protection against fire hazards while maintaining structural integrity and aesthetic appeal.</p>
-                <div class="flex space-x-4 justify-center md:justify-start">
-                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Get a Sample</a>
+                <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 justify-center md:justify-start">
+                    <a href="#" class="sample-cta bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Get a Sample</a>
                     <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
                 </div>
             </div>
@@ -1028,14 +1028,24 @@
             thankYouMessage.classList.remove('hidden');
         }
         
+        // Add event listener to the main Order Samples button
         sampleCta.addEventListener('click', (e) => {
             e.preventDefault();
             openSampleForm();
         });
         
+        // Add event listener to the floating Order Samples button
         floatingSampleCta.addEventListener('click', (e) => {
             e.preventDefault();
             openSampleForm();
+        });
+        
+        // Add event listener to all buttons with sample-cta class
+        document.querySelectorAll('.sample-cta').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                openSampleForm();
+            });
         });
         
         closeSampleForm.addEventListener('click', closeSampleFormFunc);
