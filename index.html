@@ -78,6 +78,28 @@
             width: 100% !important;
         }
     }
+    
+    /* Construction section gallery styles */
+    .construction-main-gallery {
+        height: 100%;
+    }
+    
+    #construction-slider {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #construction-slider > div {
+        width: 100%;
+        flex-shrink: 0;
+    }
+    
+    #construction-slider img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+    }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -185,9 +207,41 @@
                 </div>
             </div>
             <div class="md:w-1/2 fade-in delay-1">
-                <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
-                     alt="Construction site with fireproof materials" 
-                     class="rounded-lg shadow-xl w-full h-auto">
+                <!-- Replace static image with swipeable gallery -->
+                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden">
+                    <div id="construction-slider" class="flex transition-transform duration-500 ease-in-out">
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
+                                 alt="Construction site with fireproof materials" 
+                                 class="w-full h-auto">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
+                                 alt="Elven Sheet Application" 
+                                 class="w-full h-auto">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
+                                 alt="Elven Sheet Installation" 
+                                 class="w-full h-auto">
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button id="construction-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
+                        <i class="fas fa-chevron-left text-green-700"></i>
+                    </button>
+                    <button id="construction-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
+                        <i class="fas fa-chevron-right text-green-700"></i>
+                    </button>
+                    
+                    <!-- Navigation Dots -->
+                    <div id="construction-dots" class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                        <button class="w-3 h-3 rounded-full bg-green-600 focus:outline-none"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 hover:bg-green-500 focus:outline-none transition"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 hover:bg-green-500 focus:outline-none transition"></button>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -335,7 +389,7 @@
             </div>
             
             <div class="md:w-1/2 fade-in delay-1">
-                <img src="https://static.wixstatic.com/media/847d72_f37ac773c3c24b0fb625c26e34ba776a~mv2.jpg" 
+                <img src="https://static.wixstatic.com/media/847d
                      alt="Custom fireproof solutions" 
                      class="rounded-lg shadow-xl w-full h-auto">
             </div>
@@ -626,38 +680,6 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                            <span>How our system achieved complete fire and heat containment—no flames, no heat, total safety</span>
-                        </li>
-                    </ul>
-                    <p class="text-gray-700 font-medium">Discover how Elven Technologies is setting new standards in EV battery safety.</p>
-                </div>
-                
-                <div class="mt-8 text-center lg:text-left">
-                    <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Request Similar Solution</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Work in Action</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">See our innovative fireproof materials and solutions in various applications.</p>
-            </div>
-            
-            <div class="relative max-w-5xl mx-auto fade-in">
-                <!-- Carousel container -->
-                <div id="gallery-carousel" class="overflow-hidden rounded-lg shadow-xl">
-                    <div id="gallery-slider" class="flex transition-transform duration-500 ease-in-out">
-                        <!-- Gallery Slide 1 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" 
-                                 alt="Thermal Containment System" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
                                 <h3 class="text-xl font-bold">Thermal Containment System</h3>
                                 <p class="text-sm mt-2">Advanced thermal management solution for high-temperature applications</p>
                             </div>
@@ -687,7 +709,7 @@
                         
                         <!-- Gallery Slide 4 -->
                         <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_6fe43f7438fd4ee59a9fa3652d2dcc0b~mv2.jpg" 
+                            <img src="https://static.wixstatic.com/media/847d
                                  alt="Protective Gear Testing" 
                                  class="w-full h-96 object-cover">
                             <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
@@ -720,7 +742,7 @@
                         
                         <!-- Gallery Slide 7 -->
                         <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_3f432101f3b94f26bf78350c2c1d53ed~mv2.jpg" 
+                            <img src="https://static.wixstatic.com/media/847d
                                  alt="Fireproof Material Sample" 
                                  class="w-full h-96 object-cover">
                             <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
@@ -1260,107 +1282,95 @@
             }
         }
         
-        // Fullscreen gallery functionality
-        let fullscreenCurrentSlide = 0;
+        // Construction section gallery functionality
+        const constructionSlider = document.getElementById('construction-slider');
+        const constructionPrevButton = document.getElementById('construction-prev');
+        const constructionNextButton = document.getElementById('construction-next');
+        const constructionDots = document.getElementById('construction-dots');
         
-        fullscreenButton.addEventListener('click', () => {
-            // Create a container for the gallery
-            const galleryContainer = document.createElement('div');
-            galleryContainer.classList.add('w-full', 'max-w-6xl', 'h-full', 'flex', 'flex-col');
-            galleryModal.appendChild(galleryContainer);
+        let constructionCurrentSlide = 0;
+        const constructionSlideCount = constructionSlider.children.length;
+        
+        // Navigation functions for construction gallery
+        function updateConstructionSliderPosition() {
+            constructionSlider.style.transform = `translateX(-${constructionCurrentSlide * 100}%)`;
             
-            // Add close button
-            const closeButton = document.createElement('button');
-            closeButton.classList.add('self-end', 'text-white', 'hover:text-gray-300', 'mb-4');
-            closeButton.innerHTML = '<i class="fas fa-times text-3xl"></i>';
-                       galleryContainer.appendChild(closeButton);
-            
-            // Add image container
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add('flex-1', 'flex', 'items-center', 'justify-center', 'relative');
-            galleryContainer.appendChild(imageContainer);
-            
-            // Add current image
-            const currentImage = document.createElement('img');
-            currentImage.classList.add('max-w-full', 'max-h-[80vh]', 'object-contain');
-            const firstSlide = slider.children[currentSlide];
-            const firstImage = firstSlide.querySelector('img');
-            currentImage.src = firstImage.src;
-            currentImage.alt = firstImage.alt;
-            imageContainer.appendChild(currentImage);
-            
-            // Add navigation buttons
-            const prevBtn = document.createElement('button');
-            prevBtn.classList.add('absolute', 'left-2', 'bg-white', 'bg-opacity-75', 'hover:bg-opacity-100', 'rounded-full', 'p-3', 'shadow-md');
-            prevBtn.innerHTML = '<i class="fas fa-chevron-left text-green-700"></i>';
-            imageContainer.appendChild(prevBtn);
-            
-            const nextBtn = document.createElement('button');
-            nextBtn.classList.add('absolute', 'right-2', 'bg-white', 'bg-opacity-75', 'hover:bg-opacity-100', 'rounded-full', 'p-3', 'shadow-md');
-            nextBtn.innerHTML = '<i class="fas fa-chevron-right text-green-700"></i>';
-            imageContainer.appendChild(nextBtn);
-            
-            // Add caption container
-            const caption = document.createElement('div');
-            caption.classList.add('absolute', 'bottom-0', 'left-0', 'right-0', 'p-4', 'bg-gradient-to-t', 'from-black', 'to-transparent', 'text-white');
-            galleryContainer.appendChild(caption);
-            
-            // Update image and caption
-            function updateFullscreenGallery() {
-                const slide = slider.children[fullscreenCurrentSlide];
-                const img = slide.querySelector('img');
-                const title = slide.querySelector('.p-6 h3').textContent;
-                const desc = slide.querySelector('.p-6 p').textContent;
-                
-                currentImage.src = img.src;
-                currentImage.alt = img.alt;
-                caption.innerHTML = `<h3 class="text-xl font-bold">${title}</h3><p class="text-gray-300 mt-2">${desc}</p>`;
-            }
-            
-            // Navigation functions
-            function goToNextFullscreenSlide() {
-                fullscreenCurrentSlide = (fullscreenCurrentSlide + 1) % slideCount;
-                updateFullscreenGallery();
-            }
-            
-            function goToPrevFullscreenSlide() {
-                fullscreenCurrentSlide = (fullscreenCurrentSlide - 1 + slideCount) % slideCount;
-                updateFullscreenGallery();
-            }
-            
-            // Add event listeners
-            nextBtn.addEventListener('click', goToNextFullscreenSlide);
-            prevBtn.addEventListener('click', goToPrevFullscreenSlide);
-            
-            // Close modal on button click
-            closeButton.addEventListener('click', () => {
-                document.body.removeChild(galleryModal);
-                document.body.style.overflow = '';
-            });
-            
-            // Close modal on background click
-            galleryModal.addEventListener('click', (e) => {
-                if (e.target === galleryModal) {
-                    document.body.removeChild(galleryModal);
-                    document.body.style.overflow = '';
+            // Update dots
+            const dots = constructionDots.children;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === constructionCurrentSlide) {
+                    dots[i].classList.add('bg-green-600');
+                    dots[i].classList.remove('bg-gray-300');
+                } else {
+                    dots[i].classList.remove('bg-green-600');
+                    dots[i].classList.add('bg-gray-300');
                 }
+            }
+        }
+        
+        function goToConstructionSlide(slideIndex) {
+            constructionCurrentSlide = slideIndex;
+            updateConstructionSliderPosition();
+        }
+        
+        function goToNextConstructionSlide() {
+            constructionCurrentSlide = (constructionCurrentSlide + 1) % constructionSlideCount;
+            updateConstructionSliderPosition();
+        }
+        
+        function goToPrevConstructionSlide() {
+            constructionCurrentSlide = (constructionCurrentSlide - 1 + constructionSlideCount) % constructionSlideCount;
+            updateConstructionSliderPosition();
+        }
+        
+        // Event listeners
+        constructionPrevButton.addEventListener('click', goToPrevConstructionSlide);
+        constructionNextButton.addEventListener('click', goToNextConstructionSlide);
+        
+        // Add dot click handlers
+        Array.from(constructionDots.children).forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToConstructionSlide(index);
             });
-            
-            // Prevent scrolling
-            document.body.style.overflow = 'hidden';
-            
-            // Add keyboard navigation
-            document.addEventListener('keydown', function handleKeyDown(e) {
-                if (e.key === 'Escape') {
-                    document.body.removeChild(galleryModal);
-                    document.body.style.overflow = '';
-                    document.removeEventListener('keydown', handleKeyDown);
-                } else if (e.key === 'ArrowRight') {
-                    goToNextFullscreenSlide();
-                } else if (e.key === 'ArrowLeft') {
-                    goToPrevFullscreenSlide();
-                }
-            });
+        });
+        
+        // Touch/swipe functionality for construction gallery
+        let constructionTouchStartX = 0;
+        let constructionTouchEndX = 0;
+        
+        constructionSlider.addEventListener('touchstart', e => {
+            constructionTouchStartX = e.changedTouches[0].screenX;
+        });
+        
+        constructionSlider.addEventListener('touchend', e => {
+            constructionTouchEndX = e.changedTouches[0].screenX;
+            handleConstructionSwipe();
+        });
+        
+        function handleConstructionSwipe() {
+            const swipeThreshold = 50;
+            if (constructionTouchEndX < constructionTouchStartX - swipeThreshold) {
+                // Swipe left
+                goToNextConstructionSlide();
+            } else if (constructionTouchEndX > constructionTouchStartX + swipeThreshold) {
+                // Swipe right
+                goToPrevConstructionSlide();
+            }
+        }
+        
+        // Auto-advance the construction slider every 5 seconds
+        const constructionSliderInterval = setInterval(goToNextConstructionSlide, 5000);
+        
+        // Pause auto-advance when hovering over the slider
+        const constructionGallery = document.querySelector('.construction-main-gallery');
+        constructionGallery.addEventListener('mouseenter', () => {
+            clearInterval(constructionSliderInterval);
+        });
+        
+        constructionGallery.addEventListener('mouseleave', () => {
+            clearInterval(constructionSliderInterval);
+            const newInterval = setInterval(goToNextConstructionSlide, 5000);
+            constructionGallery.dataset.intervalId = newInterval;
         });
     });
 </script>
