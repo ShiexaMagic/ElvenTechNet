@@ -179,51 +179,30 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Fireresistant Solutions for Construction - Elven Sheets</h2>
                 <p class="text-gray-600 mb-6">Our advanced fireresistant materials are revolutionizing the construction industry, providing unparalleled protection against fire hazards while maintaining structural integrity and aesthetic appeal.</p>
                 
-                <!-- Mini Gallery for Elven Sheets -->
-                <div class="mb-8">
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="cursor-pointer hover:opacity-80 transition-opacity construction-gallery-item">
-                            <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
-                                 alt="Elven Sheet Sample 1" 
-                                 class="rounded-lg shadow-sm w-full h-auto">
-                        </div>
-                        <div class="cursor-pointer hover:opacity-80 transition-opacity construction-gallery-item">
-                            <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
-                                 alt="Elven Sheet Sample 2" 
-                                 class="rounded-lg shadow-sm w-full h-auto">
-                        </div>
-                        <div class="cursor-pointer hover:opacity-80 transition-opacity construction-gallery-item">
-                            <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
-                                 alt="Elven Sheet Sample 3" 
-                                 class="rounded-lg shadow-sm w-full h-auto">
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-2 text-center md:text-left">Click images to view larger</p>
-                </div>
-                
+                <!-- Remove the mini gallery and just keep the buttons -->
                 <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 justify-center md:justify-start">
                     <a href="#" class="sample-cta bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Get a Sample</a>
                     <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
                 </div>
             </div>
             <div class="md:w-1/2 fade-in delay-1">
-                <!-- Replace static image with swipeable gallery -->
-                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden">
-                    <div id="construction-slider" class="flex transition-transform duration-500 ease-in-out">
-                        <div class="w-full flex-shrink-0">
+                <!-- Fix the swipeable gallery -->
+                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden h-80">
+                    <div id="construction-slider" class="flex transition-transform duration-500 ease-in-out h-full">
+                        <div class="w-full flex-shrink-0 h-full">
                             <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
                                  alt="Construction site with fireproof materials" 
-                                 class="w-full h-auto">
+                                 class="w-full h-full object-cover">
                         </div>
-                        <div class="w-full flex-shrink-0">
+                        <div class="w-full flex-shrink-0 h-full">
                             <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
                                  alt="Elven Sheet Application" 
-                                 class="w-full h-auto">
+                                 class="w-full h-full object-cover">
                         </div>
-                        <div class="w-full flex-shrink-0">
+                        <div class="w-full flex-shrink-0 h-full">
                             <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
                                  alt="Elven Sheet Installation" 
-                                 class="w-full h-auto">
+                                 class="w-full h-full object-cover">
                         </div>
                     </div>
                     
@@ -1288,90 +1267,93 @@
         const constructionNextButton = document.getElementById('construction-next');
         const constructionDots = document.getElementById('construction-dots');
         
-        let constructionCurrentSlide = 0;
-        const constructionSlideCount = constructionSlider.children.length;
-        
-        // Navigation functions for construction gallery
-        function updateConstructionSliderPosition() {
-            constructionSlider.style.transform = `translateX(-${constructionCurrentSlide * 100}%)`;
+        if (constructionSlider && constructionPrevButton && constructionNextButton && constructionDots) {
+            let constructionCurrentSlide = 0;
+            const constructionSlideCount = constructionSlider.children.length;
             
-            // Update dots
-            const dots = constructionDots.children;
-            for (let i = 0; i < dots.length; i++) {
-                if (i === constructionCurrentSlide) {
-                    dots[i].classList.add('bg-green-600');
-                    dots[i].classList.remove('bg-gray-300');
-                } else {
-                    dots[i].classList.remove('bg-green-600');
-                    dots[i].classList.add('bg-gray-300');
+            // Navigation functions for construction gallery
+            function updateConstructionSliderPosition() {
+                constructionSlider.style.transform = `translateX(-${constructionCurrentSlide * 100}%)`;
+                
+                // Update dots
+                const dots = constructionDots.children;
+                for (let i = 0; i < dots.length; i++) {
+                    if (i === constructionCurrentSlide) {
+                        dots[i].classList.add('bg-green-600');
+                        dots[i].classList.remove('bg-gray-300');
+                    } else {
+                        dots[i].classList.remove('bg-green-600');
+                        dots[i].classList.add('bg-gray-300');
+                    }
                 }
             }
-        }
-        
-        function goToConstructionSlide(slideIndex) {
-            constructionCurrentSlide = slideIndex;
-            updateConstructionSliderPosition();
-        }
-        
-        function goToNextConstructionSlide() {
-            constructionCurrentSlide = (constructionCurrentSlide + 1) % constructionSlideCount;
-            updateConstructionSliderPosition();
-        }
-        
-        function goToPrevConstructionSlide() {
-            constructionCurrentSlide = (constructionCurrentSlide - 1 + constructionSlideCount) % constructionSlideCount;
-            updateConstructionSliderPosition();
-        }
-        
-        // Event listeners
-        constructionPrevButton.addEventListener('click', goToPrevConstructionSlide);
-        constructionNextButton.addEventListener('click', goToNextConstructionSlide);
-        
-        // Add dot click handlers
-        Array.from(constructionDots.children).forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                goToConstructionSlide(index);
+            
+            function goToConstructionSlide(slideIndex) {
+                constructionCurrentSlide = slideIndex;
+                updateConstructionSliderPosition();
+            }
+            
+            function goToNextConstructionSlide() {
+                constructionCurrentSlide = (constructionCurrentSlide + 1) % constructionSlideCount;
+                updateConstructionSliderPosition();
+            }
+            
+            function goToPrevConstructionSlide() {
+                constructionCurrentSlide = (constructionCurrentSlide - 1 + constructionSlideCount) % constructionSlideCount;
+                updateConstructionSliderPosition();
+            }
+            
+            // Event listeners
+            constructionPrevButton.addEventListener('click', goToPrevConstructionSlide);
+            constructionNextButton.addEventListener('click', goToNextConstructionSlide);
+            
+            // Add dot click handlers
+            Array.from(constructionDots.children).forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToConstructionSlide(index);
+                });
             });
-        });
-        
-        // Touch/swipe functionality for construction gallery
-        let constructionTouchStartX = 0;
-        let constructionTouchEndX = 0;
-        
-        constructionSlider.addEventListener('touchstart', e => {
-            constructionTouchStartX = e.changedTouches[0].screenX;
-        });
-        
-        constructionSlider.addEventListener('touchend', e => {
-            constructionTouchEndX = e.changedTouches[0].screenX;
-            handleConstructionSwipe();
-        });
-        
-        function handleConstructionSwipe() {
-            const swipeThreshold = 50;
-            if (constructionTouchEndX < constructionTouchStartX - swipeThreshold) {
-                // Swipe left
-                goToNextConstructionSlide();
-            } else if (constructionTouchEndX > constructionTouchStartX + swipeThreshold) {
-                // Swipe right
-                goToPrevConstructionSlide();
+            
+            // Touch/swipe functionality for construction gallery
+            let constructionTouchStartX = 0;
+            let constructionTouchEndX = 0;
+            
+            constructionSlider.addEventListener('touchstart', e => {
+                constructionTouchStartX = e.changedTouches[0].screenX;
+            });
+            
+            constructionSlider.addEventListener('touchend', e => {
+                constructionTouchEndX = e.changedTouches[0].screenX;
+                handleConstructionSwipe();
+            });
+            
+            function handleConstructionSwipe() {
+                const swipeThreshold = 50;
+                if (constructionTouchEndX < constructionTouchStartX - swipeThreshold) {
+                    // Swipe left
+                    goToNextConstructionSlide();
+                } else if (constructionTouchEndX > constructionTouchStartX + swipeThreshold) {
+                    // Swipe right
+                    goToPrevConstructionSlide();
+                }
+            }
+            
+            // Auto-advance the construction slider every 5 seconds
+            const constructionSliderInterval = setInterval(goToNextConstructionSlide, 5000);
+            
+            // Pause auto-advance when hovering over the slider
+            const constructionGallery = document.querySelector('.construction-main-gallery');
+            if (constructionGallery) {
+                constructionGallery.addEventListener('mouseenter', () => {
+                    clearInterval(constructionSliderInterval);
+                });
+                
+                constructionGallery.addEventListener('mouseleave', () => {
+                    const newInterval = setInterval(goToNextConstructionSlide, 5000);
+                    constructionGallery.dataset.intervalId = newInterval;
+                });
             }
         }
-        
-        // Auto-advance the construction slider every 5 seconds
-        const constructionSliderInterval = setInterval(goToNextConstructionSlide, 5000);
-        
-        // Pause auto-advance when hovering over the slider
-        const constructionGallery = document.querySelector('.construction-main-gallery');
-        constructionGallery.addEventListener('mouseenter', () => {
-            clearInterval(constructionSliderInterval);
-        });
-        
-        constructionGallery.addEventListener('mouseleave', () => {
-            clearInterval(constructionSliderInterval);
-            const newInterval = setInterval(goToNextConstructionSlide, 5000);
-            constructionGallery.dataset.intervalId = newInterval;
-        });
     });
 </script>
 
