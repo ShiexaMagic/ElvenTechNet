@@ -24,7 +24,7 @@
     /* Hero image zoom animation */
     @keyframes slowZoom {
         0% { transform: scale(1); }
-        100% { transform: scale(1.2); }
+        100% { transform: scale(1.5); }
     }
     
     .hero-image {
@@ -1265,7 +1265,7 @@
             const closeButton = document.createElement('button');
             closeButton.classList.add('self-end', 'text-white', 'hover:text-gray-300', 'mb-4');
             closeButton.innerHTML = '<i class="fas fa-times text-3xl"></i>';
-            galleryContainer.appendChild(closeButton);
+            galleryContainer.appendChild closeButton);
             
             // Add image container
             const imageContainer = document.createElement('div');
