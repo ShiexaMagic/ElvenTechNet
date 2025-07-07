@@ -1670,5 +1670,58 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- Fix for the Order Sample buttons -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all order sample buttons (including the floating button)
+  const sampleCta = document.getElementById('sample-cta');
+  const floatingSampleCta = document.getElementById('floating-sample-cta');
+  const allSampleButtons = document.querySelectorAll('.sample-cta');
+  const sampleFormContainer = document.getElementById('sample-form-container');
+  const sampleForm = document.getElementById('sample-form');
+  const closeSampleForm = document.getElementById('close-sample-form');
+  
+  // Function to open the sample form
+  function openSampleForm() {
+    if (sampleFormContainer) {
+      sampleFormContainer.classList.remove('hidden');
+      setTimeout(() => {
+        sampleForm.classList.add('active');
+      }, 10);
+    }
+  }
+  
+  // Add click handlers to all sample buttons
+  if (sampleCta) {
+    sampleCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      openSampleForm();
+    });
+  }
+  
+  if (floatingSampleCta) {
+    floatingSampleCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      openSampleForm();
+    });
+  }
+  
+  // Add listeners to all buttons with sample-cta class
+  allSampleButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      openSampleForm();
+    });
+  });
+  
+  // Fix conflict with smooth scrolling by preventing Lenis from capturing these events
+  if (typeof lenis !== 'undefined') {
+    allSampleButtons.forEach(button => {
+      button.setAttribute('data-lenis-prevent', '');
+    });
+  }
+});
+</script>
+
 </body>
 </html>
