@@ -21,16 +21,6 @@
     .delay-2 { animation-delay: 0.6s; }
     .delay-3 { animation-delay: 0.9s; }
     
-    /* Hero image zoom animation */
-    @keyframes slowZoom {
-        0% { transform: scale(1); }
-        100% { transform: scale(1.5); }
-    }
-    
-    .hero-image {
-        animation: slowZoom 15s ease-in-out infinite alternate;
-    }
-    
     /* Hero image overlay */
     .hero-overlay {
         background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
@@ -82,11 +72,15 @@
     /* Construction section gallery styles */
     .construction-main-gallery {
         height: 100%;
+        position: relative;
+        overflow: hidden;
     }
     
     #construction-slider {
         width: 100%;
         height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
     }
     
     #construction-slider > div {
@@ -153,7 +147,7 @@
         <div class="absolute inset-0 hero-overlay z-10"></div>
         <img src="https://static.wixstatic.com/media/847d72_41495c0d2bf84a3a903f386b4a319064~mv2.png" 
              alt="Fireproof technology" 
-             class="absolute inset-0 w-full h-full object-cover hero-image">
+             class="absolute inset-0 w-full h-full object-cover">
         
         <div class="relative z-20 text-center px-4 max-w-4xl mx-auto">
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">Protecting Lives with Advanced Fireproof Technology</h1>
@@ -1268,8 +1262,11 @@
         const constructionDots = document.getElementById('construction-dots');
         
         if (constructionSlider && constructionPrevButton && constructionNextButton && constructionDots) {
+            console.log("Construction slider elements found");
+            
             let constructionCurrentSlide = 0;
             const constructionSlideCount = constructionSlider.children.length;
+            console.log(`Found ${constructionSlideCount} slides in construction slider`);
             
             // Navigation functions for construction gallery
             function updateConstructionSliderPosition() {
@@ -1286,6 +1283,7 @@
                         dots[i].classList.add('bg-gray-300');
                     }
                 }
+                console.log(`Construction slider moved to slide ${constructionCurrentSlide + 1}/${constructionSlideCount}`);
             }
             
             function goToConstructionSlide(slideIndex) {
@@ -1304,12 +1302,20 @@
             }
             
             // Event listeners
-            constructionPrevButton.addEventListener('click', goToPrevConstructionSlide);
-            constructionNextButton.addEventListener('click', goToNextConstructionSlide);
+            constructionPrevButton.addEventListener('click', function() {
+                console.log("Construction prev button clicked");
+                goToPrevConstructionSlide();
+            });
+            
+            constructionNextButton.addEventListener('click', function() {
+                console.log("Construction next button clicked");
+                goToNextConstructionSlide();
+            });
             
             // Add dot click handlers
             Array.from(constructionDots.children).forEach((dot, index) => {
                 dot.addEventListener('click', () => {
+                    console.log(`Construction dot ${index + 1} clicked`);
                     goToConstructionSlide(index);
                 });
             });
@@ -1320,39 +1326,55 @@
             
             constructionSlider.addEventListener('touchstart', e => {
                 constructionTouchStartX = e.changedTouches[0].screenX;
+                console.log("Construction touch start detected");
             });
             
             constructionSlider.addEventListener('touchend', e => {
                 constructionTouchEndX = e.changedTouches[0].screenX;
+                console.log("Construction touch end detected");
                 handleConstructionSwipe();
             });
             
             function handleConstructionSwipe() {
                 const swipeThreshold = 50;
-                if (constructionTouchEndX < constructionTouchStartX - swipeThreshold) {
+                const swipeDistance = constructionTouchEndX - constructionTouchStartX;
+                console.log(`Construction swipe distance: ${swipeDistance}px`);
+                
+                if (swipeDistance < -swipeThreshold) {
                     // Swipe left
+                    console.log("Construction swipe left detected");
                     goToNextConstructionSlide();
-                } else if (constructionTouchEndX > constructionTouchStartX + swipeThreshold) {
+                } else if (swipeDistance > swipeThreshold) {
                     // Swipe right
+                    console.log("Construction swipe right detected");
                     goToPrevConstructionSlide();
                 }
             }
             
             // Auto-advance the construction slider every 5 seconds
+            console.log("Setting up construction slider auto-advance");
             const constructionSliderInterval = setInterval(goToNextConstructionSlide, 5000);
             
             // Pause auto-advance when hovering over the slider
             const constructionGallery = document.querySelector('.construction-main-gallery');
             if (constructionGallery) {
                 constructionGallery.addEventListener('mouseenter', () => {
+                    console.log("Mouse entered construction gallery, pausing auto-advance");
                     clearInterval(constructionSliderInterval);
                 });
                 
                 constructionGallery.addEventListener('mouseleave', () => {
+                    console.log("Mouse left construction gallery, resuming auto-advance");
                     const newInterval = setInterval(goToNextConstructionSlide, 5000);
                     constructionGallery.dataset.intervalId = newInterval;
                 });
             }
+            
+            // Initialize slider position
+            updateConstructionSliderPosition();
+            console.log("Construction slider initialized");
+        } else {
+            console.warn("Could not find all construction slider elements");
         }
     });
 </script>
