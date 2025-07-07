@@ -105,53 +105,163 @@
         height: 100%;
         border-radius: 0.5rem;
     }
+    
+    /* Square aspect ratio container */
+    .aspect-w-1 {
+        position: relative;
+        padding-bottom: 100%; /* Creates a 1:1 aspect ratio */
+        height: 0;
+        width: 100%;
+    }
+    
+    .aspect-h-1 {
+        position: relative;
+    }
+    
+    .aspect-w-1 img, .aspect-h-1 img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Gallery modal styles */
+    #gallery-modal img {
+        max-width: 1080px;
+        max-height: 1080px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+    
+    /* Scroll reveal animations */
+    .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .scroll-reveal.appear {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Ensure smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Add subtle transition to all interactive elements */
+  a, button {
+    transition: all 0.3s ease;
+  }
+  
+  /* Additional styling for smoother section transitions */
+  section {
+    transition: background-color 0.5s ease;
+  }
+  
+  /* Enhanced fade-in animations with slight delay between elements */
+  .fade-in {
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+  
+  .delay-1 {
+    animation-delay: 0.3s;
+  }
+  
+  .delay-2 {
+    animation-delay: 0.6s;
+  }
+  
+  .delay-3 {
+    animation-delay: 0.9s;
+  }
+
+  /* Add these minimal styles to your CSS */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  overflow-x: hidden;
+}
     </style>
 </head>
-<body class="font-sans bg-gray-50">
+
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.19/dist/lenis.min.js"></script>
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <img src="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png/v1/fill/w_59,h_64,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Elven%20Logo_edited.png" alt="Elven Technologies Logo" class="h-12 mr-3">
-                    <a href="#" class="text-2xl font-bold text-green-700">Elven<span class="text-green-500">Tech</span></a>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#construction" class="text-gray-700 hover:text-green-600 font-medium">Construction</a>
-                    <a href="#transportation" class="text-gray-700 hover:text-green-600 font-medium">Transportation</a>
-                    <a href="#custom-projects" class="text-gray-700 hover:text-green-600 font-medium">Custom Projects</a>
-                    <a href="#team" class="text-gray-700 hover:text-green-600 font-medium">Our Team</a>
-                    <a href="#gallery" class="text-gray-700 hover:text-green-600 font-medium">Gallery</a>
-                    <a href="#" class="text-gray-700 hover:text-green-600 font-medium">Order Samples</a>
-                    <a href="#about" class="text-gray-700 hover:text-green-600 font-medium">About Us</a>
-                    <a href="#contact" class="text-gray-700 hover:text-green-600 font-medium">Contact</a>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <img src="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png/v1/fill/w_59,h_64,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Elven%20Logo_edited.png" alt="Elven Technologies Logo" class="h-12 mr-3">
+                <a href="#" class="text-2xl font-bold text-green-700">Elven<span class="text-green-500">Tech</span></a>
             </div>
             
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="mobile-menu md:hidden">
-                <div class="px-2 pt-2 pb-4 space-y-1">
-                    <a href="#construction" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Construction</a>
-                    <a href="#transportation" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Transportation</a>
-                    <a href="#custom-projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Custom Projects</a>
-                    <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Our Team</a>
-                    <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Gallery</a>
-                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Order Samples</a>
-                    <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">About Us</a>
-                    <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Contact</a>
+            <!-- Desktop Navigation - Only Primary Items -->
+<div class="hidden md:flex space-x-8 items-center">
+    <a href="#construction" class="text-gray-700 hover:text-green-600 font-medium">Construction</a>
+    <a href="#transportation" class="text-gray-700 hover:text-green-600 font-medium">Transportation</a>
+    <a href="#custom-projects" class="text-gray-700 hover:text-green-600 font-medium">Custom Projects</a>
+    <a href="#" class="sample-cta text-gray-700 hover:text-green-600 font-medium">Order Samples</a>
+    
+    <!-- More Menu (Dropdown) - Now vertically centered -->
+    <div class="relative group">
+        <button class="text-gray-700 hover:text-green-600 font-medium flex items-center h-full">
+            <i class="fas fa-ellipsis-h"></i>
+            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+        </button>
+        <div class="absolute right-0 top-full w-48 bg-white shadow-lg rounded-lg py-2 mt-1 hidden group-hover:block">
+            <a href="#team" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">Our Team</a>
+            <a href="#gallery" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">Gallery</a>
+            <a href="#partners" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">Partners</a>
+            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">About Us</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">Contact</a>
+        </div>
+    </div>
+</div>
+            
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <div class="px-2 pt-2 pb-4 space-y-1">
+                <!-- Primary Mobile Menu Items -->
+                <a href="#construction" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Construction</a>
+                <a href="#transportation" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Transportation</a>
+                <a href="#custom-projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Custom Projects</a>
+                <a href="#" class="sample-cta block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Order Samples</a>
+                
+                <!-- Secondary Mobile Menu Items (with divider) -->
+                <div class="border-t border-gray-200 my-2 pt-2">
+                    <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-green-600 hover:bg-gray-50">Our Team</a>
+                    <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-green-600 hover:bg-gray-50">Gallery</a>
+                    <a href="#partners" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-green-600 hover:bg-gray-50">Partners</a>
+                    <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-green-600 hover:bg-gray-50">About Us</a>
+                    <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-green-600 hover:bg-gray-50">Contact</a>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
@@ -210,14 +320,6 @@
                                  class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <!-- Navigation Arrows -->
-                    <button id="construction-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
-                        <i class="fas fa-chevron-left text-green-700"></i>
-                    </button>
-                    <button id="construction-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
-                        <i class="fas fa-chevron-right text-green-700"></i>
-                    </button>
                     
                     <!-- Navigation Dots -->
                     <div id="construction-dots" class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
@@ -373,8 +475,8 @@
             </div>
             
             <div class="md:w-1/2 fade-in delay-1">
-                <img src="https://static.wixstatic.com/media/847d
-                     alt="Custom fireproof solutions" 
+                <img src="https://static.wixstatic.com/media/847d72_f37ac773c3c24b0fb625c26e34ba776a~mv2.jpg"
+                     alt="Custom fireproof solutions"
                      class="rounded-lg shadow-xl w-full h-auto">
             </div>
         </div>
@@ -664,123 +766,192 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                <h3 class="text-xl font-bold">Thermal Containment System</h3>
-                                <p class="text-sm mt-2">Advanced thermal management solution for high-temperature applications</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 2 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_243f217bc63246849a446c2a0bc5ab6f~mv2.jpg" 
-                                 alt="Battery Protection System" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Battery Protection System</h3>
-                                <p class="text-sm mt-2">Innovative fireproof solutions for lithium-ion battery safety</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 3 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_44f74f9a63204e4d8f32fc970dbc56a8~mv2.jpg" 
-                                 alt="Material Testing" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Material Testing</h3>
-                                <p class="text-sm mt-2">Rigorous testing protocols ensure our materials meet the highest safety standards</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 4 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d
-                                 alt="Protective Gear Testing" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Protective Gear Testing</h3>
-                                <p class="text-sm mt-2">Advanced firefighter protection equipment under real-world conditions</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 5 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
-                                 alt="Fire Resistance Demonstration" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Fire Resistance Demonstration</h3>
-                                <p class="text-sm mt-2">Live demonstrations showcase the exceptional performance of our materials</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 6 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_39198d53ae3b463bb78c460f4d43f3ef~mv2.jpg" 
-                                 alt="Laboratory Testing Setup" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Laboratory Testing Setup</h3>
-                                <p class="text-sm mt-2">State-of-the-art facilities for developing next-generation fireproof solutions</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 7 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d
-                                 alt="Fireproof Material Sample" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Fireproof Material Sample</h3>
-                                <p class="text-sm mt-2">Close-up of our proprietary composite material withstanding extreme heat</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 8 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_fd3e3b78008c4dfca8e32951edfa2306~mv2.jpg" 
-                                 alt="Product Development" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Product Development</h3>
-                                <p class="text-sm mt-2">Our R&D process ensures continuous innovation in fireproof technology</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Gallery Slide 9 -->
-                        <div class="w-full flex-shrink-0 relative">
-                            <img src="https://static.wixstatic.com/media/847d72_f1f28ba1ea8c4f5f91b67c427a28c939~mv2.jpg" 
-                                 alt="Advanced Testing Equipment" 
-                                 class="w-full h-96 object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                                <h3 class="text-xl font-bold">Advanced Testing Equipment</h3>
-                                <p class="text-sm mt-2">Specialized equipment for measuring material performance under extreme conditions</p>
-                            </div>
-                        </div>
+                            <span>Real-time temperature readings and comparisons</span>
+                        </li>
+                    </ul>
+                    <p class="text-gray-600">This breakthrough technology has applications in electric vehicles, battery storage facilities, and transportation of hazardous materials.</p>
+                </div>
+                
+                <div class="mt-8 text-center lg:text-left">
+                    <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Request Similar Solution</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partners Section with improved layout -->
+<section id="partners" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Partners</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Working together with industry leaders to advance fireproof technology solutions across multiple sectors.</p>
+        </div>
+        
+        <div class="mb-20">
+            <h3 class="text-2xl font-bold text-green-700 text-center mb-10">Strategic Partners</h3>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
+                <a href="https://ltaresearch.com/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_361ae0e55b304999a57d4100430b5386~mv2.png/v1/crop/x_58,y_336,w_1123,h_509/fill/w_191,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LTA%20logo.png" 
+                         alt="LTA Research" 
+                         class="max-h-20">
+                </a>
+                
+                <a href="https://auve.tech/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_655f29f377184c5aa711045779d6c633~mv2.png/v1/fill/w_334,h_47,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/auvetech%20logo.png" 
+                         alt="Auve Tech" 
+                         class="max-h-16">
+                </a>
+                
+                <a href="https://alef.aero/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_0ba0d7b568184ccfbc583c53a9ec2191~mv2.jpeg/v1/fill/w_191,h_70,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Alef_Aeronautics_logo%20(1).jpeg" 
+                         alt="Alef Aeronautics" 
+                         class="max-h-20">
+                </a>
+                
+                <a href="https://soteriabig.com/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_dd9834e287da4aee80d867a5890e8970~mv2.png/v1/fill/w_281,h_103,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Soteria-Logo.png" 
+                         alt="Soteria" 
+                         class="max-h-24">
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-24">
+            <h3 class="text-2xl font-bold text-green-700 text-center mb-10">Testing Partners</h3>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                <a href="https://www.flynow-aviation.com/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_613f8addb5694d69ba22c9f3377dd681~mv2.png/v1/fill/w_261,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/flynow_logo_horizontal_c4_489x150.png" 
+                         alt="FlyNow Aviation" 
+                         class="max-h-20">
+                </a>
+                
+                <a href="https://www.maxionsc.com/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_1ab1ae3509aa432a8317e5b8ba847f49~mv2.png/v1/fill/w_300,h_300,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Maxion%20logo.png" 
+                         alt="Maxion" 
+                         class="max-h-24">
+                </a>
+                
+                <a href="https://lucidmotors.com/" target="_blank" rel="noopener noreferrer" class="transform transition hover:scale-110 duration-300 flex items-center justify-center">
+                    <img src="https://static.wixstatic.com/media/735320_6d92ce1c5e13409f9efef6e823826a95~mv2.png/v1/fill/w_313,h_176,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Lucid-Motors-Logo.png" 
+                         alt="Lucid Motors" 
+                         class="max-h-20">
+                </a>
+            </div>
+        </div>
+    </div>
+
+<!-- Gallery Section with 1080x1080 frames -->
+<section id="gallery" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Gallery</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our materials, applications, and testing processes through our gallery of images.</p>
+        </div>
+        
+        <div class="relative overflow-hidden rounded-lg shadow-xl max-w-3xl mx-auto">
+            <div id="gallery-slider" class="flex transition-transform duration-500 ease-in-out">
+                <!-- Gallery Slide 1 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" 
+                             alt="Thermal Containment System" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                        <h3 class="text-xl font-bold">Thermal Containment System</h3>
+                        <p class="text-sm mt-2">Advanced thermal management solution for high-temperature applications</p>
                     </div>
                 </div>
                 
-                <!-- Navigation Arrows -->
-                <button id="gallery-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
-                    <i class="fas fa-chevron-left text-green-700"></i>
-                </button>
-                <button id="gallery-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
-                    <i class="fas fa-chevron-right text-green-700"></i>
-                </button>
+                <!-- Gallery Slide 2 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_243f217bc63246849a446c2a0bc5ab6f~mv2.jpg" 
+                             alt="Battery Protection System" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                        <h3 class="text-xl font-bold">Battery Protection System</h3>
+                        <p class="text-sm mt-2">Innovative fireproof solutions for lithium-ion battery safety</p>
+                    </div>
+                </div>
                 
-                <!-- Navigation Dots -->
-                <div id="gallery-dots" class="flex justify-center space-x-2 mt-4">
-                    <!-- Dots will be added by JavaScript -->
+                <!-- Gallery Slide 3 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_44f74f9a63204e4d8f32fc970dbc56a8~mv2.jpg" 
+                             alt="Material Testing" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                        <h3 class="text-xl font-bold">Material Testing</h3>
+                        <p class="text-sm mt-2">Rigorous testing protocols ensure our materials meet the highest safety standards</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 4 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
+                             alt="Fire Resistance Demonstration" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                        <h3 class="text-xl font-bold">Fire Resistance Demonstration</h3>
+                        <p class="text-sm mt-2">Live demonstrations showcase the exceptional performance of our materials</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 5 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_39198d53ae3b463bb78c460f4d43f3ef~mv2.jpg" 
+                             alt="Laboratory Testing Setup" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                        <h3 class="text-xl font-bold">Laboratory Testing Setup</h3>
+                        <p class="text-sm mt-2">State-of-the-art facilities for developing next-generation fireproof solutions</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 6 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_f1f28ba1ea8c4f5f91b67c427a28c939~mv2.jpg" 
+                             alt="Advanced Testing Equipment" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                        <h3 class="text-xl font-bold">Advanced Testing Equipment</h3>
+                        <p class="text-sm mt-2">Specialized equipment for measuring material performance under extreme conditions</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="text-center mt-8">
-                <button id="gallery-fullscreen" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
-                    <i class="fas fa-expand mr-2"></i>View Full Gallery
-                </button>
+            <!-- Navigation Arrows -->
+            <button id="gallery-prev" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
+                <i class="fas fa-chevron-left text-green-700"></i>
+            </button>
+            <button id="gallery-next" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full p-3 shadow-md focus:outline-none">
+                <i class="fas fa-chevron-right text-green-700"></i>
+            </button>
+            
+            <!-- Navigation Dots -->
+            <div id="gallery-dots" class="flex justify-center space-x-2 mt-4">
+                <!-- Dots will be added by JavaScript -->
             </div>
         </div>
-    </section>
+        
+        <div class="text-center mt-8">
+            <button id="gallery-fullscreen" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
+                <i class="fas fa-expand mr-2"></i>View Full Gallery
+            </button>
+        </div>
+    </div>
 
+</section>
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-4">
@@ -1011,10 +1182,6 @@
                 
                 <div>
                     <h3 class="text-lg font-bold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Cookie Policy</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Sitemap</a></li>
                     </ul>
                 </div>
@@ -1046,6 +1213,7 @@
         const sampleForm = document.getElementById('sample-form');
         const closeSampleForm = document.getElementById('close-sample-form');
         const thankYouMessage = document.getElementById('thank-you-message');
+
         const closeThankYou = document.getElementById('close-thank-you');
         
         function openSampleForm() {
@@ -1111,72 +1279,50 @@
             });
         });
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') === '#') return;
-                
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                    }
-                }
-            });
+        // Replace your current scroll initialization code with this
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Lenis with simpler options
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true
+  });
+  
+  // Basic animation loop
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  
+  requestAnimationFrame(raf);
+  
+  // Handle all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      e.preventDefault();
+      const target = document.querySelector(href);
+      
+      if (target) {
+        const headerHeight = document.querySelector('nav').offsetHeight;
+        lenis.scrollTo(target, { 
+          offset: -headerHeight,
+          duration: 1.5,
         });
         
-        // Animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fadeIn');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        fadeElements.forEach(element => {
-            observer.observe(element);
-        });
-        
-        // Gallery modal functionality
-        const galleryItems = document.querySelectorAll('#gallery .group');
-        const galleryModal = document.getElementById('gallery-modal');
-        const galleryModalImage = document.getElementById('gallery-modal-image');
-        const closeGalleryModal = document.getElementById('close-gallery-modal');
-        
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const imgSrc = item.querySelector('img').src;
-                galleryModalImage.src = imgSrc;
-                galleryModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        closeGalleryModal.addEventListener('click', () => {
-            galleryModal.classList.add('hidden');
-            document.body.style.overflow = '';
-        });
-        
-        galleryModal.addEventListener('click', (e) => {
-            if (e.target === galleryModal) {
-                galleryModal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        });
+        // Close mobile menu if open
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+        }
+      }
+    });
+  });
+});
+</script>
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -1207,6 +1353,16 @@
         }
         
         // Navigation functions
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSliderPosition();
+        }
+
+        function goToNextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSliderPosition();
+        }
+        
         function updateSliderPosition() {
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
             
@@ -1223,23 +1379,11 @@
             }
         }
         
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateSliderPosition();
-        }
-        
-        function goToNextSlide() {
-            currentSlide = (currentSlide + 1) % slideCount;
-            updateSliderPosition();
-        }
-        
-        function goToPrevSlide() {
+        // Event listeners
+        prevButton.addEventListener('click', () => {
             currentSlide = (currentSlide - 1 + slideCount) % slideCount;
             updateSliderPosition();
-        }
-        
-        // Event listeners
-        prevButton.addEventListener('click', goToPrevSlide);
+        });
         nextButton.addEventListener('click', goToNextSlide);
         
         // Touch/swipe functionality
@@ -1262,7 +1406,8 @@
                 goToNextSlide();
             } else if (touchEndX > touchStartX + swipeThreshold) {
                 // Swipe right
-                goToPrevSlide();
+                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                updateSliderPosition();
             }
         }
         
@@ -1271,11 +1416,11 @@
         const constructionDots = document.getElementById('construction-dots');
 
         if (constructionSlider && constructionDots) {
-            console.log("Construction slider elements found");
-            
+
+
+
             let constructionCurrentSlide = 0;
             const constructionSlideCount = constructionSlider.children.length;
-            console.log(`Found ${constructionSlideCount} slides in construction slider`);
             
             // Navigation functions for construction gallery
             function updateConstructionSliderPosition() {
@@ -1292,7 +1437,6 @@
                         dots[i].classList.add('bg-gray-300');
                     }
                 }
-                console.log(`Construction slider moved to slide ${constructionCurrentSlide + 1}/${constructionSlideCount}`);
             }
             
             function goToConstructionSlide(slideIndex) {
@@ -1313,7 +1457,6 @@
             // Add dot click handlers
             Array.from(constructionDots.children).forEach((dot, index) => {
                 dot.addEventListener('click', () => {
-                    console.log(`Construction dot ${index + 1} clicked`);
                     goToConstructionSlide(index);
                 });
             });
@@ -1324,45 +1467,37 @@
             
             constructionSlider.addEventListener('touchstart', e => {
                 constructionTouchStartX = e.changedTouches[0].screenX;
-                console.log("Construction touch start detected");
             });
             
             constructionSlider.addEventListener('touchend', e => {
                 constructionTouchEndX = e.changedTouches[0].screenX;
-                console.log("Construction touch end detected");
                 handleConstructionSwipe();
             });
             
             function handleConstructionSwipe() {
                 const swipeThreshold = 50;
                 const swipeDistance = constructionTouchEndX - constructionTouchStartX;
-                console.log(`Construction swipe distance: ${swipeDistance}px`);
                 
                 if (swipeDistance < -swipeThreshold) {
                     // Swipe left
-                    console.log("Construction swipe left detected");
                     goToNextConstructionSlide();
                 } else if (swipeDistance > swipeThreshold) {
                     // Swipe right
-                    console.log("Construction swipe right detected");
                     goToPrevConstructionSlide();
                 }
             }
             
             // Auto-advance the construction slider every 5 seconds
-            console.log("Setting up construction slider auto-advance");
             const constructionSliderInterval = setInterval(goToNextConstructionSlide, 5000);
             
             // Pause auto-advance when interacting with the slider
             const constructionGallery = document.querySelector('.construction-main-gallery');
             if (constructionGallery) {
                 constructionGallery.addEventListener('touchstart', () => {
-                    console.log("Touch started on construction gallery, pausing auto-advance");
                     clearInterval(constructionSliderInterval);
                 });
                 
                 constructionGallery.addEventListener('touchend', () => {
-                    console.log("Touch ended on construction gallery, resuming auto-advance");
                     const newInterval = setInterval(goToNextConstructionSlide, 5000);
                     constructionGallery.dataset.intervalId = newInterval;
                 });
@@ -1370,9 +1505,107 @@
             
             // Initialize slider position
             updateConstructionSliderPosition();
-            console.log("Construction slider initialized");
         } else {
             console.warn("Could not find all construction slider elements");
+        }
+        
+        // Fullscreen gallery functionality
+        const galleryFullscreenButton = document.getElementById('gallery-fullscreen');
+        const gallerySlider = document.getElementById('gallery-slider');
+
+        if (galleryFullscreenButton) {
+            galleryFullscreenButton.addEventListener('click', function() {
+                // Create a fullscreen gallery modal
+                const fullGalleryModal = document.createElement('div');
+                fullGalleryModal.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-95', 'z-50', 'overflow-y-auto', 'p-4', 'md:p-10');
+                fullGalleryModal.id = 'full-gallery-modal';
+                
+                // Add close button
+                const closeButton = document.createElement('button');
+                closeButton.classList.add('absolute', 'top-6', 'right-6', 'text-white', 'hover:text-gray-300', 'z-10');
+                closeButton.innerHTML = '<i class="fas fa-times text-3xl"></i>';
+                
+                // Create gallery grid container
+                const galleryGrid = document.createElement('div');
+                galleryGrid.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3', 'gap-4', 'max-w-7xl', 'mx-auto', 'pt-16');
+                
+                // Get all gallery images
+                const galleryItems = gallerySlider.querySelectorAll('.aspect-w-1 img');
+                
+                // Create gallery items
+                galleryItems.forEach(img => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('aspect-w-1', 'aspect-h-1', 'cursor-pointer');
+                    
+                    const newImg = document.createElement('img');
+                    newImg.src = img.src;
+                    newImg.alt = img.alt;
+                    newImg.classList.add('w-full', 'h-full', 'object-cover');
+                    
+                    imgContainer.appendChild(newImg);
+                    galleryGrid.appendChild(imgContainer);
+                    
+                    // Make each image clickable to show in full size
+                    imgContainer.addEventListener('click', () => {
+                        const fullSizeModal = document.createElement('div');
+                        fullSizeModal.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-95', 'z-60', 'flex', 'items-center', 'justify-center', 'p-4');
+                        
+                        const closeFullSizeBtn = document.createElement('button');
+                        closeFullSizeBtn.classList.add('absolute', 'top-6', 'right-6', 'text-white', 'hover:text-gray-300');
+                        closeFullSizeBtn.innerHTML = '<i class="fas fa-times text-3xl"></i>';
+                        
+                        const fullImg = document.createElement('img');
+                        fullImg.src = img.src;
+                        fullImg.alt = img.alt;
+                        fullImg.classList.add('max-w-full', 'max-h-[90vh]', 'object-contain');
+                        
+                        fullSizeModal.appendChild(closeFullSizeBtn);
+                        fullSizeModal.appendChild(fullImg);
+                        document.body.appendChild(fullSizeModal);
+                        
+                        closeFullSizeBtn.addEventListener('click', () => {
+                            document.body.removeChild(fullSizeModal);
+                        });
+                        
+                        fullSizeModal.addEventListener('click', (e) => {
+                            if (e.target === fullSizeModal) {
+                                document.body.removeChild(fullSizeModal);
+                            }
+                        });
+                    });
+                });
+                
+                // Add elements to the modal
+                fullGalleryModal.appendChild(closeButton);
+                fullGalleryModal.appendChild(galleryGrid);
+                document.body.appendChild(fullGalleryModal);
+                
+                // Prevent scrolling on the body
+                document.body.style.overflow = 'hidden';
+                
+                // Handle close button click
+                closeButton.addEventListener('click', () => {
+                    document.body.removeChild(fullGalleryModal);
+                    document.body.style.overflow = '';
+                });
+                
+                // Close when clicking outside the grid
+                fullGalleryModal.addEventListener('click', (e) => {
+                    if (e.target === fullGalleryModal) {
+                        document.body.removeChild(fullGalleryModal);
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Handle escape key
+                document.addEventListener('keydown', function escHandler(e) {
+                    if (e.key === 'Escape') {
+                        document.body.removeChild(fullGalleryModal);
+                        document.body.style.overflow = '';
+                        document.removeEventListener('keydown', escHandler);
+                    }
+                });
+            });
         }
     });
 </script>
@@ -1384,5 +1617,58 @@
     </button>
     <img id="gallery-modal-image" src="" alt="Gallery image full size" class="max-w-full max-h-[80vh] object-contain">
 </div>
+
+<script>
+  // Add this smaller implementation to your JavaScript
+  document.addEventListener('DOMContentLoaded', function() {
+  // Load the small Lenis library
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.19/dist/lenis.min.js';
+  script.onload = initSmoothScroll;
+  document.head.appendChild(script);
+  
+  function initSmoothScroll() {
+    // Initialize Lenis with minimal options
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true
+    });
+    
+    // Add basic classes
+    document.documentElement.classList.add('lenis', 'lenis-smooth');
+    
+    // Handle anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        if (this.getAttribute('href') === '#') return;
+        
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (target) {
+          const headerHeight = document.querySelector('nav').offsetHeight;
+          lenis.scrollTo(target, { offset: -headerHeight });
+          
+          // Close mobile menu if open
+          const mobileMenu = document.getElementById('mobile-menu');
+          if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+          }
+        }
+      });
+    });
+    
+    // Animation loop
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+});
+</script>
+
 </body>
 </html>
