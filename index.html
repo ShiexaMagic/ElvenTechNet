@@ -7,52 +7,67 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+    /* Custom animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+        animation: fadeIn 1s ease-out forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.3s; }
+    .delay-2 { animation-delay: 0.6s; }
+    .delay-3 { animation-delay: 0.9s; }
+    
+    /* Hero image overlay */
+    .hero-overlay {
+        background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+    }
+    
+    /* Sample form transition */
+    .sample-form {
+        transition: all 0.3s ease;
+    }
+    
+    .sample-form.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .sample-form:not(.active) {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+        transition: all 0.3s ease;
+        max-height: 0;
+        overflow: hidden;
+    }
+    
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+
+    /* Mobile text alignment fixes */
+    @media (max-width: 768px) {
+        .text-center-mobile {
+            text-align: center !important;
         }
         
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
+        .mb-mobile-6 {
+            margin-bottom: 1.5rem !important;
         }
-        
-        .delay-1 { animation-delay: 0.3s; }
-        .delay-2 { animation-delay: 0.6s; }
-        .delay-3 { animation-delay: 0.9s; }
-        
-        /* Hero image overlay */
-        .hero-overlay {
-            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+
+        .mobile-full-width {
+            width: 100% !important;
         }
-        
-        /* Sample form transition */
-        .sample-form {
-            transition: all 0.3s ease;
-        }
-        
-        .sample-form.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .sample-form:not(.active) {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-        
-        /* Mobile menu */
-        .mobile-menu {
-            transition: all 0.3s ease;
-            max-height: 0;
-            overflow: hidden;
-        }
-        
-        .mobile-menu.active {
-            max-height: 500px;
-        }
+    }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -126,288 +141,290 @@
 
     <!-- Construction Section -->
     <section id="construction" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center mb-16">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Fireproof Solutions for Construction</h2>
-                    <p class="text-gray-600 mb-6">Our advanced fireproof materials are revolutionizing the construction industry, providing unparalleled protection against fire hazards while maintaining structural integrity and aesthetic appeal.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Get a Sample</a>
-                        <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 fade-in delay-1">
-                    <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
-                         alt="Construction site with fireproof materials" 
-                         class="rounded-lg shadow-xl w-full h-auto">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center mb-16">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Fireproof Solutions for Construction</h2>
+                <p class="text-gray-600 mb-6">Our advanced fireproof materials are revolutionizing the construction industry, providing unparalleled protection against fire hazards while maintaining structural integrity and aesthetic appeal.</p>
+                <div class="flex space-x-4 justify-center md:justify-start">
+                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Get a Sample</a>
+                    <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
                 </div>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 mt-16">
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
-                    <div class="text-green-600 mb-4">
-                        <i class="fas fa-layer-group text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Product Overview</h3>
-                    <p class="text-gray-600">Our comprehensive range includes fireproof sheets, insulation materials, coatings, and structural components that meet the highest safety standards.</p>
-                </div>
-                
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
-                    <div class="text-green-600 mb-4">
-                        <i class="fas fa-shield-alt text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Key Benefits</h3>
-                    <p class="text-gray-600">Exceptional durability, compliance with international fire safety regulations, and materials that maintain integrity even under extreme conditions.</p>
-                </div>
-                
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
-                    <div class="text-green-600 mb-4">
-                        <i class="fas fa-building text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Case Studies</h3>
-                    <p class="text-gray-600">From skyscrapers to residential complexes, our materials have chance to protect structures worldwide. Learn how we've helped leading construction firms.</p>
-                </div>
+            <div class="md:w-1/2 fade-in delay-1">
+                <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
+                     alt="Construction site with fireproof materials" 
+                     class="rounded-lg shadow-xl w-full h-auto">
             </div>
         </div>
-    </section>
+        
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-layer-group text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Product Overview</h3>
+                <p class="text-gray-600">Our comprehensive range includes fireproof sheets, insulation materials, coatings, and structural components that meet the highest safety standards.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-shield-alt text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Key Benefits</h3>
+                <p class="text-gray-600">Exceptional durability, compliance with international fire safety regulations, and materials that maintain integrity even under extreme conditions.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-building text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Case Studies</h3>
+                <p class="text-gray-600">From skyscrapers to residential complexes, our materials have chance to protect structures worldwide. Learn how we've helped leading construction firms.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Transportation Section -->
     <section id="transportation" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Transportation Fireproof Solutions</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Protecting vehicles and infrastructure with innovative fireproof technologies designed for the transportation sector.</p>
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Transportation Fireproof Solutions</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Protecting vehicles and infrastructure with innovative fireproof technologies designed for the transportation sector.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center mb-16">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in order-2 md:order-1">
+                <img src="https://static.wixstatic.com/media/847d72_93c606d7a2374e9387190ba0e9849be9~mv2.png" 
+                     alt="Electric vehicle with fireproof battery" 
+                     class="rounded-lg shadow-xl w-full h-auto">
             </div>
-            
-            <div class="flex flex-col md:flex-row items-center mb-16">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in">
-                    <img src="https://static.wixstatic.com/media/847d72_93c606d7a2374e9387190ba0e9849be9~mv2.png" 
-                         alt="Electric vehicle with fireproof battery" 
-                         class="rounded-lg shadow-xl w-full h-auto">
-                </div>
-                <div class="md:w-1/2 fade-in delay-1">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Specially Designed Containment Systems</h3>
-                    <p class="text-gray-600 mb-6">Our advanced containment systems are engineered to safely transport and store any fire-hazardous materials, from lithium batteries to chemicals and industrial compounds. These specialized containers provide exceptional protection against thermal events.</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                            <span class="text-gray-700">Withstands temperatures up to 2000°F</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                            <span class="text-gray-700">Versatile designs for various hazardous materials</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                            <span class="text-gray-700">Customizable sizes for different transportation needs</span>
-                        </li>
-                    </ul>
+            <div class="md:w-1/2 fade-in delay-1 mb-mobile-6 text-center-mobile order-1 md:order-2">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Specially Designed Containment Systems</h3>
+                <p class="text-gray-600 mb-6">Our advanced containment systems are engineered to safely transport and store any fire-hazardous materials, from lithium batteries to chemicals and industrial compounds. These specialized containers provide exceptional protection against thermal events.</p>
+                <ul class="space-y-3 mb-8 text-left">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Withstands temperatures up to 2000°F</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Versatile designs for various hazardous materials</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Customizable sizes for different transportation needs</span>
+                    </li>
+                </ul>
+                <div class="text-center md:text-left">
                     <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Order Samples for Your Fleet</a>
                 </div>
             </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 mt-12">
-                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Public Transportation Solutions</h3>
-                    <p class="text-gray-600 mb-4">From buses to trains, our fireproof materials ensure passenger safety and protect critical components from fire hazards.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-green-600 font-medium">Learn More</span>
-                        <i class="fas fa-arrow-right text-green-600"></i>
-                    </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 mt-12">
+            <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Public Transportation Solutions</h3>
+                <p class="text-gray-600 mb-4">From buses to trains, our fireproof materials ensure passenger safety and protect critical components from fire hazards.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-green-600 font-medium">Learn More</span>
+                    <i class="fas fa-arrow-right text-green-600"></i>
                 </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Aviation & Aerospace Applications</h3>
-                    <p class="text-gray-600 mb-4">Specialized fireproof solutions for aircraft interiors, cargo holds, and critical components where weight and safety are paramount.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-green-600 font-medium">Learn More</span>
-                        <i class="fas fa-arrow-right text-green-600"></i>
-                    </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Aviation & Aerospace Applications</h3>
+                <p class="text-gray-600 mb-4">Specialized fireproof solutions for aircraft interiors, cargo holds, and critical components where weight and safety are paramount.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-green-600 font-medium">Learn More</span>
+                    <i class="fas fa-arrow-right text-green-600"></i>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Custom Projects Section -->
     <section id="custom-projects" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Custom Fireproof Solutions</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Your unique challenges deserve tailored solutions. Our team works closely with you to develop fireproof materials for specialized applications.</p>
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center mb-16">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">From Concept to Completion</h3>
-                    <p class="text-gray-600 mb-6">Our customization process begins with understanding your specific requirements and ends with a solution that exceeds expectations.</p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-green-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-comments text-green-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Consultation</h4>
-                                <p class="text-gray-600">We listen to understand your needs and challenges.</p>
-                            </div>
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Custom Fireproof Solutions</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Your unique challenges deserve tailored solutions. Our team works closely with you to develop fireproof materials for specialized applications.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center mb-16">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">From Concept to Completion</h3>
+                <p class="text-gray-600 mb-6">Our customization process begins with understanding your specific requirements and ends with a solution that exceeds expectations.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-comments text-green-600 text-xl"></i>
                         </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-green-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-flask text-green-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Material Development</h4>
-                                <p class="text-gray-600">Our scientists develop formulations tailored to your application.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-green-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-cogs text-green-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Prototyping</h4>
-                                <p class="text-gray-600">We create prototypes for testing and refinement.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-green-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-truck text-green-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Delivery</h4>
-                                <p class="text-gray-600">Your custom solution is manufactured and delivered.</p>
-                            </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Consultation</h4>
+                            <p class="text-gray-600">We listen to understand your needs and challenges.</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="md:w-1/2 fade-in delay-1">
-                    <img src="https://static.wixstatic.com/media/847d72_f37ac773c3c24b0fb625c26e34ba776a~mv2.jpg" 
-                         alt="Custom fireproof solutions" 
-                         class="rounded-lg shadow-xl w-full h-auto">
+                    
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-flask text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Material Development</h4>
+                            <p class="text-gray-600">Our scientists develop formulations tailored to your application.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-cogs text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Prototyping</h4>
+                            <p class="text-gray-600">We create prototypes for testing and refinement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-truck text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Delivery</h4>
+                            <p class="text-gray-600">Your custom solution is manufactured and delivered.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="mt-16">
-                <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Success Stories</h3>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-car-battery text-green-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-bold text-gray-800">Lithium-Ion Battery Containment</h4>
-                        </div>
-                        <p class="text-gray-600 mb-4">"Elven's enclosure fully contained a catastrophic thermal runaway event in our EV battery testing facility, preventing what could have been millions in damages and potential injuries."</p>
-                        <div class="text-green-600 font-medium">- Advanced Electric Mobility Inc.</div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-fire-extinguisher text-green-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-bold text-gray-800">Firefighter Protection Suit</h4>
-                        </div>
-                        <p class="text-gray-600 mb-4">"Our department equipped our specialized team with Elven's suits, allowing our firefighters to withstand extreme heat longer and operate more effectively during industrial fire emergencies."</p>
-                        <div class="text-green-600 font-medium">- Sacramento Metro Fire Department</div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-film text-green-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-bold text-gray-800">Film Industry Safety Gear</h4>
-                        </div>
-                        <p class="text-gray-600 mb-4">"The lightweight fireproof suits from Elven have revolutionized our stunt work. Our performers now have unprecedented protection during complex fire scenes while maintaining full mobility."</p>
-                        <div class="text-green-600 font-medium">- Paramount Studios Special Effects</div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12 fade-in">
-                    <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Start Your Custom Project Inquiry</a>
-                </div>
+            <div class="md:w-1/2 fade-in delay-1">
+                <img src="https://static.wixstatic.com/media/847d72_f37ac773c3c24b0fb625c26e34ba776a~mv2.jpg" 
+                     alt="Custom fireproof solutions" 
+                     class="rounded-lg shadow-xl w-full h-auto">
             </div>
         </div>
-    </section>
+        
+        <div class="mt-16">
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Success Stories</h3>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-car-battery text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Lithium-Ion Battery Containment</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Elven's enclosure fully contained a catastrophic thermal runaway event in our EV battery testing facility, preventing what could have been millions in damages and potential injuries."</p>
+                    <div class="text-green-600 font-medium">- Advanced Electric Mobility Inc.</div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-fire-extinguisher text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Firefighter Protection Suit</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Our department equipped our specialized team with Elven's suits, allowing our firefighters to withstand extreme heat longer and operate more effectively during industrial fire emergencies."</p>
+                    <div class="text-green-600 font-medium">- Sacramento Metro Fire Department</div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-film text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Film Industry Safety Gear</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The lightweight fireproof suits from Elven have revolutionized our stunt work. Our performers now have unprecedented protection during complex fire scenes while maintaining full mobility."</p>
+                    <div class="text-green-600 font-medium">- Paramount Studios Special Effects</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Start Your Custom Project Inquiry</a>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- About Us Section -->
     <section id="about" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Elven Technologies</h2>
-                    <p class="text-gray-600 mb-6">Founded in 2019, Elven Technologies began with a vision to create revolutionary fireproof materials. Our name draws inspiration from elves and fantasy—where "advanced technology is indistinguishable from magic."</p>
-                    <p class="text-gray-600 mb-8">What started as a small team working in a 15m² garage has evolved into a groundbreaking company developing materials that withstand temperatures up to 2000°C. Our flagship technology provides critical protection for lithium-ion batteries in electric vehicles and transportation chains, preventing catastrophic fires from becoming disasters.</p>
-                    <p class="text-gray-600 mb-8">After extensive laboratory testing with Underwriters Laboratories (UL) in the United States and numerous real-world trials, our composite materials have consistently outperformed conventional solutions. Even our most basic models demonstrate exceptional fire resistance that only materials like concrete can match.</p>
-                    
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <div class="text-green-600 text-3xl font-bold mb-2">2000°C</div>
-                            <div class="text-gray-600">Heat Resistance</div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <div class="text-green-600 text-3xl font-bold mb-2">10+</div>
-                            <div class="text-gray-600">Test Cycles Passed</div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <div class="text-green-600 text-3xl font-bold mb-2">2</div>
-                            <div class="text-gray-600">Patents Pending</div>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <div class="text-green-600 text-3xl font-bold mb-2">24/7</div>
-                            <div class="text-gray-600">Support Available</div>
-                        </div>
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Elven Technologies</h2>
+                <p class="text-gray-600 mb-6">Founded in 2019, Elven Technologies began with a vision to create revolutionary fireproof materials. Our name draws inspiration from elves and fantasy—where "advanced technology is indistinguishable from magic."</p>
+                <p class="text-gray-600 mb-8">What started as a small team working in a 15m² garage has evolved into a groundbreaking company developing materials that withstand temperatures up to 2000°C. Our flagship technology provides critical protection for lithium-ion batteries in electric vehicles and transportation chains, preventing catastrophic fires from becoming disasters.</p>
+                <p class="text-gray-600 mb-8">After extensive laboratory testing with Underwriters Laboratories (UL) in the United States and numerous real-world trials, our composite materials have consistently outperformed conventional solutions. Even our most basic models demonstrate exceptional fire resistance that only materials like concrete can match.</p>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">2000°C</div>
+                        <div class="text-gray-600">Heat Resistance</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">10+</div>
+                        <div class="text-gray-600">Test Cycles Passed</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">2</div>
+                        <div class="text-gray-600">Patents Pending</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">24/7</div>
+                        <div class="text-gray-600">Support Available</div>
                     </div>
                 </div>
-                
-                <div class="md:w-1/2 fade-in delay-1">
-                    <div class="bg-white p-8 rounded-lg shadow-xl">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Our Mission</h3>
-                        <p class="text-gray-600 mb-6">To develop fireproof solutions that not only meet but exceed safety standards, providing peace of mind for our clients and end-users in high-risk environments.</p>
+            </div>
+            
+            <div class="md:w-1/2 fade-in delay-1">
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Our Mission</h3>
+                    <p class="text-gray-600 mb-6">To develop fireproof solutions that not only meet but exceed safety standards, providing peace of mind for our clients and end-users in high-risk environments.</p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 mt-8">Core Values</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-shield-alt text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Safety First</h4>
+                                <p class="text-gray-600">Every decision we make prioritizes human safety and property protection.</p>
+                            </div>
+                        </div>
                         
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6 mt-8">Core Values</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
-                                    <i class="fas fa-shield-alt text-green-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">Safety First</h4>
-                                    <p class="text-gray-600">Every decision we make prioritizes human safety and property protection.</p>
-                                </div>
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-lightbulb text-green-600"></i>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
-                                    <i class="fas fa-lightbulb text-green-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">Innovation Driven</h4>
-                                    <p class="text-gray-600">We continuously push the boundaries of material science to develop better solutions.</p>
-                                </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Innovation Driven</h4>
+                                <p class="text-gray-600">We continuously push the boundaries of material science to develop better solutions.</p>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
-                                    <i class="fas fa-hands-helping text-green-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">Client Focused</h4>
-                                    <p class="text-gray-600">Your challenges become our challenges, and we won't rest until we've solved them.</p>
-                                </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-hands-helping text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Client Focused</h4>
+                                <p class="text-gray-600">Your challenges become our challenges, and we won't rest until we've solved them.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Team Section -->
     <section id="team" class="py-20 bg-gray-50">
@@ -537,58 +554,58 @@
 
     <!-- Completed Projects Section -->
     <section id="completed-projects" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Completed Projects</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">See our innovative fireproof solutions in action through real-world applications and testing.</p>
-            </div>
-            
-            <div class="flex flex-col lg:flex-row items-start gap-12">
-                <div class="lg:w-3/5 fade-in">
-                    <div class="rounded-lg overflow-hidden shadow-xl bg-gray-900">
-                        <div class="relative pb-[56.25%] h-0">
-                            <iframe 
-                                class="absolute top-0 left-0 w-full h-full" 
-                                src="https://www.youtube.com/embed/77Ugb5_7BNA?rel=0" 
-                                title="EV Battery Fire Containment by Elven Technologies" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Completed Projects</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">See our innovative fireproof solutions in action through real-world applications and testing.</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row items-start gap-12">
+            <div class="lg:w-3/5 fade-in w-full">
+                <div class="rounded-lg overflow-hidden shadow-xl bg-gray-900">
+                    <div class="relative pb-[56.25%] h-0">
+                        <iframe 
+                            class="absolute top-0 left-0 w-full h-full" 
+                            src="https://www.youtube.com/embed/77Ugb5_7BNA?rel=0" 
+                            title="EV Battery Fire Containment by Elven Technologies" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
+            </div>
+            
+            <div class="lg:w-2/5 fade-in delay-1 text-center-mobile">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">EV Battery Fire Containment System</h3>
+                <p class="text-gray-600 mb-4">Vamekh, CTO of Elven Technologies, demonstrates the world's first full containment of an electric vehicle (EV) lithium battery fire. Using our innovative fireproof composite material, we built a protective enclosure for a 400V, 17.6kWh lithium battery pack and put it through a series of rigorous explosion tests.</p>
                 
-                <div class="lg:w-2/5 fade-in delay-1">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">EV Battery Fire Containment System</h3>
-                    <p class="text-gray-600 mb-4">Vamekh, CTO of Elven Technologies, demonstrates the world's first full containment of an electric vehicle (EV) lithium battery fire. Using our innovative fireproof composite material, we built a protective enclosure for a 400V, 17.6kWh lithium battery pack and put it through a series of rigorous explosion tests.</p>
-                    
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md mt-8">
-                        <h4 class="font-bold text-gray-800 mb-2">In this demonstration:</h4>
-                        <ul class="space-y-2 text-gray-600 mb-4">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                <span>The construction and setup of the battery enclosure</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                <span>Three different test scenarios: unprotected, protected without exhaust, and protected with exhaust</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                <span>How our system achieved complete fire and heat containment—no flames, no heat, total safety</span>
-                            </li>
-                        </ul>
-                        <p class="text-gray-700 font-medium">Discover how Elven Technologies is setting new standards in EV battery safety.</p>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Request Similar Solution</a>
-                    </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md mt-8">
+                    <h4 class="font-bold text-gray-800 mb-2">In this demonstration:</h4>
+                    <ul class="space-y-2 text-gray-600 mb-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>The construction and setup of the battery enclosure</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Three different test scenarios: unprotected, protected without exhaust, and protected with exhaust</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>How our system achieved complete fire and heat containment—no flames, no heat, total safety</span>
+                        </li>
+                    </ul>
+                    <p class="text-gray-700 font-medium">Discover how Elven Technologies is setting new standards in EV battery safety.</p>
+                </div>
+                
+                <div class="mt-8 text-center lg:text-left">
+                    <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Request Similar Solution</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Gallery Section -->
     <section id="gallery" class="py-20 bg-gray-100">
@@ -1255,17 +1272,10 @@
             nextBtn.innerHTML = '<i class="fas fa-chevron-right text-green-700"></i>';
             imageContainer.appendChild(nextBtn);
             
-            // Add caption
+            // Add caption container
             const caption = document.createElement('div');
-            caption.classList.add('text-white', 'text-center', 'mt-4', 'p-4');
-            const captionText = firstSlide.querySelector('.p-6 h3').textContent;
-            caption.innerHTML = `<h3 class="text-xl font-bold">${captionText}</h3>`;
-            const captionDesc = firstSlide.querySelector('.p-6 p').textContent;
-            caption.innerHTML += `<p class="text-gray-300 mt-2">${captionDesc}</p>`;
+            caption.classList.add('absolute', 'bottom-0', 'left-0', 'right-0', 'p-4', 'bg-gradient-to-t', 'from-black', 'to-transparent', 'text-white');
             galleryContainer.appendChild(caption);
-            
-            // Keep track of current fullscreen slide
-            let fullscreenCurrentSlide = currentSlide;
             
             // Update image and caption
             function updateFullscreenGallery() {
