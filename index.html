@@ -861,19 +861,6 @@ body {
                 <!-- Gallery Slide 2 -->
                 <div class="w-full flex-shrink-0 relative">
                     <div class="aspect-w-1 aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d
-                             alt="Material Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                        <h3 class="text-xl font-bold">Material Testing</h3>
-                        <p class="text-sm mt-2">Rigorous testing protocols ensure our materials meet the highest safety standards</p>
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 3 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-1 aspect-h-1">
                         <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
                              alt="Fire Resistance Demonstration" 
                              class="w-full h-full object-cover">
@@ -884,10 +871,10 @@ body {
                     </div>
                 </div>
                 
-                <!-- Gallery Slide 4 -->
+                <!-- Gallery Slide 3 -->
                 <div class="w-full flex-shrink-0 relative">
                     <div class="aspect-w-1 aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_39198d53ae3b463bb78c460f4d43f3ef~mv2.jpg" 
+                        <img src="https://static.wixstatic.com/media/847d
                              alt="Laboratory Testing Setup" 
                              class="w-full h-full object-cover">
                     </div>
@@ -897,7 +884,7 @@ body {
                     </div>
                 </div>
                 
-                <!-- Gallery Slide 5 -->
+                <!-- Gallery Slide 4 -->
                 <div class="w-full flex-shrink-0 relative">
                     <div class="aspect-w-1 aspect-h-1">
                         <img src="https://static.wixstatic.com/media/847d72_f1f28ba1ea8c4f5f91b67c427a28c939~mv2.jpg" 
@@ -1013,6 +1000,19 @@ body {
                             </div>
                             
                             <div class="flex items-start">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600">contact@elventech.net</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-bold text-gray-800 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
                                 <div class="bg-green-100 p-3 rounded-full mr-4">
                                     <i class="fas fa-envelope text-green-600"></i>
                                 </div>
@@ -1182,6 +1182,13 @@ body {
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.19/dist/lenis.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function() {
+      emailjs.init("qAFa7520_W9R7h2HK");
+   })();
+</script>
+<script src="sample-form.js"></script>
 <script src="fixed-script.js"></script>
 <!-- Add this modal for gallery images (if not already present) -->
 <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 hidden">
@@ -1190,13 +1197,6 @@ body {
     </button>
     <img id="gallery-modal-image" src="" alt="Gallery image full size" class="max-w-full max-h-[80vh] object-contain">
 </div>
-<!-- Add this in your head section before your other scripts -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="text/javascript">
-   (function() {
-      emailjs.init("YOUR_USER_ID_HERE"); // Replace with your actual EmailJS user ID, not service ID
-   })();
-</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Directly target all sample buttons
@@ -1261,39 +1261,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Form submission with EmailJS
-    const sampleFormElement = document.querySelector('#sample-form form');
-    if (sampleFormElement) {
-        sampleFormElement.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show thank you message
-            closeSampleFormFunc();
-            if (thankYouMessage) {
-                thankYouMessage.classList.remove('hidden');
-            }
-            
-            // Send email using EmailJS
-            if (window.emailjs) {
-                emailjs.send("service_anf05h6", "template_sample_request", {
-                    name: document.getElementById('sample-name').value,
-                    company: document.getElementById('sample-company').value,
-                    email: document.getElementById('sample-email').value,
-                    phone: document.getElementById('sample-phone').value,
-                    sample_type: document.getElementById('sample-type').value,
-                    shipping_address: document.getElementById('sample-address').value,
-                    to_email: "media@elventech.net"
-                }).then(
-                    function() {
-                        console.log("Email sent successfully");
-                    },
-                    function(error) {
-                        console.error("Email failed to send:", error);
-                    }
-                );
-            }
-        });
-    }
+// Form submission with EmailJS
+const sampleFormElement = document.querySelector('#sample-form form');
+if (sampleFormElement) {
+    sampleFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show thank you message
+        closeSampleFormFunc();
+        if (thankYouMessage) {
+            thankYouMessage.classList.remove('hidden');
+        }
+        
+        // Send email using EmailJS
+        if (window.emailjs) {
+            emailjs.send("service_anf05h6", "template_sample_request", {
+                from_name: document.getElementById('sample-name').value,
+                company: document.getElementById('sample-company').value,
+                reply_to: document.getElementById('sample-email').value,
+                phone: document.getElementById('sample-phone').value,
+                sample_type: document.getElementById('sample-type').value,
+                shipping_address: document.getElementById('sample-address').value,
+                message: `Sample request for ${document.getElementById('sample-type').value}`,
+                to_name: "Elven Team"
+            }).then(
+                function() {
+                    console.log("Email sent successfully");
+                },
+                function(error) {
+                    console.error("Email failed to send:", error);
+                }
+            );
+        }
+    });
+}
     
     // Close thank you message
     if (closeThankYou) {
