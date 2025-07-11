@@ -1194,8 +1194,116 @@ body {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
    (function() {
-      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+      emailjs.init("service_anf05h6"); // Replace with your EmailJS user ID
    })();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Directly target all sample buttons
+    const sampleButtons = document.querySelectorAll('.sample-cta');
+    const sampleFormContainer = document.getElementById('sample-form-container');
+    const sampleForm = document.getElementById('sample-form');
+    const closeSampleForm = document.getElementById('close-sample-form');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const closeThankYou = document.getElementById('close-thank-you');
+    
+    // Function to open sample form - simplified
+    function openSampleForm(e) {
+        if (e) e.preventDefault();
+        console.log("Opening sample form");
+        
+        if (sampleFormContainer) {
+            sampleFormContainer.classList.remove('hidden');
+            setTimeout(() => {
+                if (sampleForm) {
+                    sampleForm.classList.add('active');
+                }
+            }, 10);
+        }
+    }
+    
+    // Function to close sample form - simplified
+    function closeSampleFormFunc() {
+        if (sampleForm) {
+            sampleForm.classList.remove('active');
+            setTimeout(() => {
+                if (sampleFormContainer) {
+                    sampleFormContainer.classList.add('hidden');
+                }
+            }, 300);
+        }
+    }
+    
+    // Add click handlers to ALL sample buttons
+    sampleButtons.forEach(button => {
+        button.addEventListener('click', openSampleForm);
+        console.log("Added click handler to button:", button);
+    });
+    
+    // Also add specific handler for the floating button
+    const floatingSampleCta = document.getElementById('floating-sample-cta');
+    if (floatingSampleCta) {
+        floatingSampleCta.addEventListener('click', openSampleForm);
+        console.log("Added click handler to floating button");
+    }
+    
+    // Close button handler
+    if (closeSampleForm) {
+        closeSampleForm.addEventListener('click', closeSampleFormFunc);
+    }
+    
+    // Close when clicking outside
+    if (sampleFormContainer) {
+        sampleFormContainer.addEventListener('click', (e) => {
+            if (e.target === sampleFormContainer) {
+                closeSampleFormFunc();
+            }
+        });
+    }
+    
+    // Form submission with EmailJS
+    const sampleFormElement = document.querySelector('#sample-form form');
+    if (sampleFormElement) {
+        sampleFormElement.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show thank you message
+            closeSampleFormFunc();
+            if (thankYouMessage) {
+                thankYouMessage.classList.remove('hidden');
+            }
+            
+            // Send email using EmailJS
+            if (window.emailjs) {
+                emailjs.send("service_anf05h6", "template_sample_request", {
+                    name: document.getElementById('sample-name').value,
+                    company: document.getElementById('sample-company').value,
+                    email: document.getElementById('sample-email').value,
+                    phone: document.getElementById('sample-phone').value,
+                    sample_type: document.getElementById('sample-type').value,
+                    shipping_address: document.getElementById('sample-address').value,
+                    to_email: "media@elventech.net"
+                }).then(
+                    function() {
+                        console.log("Email sent successfully");
+                    },
+                    function(error) {
+                        console.error("Email failed to send:", error);
+                    }
+                );
+            }
+        });
+    }
+    
+    // Close thank you message
+    if (closeThankYou) {
+        closeThankYou.addEventListener('click', () => {
+            if (thankYouMessage) {
+                thankYouMessage.classList.add('hidden');
+            }
+        });
+    }
+});
 </script>
 </body>
 </html>
