@@ -1283,13 +1283,16 @@ if (sampleFormElement) {
                 sample_type: document.getElementById('sample-type').value,
                 shipping_address: document.getElementById('sample-address').value,
                 message: `Sample request for ${document.getElementById('sample-type').value}`,
-                to_name: "Elven Team"
+                to_name: "Elven Team",
+                to_email: "shio@elventech.net" // Add this line to explicitly set recipient
             }).then(
-                function() {
-                    console.log("Email sent successfully");
+                function(response) {
+                    console.log("Email sent successfully", response);
                 },
                 function(error) {
                     console.error("Email failed to send:", error);
+                    // Log detailed error for troubleshooting
+                    console.error("Error details:", JSON.stringify(error));
                 }
             );
         }
