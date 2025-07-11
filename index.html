@@ -1190,5 +1190,12 @@ body {
     </button>
     <img id="gallery-modal-image" src="" alt="Gallery image full size" class="max-w-full max-h-[80vh] object-contain">
 </div>
+<!-- Add this in your head section before your other scripts -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function() {
+      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+   })();
+</script>
 </body>
 </html>
