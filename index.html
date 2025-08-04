@@ -101,6 +101,7 @@
         width: 100%;
         flex-shrink: 0;
         min-width: 100%;
+        height: 100%;
     }
     
     #construction-slider img {
@@ -111,6 +112,7 @@
         user-select: none;
         -webkit-user-drag: none;
         pointer-events: none;
+        display: block;
     }
     
     /* Ensure navigation buttons are clickable */
@@ -380,7 +382,7 @@ body {
             </div>
             <div class="md:w-1/2 fade-in delay-1">
                 <!-- Fix the swipeable gallery -->
-                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden h-80">
+                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden h-80" data-lenis-prevent>
                     <div id="construction-slider" class="flex transition-transform duration-500 ease-in-out h-full">
                         <div class="w-full flex-shrink-0 h-full">
                             <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
@@ -398,14 +400,6 @@ body {
                                  class="w-full h-full object-cover cursor-pointer">
                         </div>
                     </div>
-                    
-                    <!-- Navigation Arrows -->
-                    <button id="construction-prev" class="construction-nav-arrow absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-3 shadow-lg focus:outline-none transition z-20">
-                        <i class="fas fa-chevron-left text-green-700 text-lg"></i>
-                    </button>
-                    <button id="construction-next" class="construction-nav-arrow absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-3 shadow-lg focus:outline-none transition z-20">
-                        <i class="fas fa-chevron-right text-green-700 text-lg"></i>
-                    </button>
                     
                     <!-- Navigation Dots -->
                     <div id="construction-dots" class="construction-dots absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
@@ -1487,5 +1481,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script src="fixed-script.js"></script>
 </body>
 </html>
