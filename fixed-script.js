@@ -148,8 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Skip empty links and sample buttons
-            if (href === '#' || this.classList.contains('sample-cta')) return;
+            // Skip empty links, sample buttons, and contact buttons
+            if (href === '#' || this.classList.contains('sample-cta') || this.classList.contains('contact-cta')) return;
             
             e.preventDefault();
             const target = document.querySelector(href);
@@ -172,8 +172,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the sample buttons
     setupSampleButtons();
     
-    // Initialize gallery
-    initializeGallery();
+    // Initialize gallery with a small delay to ensure DOM is ready
+    setTimeout(() => {
+        initializeGallery();
+        initializeConstructionSlider();
+    }, 100);
 });
 
 function initializeGallery() {
@@ -190,6 +193,8 @@ function initializeGallery() {
         let currentSlide = 0;
         const slides = slider.children;
         const slideCount = slides.length;
+        let touchStartX = 0;
+        let touchEndX = 0;
         
         // Create navigation dots
         for (let i = 0; i < slideCount; i++) {
@@ -224,14 +229,52 @@ function initializeGallery() {
             }
         }
         
-        prevButton.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
-            goToSlide(currentSlide);
-        });
-        
-        nextButton.addEventListener('click', () => {
+        function nextSlide() {
             currentSlide = (currentSlide + 1) % slideCount;
             goToSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            goToSlide(currentSlide);
+        }
+        
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
+        
+        // Touch support for mobile
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+        
+        // Auto-slide functionality (optional)
+        let autoSlideInterval = setInterval(nextSlide, 5000);
+        
+        // Pause auto-slide on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(nextSlide, 5000);
         });
         
         // Gallery modal functionality
@@ -263,4 +306,169 @@ function initializeGallery() {
             });
         }
     }
+}
+
+function initializeConstructionSlider() {
+    // Construction slider functionality with robust initialization
+    const slider = document.getElementById('construction-slider');
+    const prevButton = document.getElementById('construction-prev');
+    const nextButton = document.getElementById('construction-next');
+    const dotsContainer = document.getElementById('construction-dots');
+    
+    if (!slider || !dotsContainer) {
+        console.warn('Construction slider elements not found');
+        return;
+    }
+    
+    let currentSlide = 0;
+    const slides = slider.children;
+    const slideCount = slides.length;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isAnimating = false;
+    
+    // Clear any existing dots first
+    dotsContainer.innerHTML = '';
+    
+    // Create navigation dots
+    for (let i = 0; i < slideCount; i++) {
+        const dot = document.createElement('button');
+        dot.classList.add('w-4', 'h-4', 'rounded-full', 'bg-white', 'bg-opacity-50', 'hover:bg-opacity-100', 'focus:outline-none', 'transition-all', 'duration-300');
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        
+        if (i === 0) {
+            dot.classList.remove('bg-opacity-50');
+            dot.classList.add('bg-green-600');
+        }
+        
+        dot.addEventListener('click', () => {
+            goToSlide(i);
+        });
+        
+        dotsContainer.appendChild(dot);
+    }
+    
+    function goToSlide(index) {
+        if (isAnimating || index === currentSlide) return;
+        
+        isAnimating = true;
+        currentSlide = index;
+        
+        // Apply transform
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update dots
+        const dots = dotsContainer.children;
+        Array.from(dots).forEach((dot, i) => {
+            if (i === currentSlide) {
+                dot.classList.remove('bg-white', 'bg-opacity-50');
+                dot.classList.add('bg-green-600');
+            } else {
+                dot.classList.remove('bg-green-600');
+                dot.classList.add('bg-white', 'bg-opacity-50');
+            }
+        });
+        
+        // Reset animation flag
+        setTimeout(() => {
+            isAnimating = false;
+        }, 500);
+    }
+    
+    function nextSlide() {
+        const next = (currentSlide + 1) % slideCount;
+        goToSlide(next);
+    }
+    
+    function prevSlide() {
+        const prev = (currentSlide - 1 + slideCount) % slideCount;
+        goToSlide(prev);
+    }
+    
+    // Add event listeners for navigation buttons
+    if (prevButton) {
+        prevButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            prevSlide();
+        });
+        
+        // Make buttons visible and clickable
+        prevButton.style.zIndex = '100';
+        prevButton.style.pointerEvents = 'auto';
+    }
+    
+    if (nextButton) {
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            nextSlide();
+        });
+        
+        // Make buttons visible and clickable
+        nextButton.style.zIndex = '100';
+        nextButton.style.pointerEvents = 'auto';
+    }
+    
+    // Touch support for mobile
+    let startX = 0;
+    let startY = 0;
+    let distX = 0;
+    let distY = 0;
+    
+    slider.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+    }, { passive: true });
+    
+    slider.addEventListener('touchmove', (e) => {
+        if (!startX || !startY) return;
+        
+        const touch = e.touches[0];
+        distX = touch.clientX - startX;
+        distY = touch.clientY - startY;
+        
+        // Prevent vertical scrolling if horizontal swipe is detected
+        if (Math.abs(distX) > Math.abs(distY)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    slider.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        const swipeThreshold = 50;
+        
+        if (Math.abs(distX) > Math.abs(distY) && Math.abs(distX) > swipeThreshold) {
+            if (distX > 0) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
+        }
+        
+        // Reset values
+        startX = 0;
+        startY = 0;
+        distX = 0;
+        distY = 0;
+    }, { passive: true });
+    
+    // Auto-slide functionality
+    let autoSlideInterval = setInterval(nextSlide, 5000);
+    
+    // Pause auto-slide on interaction
+    const pauseAutoSlide = () => clearInterval(autoSlideInterval);
+    const resumeAutoSlide = () => {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, 5000);
+    };
+    
+    slider.addEventListener('mouseenter', pauseAutoSlide);
+    slider.addEventListener('mouseleave', resumeAutoSlide);
+    slider.addEventListener('touchstart', pauseAutoSlide);
+    slider.addEventListener('touchend', () => {
+        setTimeout(resumeAutoSlide, 3000);
+    });
 }
