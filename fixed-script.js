@@ -1,5 +1,7 @@
 // fixed-script.js
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing...');
+    
     // Initialize Lenis smooth scrolling
     const lenis = new Lenis({
         duration: 1.2,
@@ -172,10 +174,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the sample buttons
     setupSampleButtons();
     
-    // Initialize gallery with a small delay to ensure DOM is ready
+    // Initialize construction slider first with multiple attempts
+    console.log('Starting slider initialization...');
+    
+    function tryInitializeSlider() {
+        const slider = document.getElementById('construction-slider');
+        const dotsContainer = document.getElementById('construction-dots');
+        
+        if (slider && dotsContainer) {
+            console.log('Elements found, initializing construction slider...');
+            initializeConstructionSlider();
+            return true;
+        } else {
+            console.log('Slider elements not found yet, retrying...');
+            return false;
+        }
+    }
+    
+    // Try immediately
+    if (!tryInitializeSlider()) {
+        // Try again after 100ms
+        setTimeout(() => {
+            if (!tryInitializeSlider()) {
+                // Try again after 500ms
+                setTimeout(() => {
+                    if (!tryInitializeSlider()) {
+                        console.warn('Could not initialize construction slider after multiple attempts');
+                    }
+                }, 500);
+            }
+        }, 100);
+    }
+    
+    // Initialize gallery
     setTimeout(() => {
         initializeGallery();
-        initializeConstructionSlider();
     }, 100);
 });
 
@@ -309,23 +342,45 @@ function initializeGallery() {
 }
 
 function initializeConstructionSlider() {
-    // Construction slider functionality with robust initialization
+    // Construction slider functionality with enhanced mobile support
     const slider = document.getElementById('construction-slider');
-    const prevButton = document.getElementById('construction-prev');
-    const nextButton = document.getElementById('construction-next');
     const dotsContainer = document.getElementById('construction-dots');
+    const container = document.querySelector('.construction-main-gallery');
     
     if (!slider || !dotsContainer) {
         console.warn('Construction slider elements not found');
         return;
     }
     
+    console.log('Initializing construction slider with', slider.children.length, 'slides');
+    
+    // Disable Lenis smooth scrolling for this container
+    if (container) {
+        container.setAttribute('data-lenis-prevent', 'true');
+    }
+    
     let currentSlide = 0;
-    const slides = slider.children;
+    const slides = Array.from(slider.children);
     const slideCount = slides.length;
-    let touchStartX = 0;
-    let touchEndX = 0;
     let isAnimating = false;
+    let autoSlideInterval = null;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    
+    // Ensure slider has proper initial styles
+    slider.style.width = '100%';
+    slider.style.display = 'flex';
+    slider.style.transition = 'transform 0.5s ease-in-out';
+    slider.style.transform = 'translateX(0%)';
+    
+    // Set up individual slides
+    slides.forEach((slide, index) => {
+        slide.style.width = '100%';
+        slide.style.flexShrink = '0';
+        slide.style.minWidth = '100%';
+    });
     
     // Clear any existing dots first
     dotsContainer.innerHTML = '';
@@ -335,13 +390,17 @@ function initializeConstructionSlider() {
         const dot = document.createElement('button');
         dot.classList.add('w-4', 'h-4', 'rounded-full', 'bg-white', 'bg-opacity-50', 'hover:bg-opacity-100', 'focus:outline-none', 'transition-all', 'duration-300');
         dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.style.pointerEvents = 'auto';
+        dot.style.zIndex = '30';
         
         if (i === 0) {
             dot.classList.remove('bg-opacity-50');
             dot.classList.add('bg-green-600');
         }
         
-        dot.addEventListener('click', () => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             goToSlide(i);
         });
         
@@ -349,13 +408,16 @@ function initializeConstructionSlider() {
     }
     
     function goToSlide(index) {
-        if (isAnimating || index === currentSlide) return;
+        if (isAnimating || index === currentSlide || index < 0 || index >= slideCount) return;
         
         isAnimating = true;
         currentSlide = index;
         
+        console.log('Going to slide', currentSlide);
+        
         // Apply transform
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        const translateValue = -currentSlide * 100;
+        slider.style.transform = `translateX(${translateValue}%)`;
         
         // Update dots
         const dots = dotsContainer.children;
@@ -372,7 +434,7 @@ function initializeConstructionSlider() {
         // Reset animation flag
         setTimeout(() => {
             isAnimating = false;
-        }, 500);
+        }, 600);
     }
     
     function nextSlide() {
@@ -385,65 +447,53 @@ function initializeConstructionSlider() {
         goToSlide(prev);
     }
     
-    // Add event listeners for navigation buttons
-    if (prevButton) {
-        prevButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            prevSlide();
-        });
+    // Enhanced touch support for mobile
+    const touchTarget = container || slider;
+    
+    function handleTouchStart(e) {
+        if (e.touches.length !== 1) return;
         
-        // Make buttons visible and clickable
-        prevButton.style.zIndex = '100';
-        prevButton.style.pointerEvents = 'auto';
-    }
-    
-    if (nextButton) {
-        nextButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            nextSlide();
-        });
-        
-        // Make buttons visible and clickable
-        nextButton.style.zIndex = '100';
-        nextButton.style.pointerEvents = 'auto';
-    }
-    
-    // Touch support for mobile
-    let startX = 0;
-    let startY = 0;
-    let distX = 0;
-    let distY = 0;
-    
-    slider.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         startX = touch.clientX;
         startY = touch.clientY;
-    }, { passive: true });
+        currentX = startX;
+        currentY = startY;
+        
+        pauseAutoSlide();
+        
+        console.log('Touch start:', startX, startY);
+    }
     
-    slider.addEventListener('touchmove', (e) => {
-        if (!startX || !startY) return;
+    function handleTouchMove(e) {
+        if (e.touches.length !== 1) return;
         
         const touch = e.touches[0];
-        distX = touch.clientX - startX;
-        distY = touch.clientY - startY;
+        currentX = touch.clientX;
+        currentY = touch.clientY;
         
-        // Prevent vertical scrolling if horizontal swipe is detected
-        if (Math.abs(distX) > Math.abs(distY)) {
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
+        
+        // If horizontal movement is greater than vertical, prevent default scrolling
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
             e.preventDefault();
         }
-    }, { passive: false });
+    }
     
-    slider.addEventListener('touchend', (e) => {
-        if (!startX || !startY) return;
-        
+    function handleTouchEnd(e) {
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
         const swipeThreshold = 50;
         
-        if (Math.abs(distX) > Math.abs(distY) && Math.abs(distX) > swipeThreshold) {
-            if (distX > 0) {
+        console.log('Touch end - deltaX:', deltaX, 'deltaY:', deltaY);
+        
+        // Check for valid swipe
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+            if (deltaX > 0) {
+                console.log('Swiping to previous slide');
                 prevSlide();
             } else {
+                console.log('Swiping to next slide');
                 nextSlide();
             }
         }
@@ -451,24 +501,43 @@ function initializeConstructionSlider() {
         // Reset values
         startX = 0;
         startY = 0;
-        distX = 0;
-        distY = 0;
-    }, { passive: true });
+        currentX = 0;
+        currentY = 0;
+        
+        setTimeout(resumeAutoSlide, 3000);
+    }
+    
+    // Add touch event listeners
+    touchTarget.addEventListener('touchstart', handleTouchStart, { passive: true });
+    touchTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
+    touchTarget.addEventListener('touchend', handleTouchEnd, { passive: true });
     
     // Auto-slide functionality
-    let autoSlideInterval = setInterval(nextSlide, 5000);
-    
-    // Pause auto-slide on interaction
-    const pauseAutoSlide = () => clearInterval(autoSlideInterval);
-    const resumeAutoSlide = () => {
-        clearInterval(autoSlideInterval);
+    function startAutoSlide() {
+        if (autoSlideInterval) clearInterval(autoSlideInterval);
         autoSlideInterval = setInterval(nextSlide, 5000);
-    };
+    }
     
-    slider.addEventListener('mouseenter', pauseAutoSlide);
-    slider.addEventListener('mouseleave', resumeAutoSlide);
-    slider.addEventListener('touchstart', pauseAutoSlide);
-    slider.addEventListener('touchend', () => {
-        setTimeout(resumeAutoSlide, 3000);
-    });
+    function pauseAutoSlide() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+        }
+    }
+    
+    function resumeAutoSlide() {
+        pauseAutoSlide();
+        startAutoSlide();
+    }
+    
+    // Mouse events for auto-slide control
+    if (container) {
+        container.addEventListener('mouseenter', pauseAutoSlide);
+        container.addEventListener('mouseleave', resumeAutoSlide);
+    }
+    
+    // Start auto-slide
+    startAutoSlide();
+    
+    console.log('Construction slider initialization complete');
 }
