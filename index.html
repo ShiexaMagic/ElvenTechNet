@@ -441,6 +441,42 @@ a[data-preview]:hover {
   text-decoration-color: #1d4ed8;
   color: #1d4ed8;
 }
+
+/* Video Selection Modal */
+.video-modal {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.video-modal-content {
+  transform: scale(0.9);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.video-modal.active .video-modal-content {
+  transform: scale(1);
+}
+
+.video-option {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.video-option:hover {
+  border-color: #10b981;
+  background-color: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+}
+
+.video-option:hover .video-icon {
+  color: #10b981;
+  transform: scale(1.1);
+}
+
+.video-icon {
+  transition: all 0.3s ease;
+}
     </style>
 </head>
 
@@ -531,10 +567,10 @@ a[data-preview]:hover {
                 
                 <!-- Material links -->
                 <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 justify-center md:justify-start">
-                    <a href="https://youtu.be/zAVy6fuHl0Q" target="_blank" 
-                       data-preview="images/Material Video.jpg"
-                       data-preview-alt="Material demonstration video"
-                       class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Material Video</a>
+                    <button id="material-video-btn" 
+                            data-preview="images/Material Video.jpg"
+                            data-preview-alt="Material demonstration videos"
+                            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 cursor-pointer">Material Videos</button>
                     <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
                 </div>
             </div>
@@ -1492,6 +1528,126 @@ a[data-preview]:hover {
         </div>
     </div>
 
+    <!-- Video Selection Modal -->
+    <div id="video-modal" class="video-modal fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="video-modal-content bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-2">Material Videos</h3>
+                        <p class="text-gray-600">Choose from our collection of FireGuard™ demonstration videos</p>
+                    </div>
+                    <button id="close-video-modal" class="text-gray-400 hover:text-gray-600 text-2xl p-2">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Video Options Grid -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Video 1: Main Material Demo -->
+                    <a href="https://youtu.be/zAVy6fuHl0Q" target="_blank" 
+                       class="video-option bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 group">
+                        <div class="flex items-start">
+                            <div class="video-icon bg-red-100 p-4 rounded-full mr-6">
+                                <i class="fab fa-youtube text-red-600 text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-600 transition-colors">
+                                    Material Demonstration
+                                </h4>
+                                <p class="text-gray-600 mb-4">Watch our flagship FireGuard™ composite material withstand extreme temperatures and demonstrate its flexibility and durability.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>2:45 minutes</span>
+                                    <i class="fas fa-eye ml-4 mr-2"></i>
+                                    <span>Featured Video</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Video 2: Manufacturing Process -->
+                    <a href="https://youtu.be/tIW49YZmGNU" target="_blank" 
+                       class="video-option bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 group">
+                        <div class="flex items-start">
+                            <div class="video-icon bg-red-100 p-4 rounded-full mr-6">
+                                <i class="fab fa-youtube text-red-600 text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-600 transition-colors">
+                                    Stunt Performance Demo
+                                </h4>
+                                <p class="text-gray-600 mb-4">See how our fireproof suits protect stunt performers during live fire sequences, demonstrating real-world applications in the film industry.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>3:12 minutes</span>
+                                    <i class="fas fa-fire ml-4 mr-2"></i>
+                                    <span>Live Testing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Video 3: Testing Results -->
+                    <a href="https://youtu.be/5F-MjqQZVWM" target="_blank" 
+                       class="video-option bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 group">
+                        <div class="flex items-start">
+                            <div class="video-icon bg-red-100 p-4 rounded-full mr-6">
+                                <i class="fab fa-youtube text-red-600 text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-600 transition-colors">
+                                    Firefighter Protection Test
+                                </h4>
+                                <p class="text-gray-600 mb-4">Official testing of our firefighter protection suits by Georgian Emergency Management Service, showing real-world professional use.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>4:28 minutes</span>
+                                    <i class="fas fa-shield-alt ml-4 mr-2"></i>
+                                    <span>Professional Use</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Video 4: Battery Containment -->
+                    <a href="https://www.youtube.com/watch?v=77Ugb5_7BNA&t=3s" target="_blank" 
+                       class="video-option bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 group">
+                        <div class="flex items-start">
+                            <div class="video-icon bg-red-100 p-4 rounded-full mr-6">
+                                <i class="fab fa-youtube text-red-600 text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-600 transition-colors">
+                                    Battery Containment Case Study
+                                </h4>
+                                <p class="text-gray-600 mb-4">Learn about our lithium-ion battery containment solution for Auve Tech's electric shuttles and see the thermal runaway containment tests.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>5:15 minutes</span>
+                                    <i class="fas fa-car-battery ml-4 mr-2"></i>
+                                    <span>Case Study</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Footer Note -->
+                <div class="mt-8 p-6 bg-green-50 rounded-lg">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-green-600 mt-1 mr-3"></i>
+                        <div>
+                            <h5 class="font-bold text-green-800 mb-2">All Videos Open in New Tab</h5>
+                            <p class="text-green-700 text-sm">Click any video to open it on YouTube in a new tab. You can return to our website anytime by closing the tab or using the back button.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.19/dist/lenis.min.js"></script>
     <script src="hover-preview-fixed.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -1990,6 +2146,66 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Button element:', mobileMenuButton);
         console.log('Menu element:', mobileMenu);
     }
+});
+</script>
+<script>
+// Video Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const videoBtn = document.getElementById('material-video-btn');
+    const videoModal = document.getElementById('video-modal');
+    const closeVideoModal = document.getElementById('close-video-modal');
+    
+    // Open video modal
+    if (videoBtn) {
+        videoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Opening video modal');
+            
+            if (videoModal) {
+                videoModal.classList.remove('hidden');
+                setTimeout(() => {
+                    videoModal.classList.add('active');
+                }, 10);
+                
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+    
+    // Close video modal
+    function closeModal() {
+        if (videoModal) {
+            videoModal.classList.remove('active');
+            setTimeout(() => {
+                videoModal.classList.add('hidden');
+            }, 300);
+            
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+    }
+    
+    // Close button click
+    if (closeVideoModal) {
+        closeVideoModal.addEventListener('click', closeModal);
+    }
+    
+    // Click outside modal to close
+    if (videoModal) {
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal && !videoModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
 });
 </script>
 <script src="fixed-script.js"></script>
