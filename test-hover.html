@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Preview Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8">
+    <h1 class="text-3xl font-bold mb-8">Hover Preview Test</h1>
+    
+    <div class="space-y-4">
+        <p>Hover over these links to see previews:</p>
+        
+        <p>
+            Check out this <a href="https://example.com" 
+                              data-preview="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=225&fit=crop"
+                              data-preview-alt="Example preview"
+                              class="text-blue-600 underline">
+                material demo
+            </a> video.
+        </p>
+        
+        <p>
+            Here's another <a href="https://example2.com" 
+                             data-preview="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=225&fit=crop"
+                             data-preview-alt="Document preview"
+                             class="text-blue-600 underline">
+                technical document
+            </a>.
+        </p>
+    </div>
+    
+    <script src="hover-preview-test.js"></script>
+</body>
+</html>

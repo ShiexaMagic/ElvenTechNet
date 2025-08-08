@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elven Technologies - Fireproof Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Hero image animation styles -->
+    <style>
+    /* Custom animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+        animation: fadeIn 1s ease-out forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.3s; }
+    .delay-2 { animation-delay: 0.6s; }
+    .delay-3 { animation-delay: 0.9s; }
+    
+    /* Hero image zoom animation */
+    @keyframes slowZoom {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.5); }
+    }
+    
+    .hero-image {
+        animation: slowZoom 15s ease-in-out infinite alternate;
+    }
+    
+    /* Hero image overlay */
+    .hero-overlay {
+        background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+    }
+    
+    /* Sample form transition */
+    .sample-form {
+        transition: all 0.3s ease;
+    }
+    
+    .sample-form.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .sample-form:not(.active) {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+        transition: all 0.3s ease;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    
+    .mobile-menu.active {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    /* Ensure mobile menu button is always visible and clickable */
+    #mobile-menu-button {
+        z-index: 1000;
+        position: relative;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    #mobile-menu-button:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    /* Mobile text alignment fixes */
+    @media (max-width: 768px) {
+        .text-center-mobile {
+            text-align: center !important;
+        }
+        
+        .mb-mobile-6 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mobile-full-width {
+            width: 100% !important;
+        }
+    }
+    
+    /* Construction section gallery styles */
+    .construction-main-gallery {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        touch-action: pan-y pinch-zoom;
+    }
+    
+    #construction-slider {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        touch-action: pan-y pinch-zoom;
+        will-change: transform;
+    }
+    
+    #construction-slider > div {
+        width: 100%;
+        flex-shrink: 0;
+        min-width: 100%;
+        height: 100%;
+    }
+    
+    #construction-slider img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
+        display: block;
+    }
+    
+    /* Ensure navigation buttons are clickable */
+    .construction-nav-arrow, .gallery-nav-arrow {
+        z-index: 10;
+        pointer-events: auto;
+        cursor: pointer;
+    }
+    
+    /* Gallery styles */
+    #gallery-slider {
+        touch-action: pan-y pinch-zoom;
+        will-change: transform;
+    }
+    
+    #gallery-slider img {
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+    
+    /* Navigation arrows responsive */
+    @media (max-width: 768px) {
+        .gallery-nav-arrow, .construction-nav-arrow {
+            padding: 8px !important;
+            left: 8px !important;
+            right: 8px !important;
+        }
+        
+        .gallery-nav-arrow i, .construction-nav-arrow i {
+            font-size: 14px !important;
+        }
+        
+        /* Make dots larger on mobile */
+        .gallery-dots button, .construction-dots button {
+            width: 12px !important;
+            height: 12px !important;
+        }
+        
+        /* Ensure readability on mobile */
+        .text-center-mobile {
+            text-align: center !important;
+        }
+        
+        .mobile-text-sm {
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+        }
+        
+        .mobile-text-base {
+            font-size: 1rem !important;
+            line-height: 1.5rem !important;
+        }
+        
+        .mobile-text-lg {
+            font-size: 1.125rem !important;
+            line-height: 1.75rem !important;
+        }
+        
+        .mobile-padding {
+            padding: 1rem !important;
+        }
+        
+        /* Improve button tap targets */
+        button, .btn, a.btn {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        /* Ensure touch-friendly spacing */
+        .mobile-spacing > * + * {
+            margin-top: 1rem !important;
+        }
+    }
+    
+    /* Square aspect ratio container */
+    .aspect-w-1 {
+        position: relative;
+        padding-bottom: 100%; /* Creates a 1:1 aspect ratio */
+        height: 0;
+        width: 100%;
+    }
+    
+    .aspect-h-1 {
+        position: relative;
+    }
+    
+    /* Responsive aspect ratios for gallery */
+    .aspect-w-16 {
+        position: relative;
+        padding-bottom: 75%; /* Better aspect ratio for mobile - between 16:9 and 1:1 */
+        height: 0;
+        width: 100%;
+    }
+    
+    .aspect-h-9 {
+        position: relative;
+    }
+    
+    @media (min-width: 768px) {
+        .aspect-w-16 {
+            padding-bottom: 100%; /* 1:1 aspect ratio for desktop */
+        }
+    }
+    
+    /* Mobile gallery improvements - hide navigation elements */
+    @media (max-width: 767px) {
+        .gallery-nav-arrow,
+        .gallery-dots {
+            display: none !important;
+        }
+        
+        #gallery-slider {
+            border-radius: 8px !important;
+        }
+    }
+    
+    /* Hide navigation on all screen sizes for cleaner look */
+    .gallery-nav-arrow,
+    .gallery-dots {
+        display: none;
+    }
+    
+    .aspect-w-1 img, .aspect-h-1 img, .aspect-w-16 img, .aspect-h-9 img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    /* Gallery modal styles */
+    #gallery-modal img {
+        max-width: 1080px;
+        max-height: 1080px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+    
+    /* Scroll reveal animations */
+    .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .scroll-reveal.appear {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Ensure smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Add subtle transition to all interactive elements */
+  a, button {
+    transition: all 0.3s ease;
+  }
+  
+  /* Additional styling for smoother section transitions */
+  section {
+    transition: background-color 0.5s ease;
+  }
+  
+  /* Enhanced fade-in animations with slight delay between elements */
+  .fade-in {
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+  
+  .delay-1 {
+    animation-delay: 0.3s;
+  }
+  
+  .delay-2 {
+    animation-delay: 0.6s;
+  }
+  
+  .delay-3 {
+    animation-delay: 0.9s;
+  }
+
+  /* Add these minimal styles to your CSS */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Footer background image */
+.footer-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('https://static.wixstatic.com/media/847d72_41495c0d2bf84a3a903f386b4a319064~mv2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Animated Grid Pattern */
+.animated-grid-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.animated-grid-pattern svg {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-square {
+  opacity: 0;
+  animation: gridSquareAnimation 4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes gridSquareAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.grid-square:nth-child(2n) {
+  animation-delay: 0.1s;
+  animation-duration: 3.5s;
+}
+
+.grid-square:nth-child(3n) {
+  animation-delay: 0.2s;
+  animation-duration: 4.5s;
+}
+
+.grid-square:nth-child(5n) {
+  animation-delay: 0.3s;
+  animation-duration: 3.8s;
+}
+
+.grid-square:nth-child(7n) {
+  animation-delay: 0.4s;
+  animation-duration: 4.2s;
+}
+
+/* Black and white grid squares for other sections */
+.material-grid-squares .grid-square,
+.custom-grid-squares .grid-square,
+.contact-grid-squares .grid-square {
+  fill: rgba(0, 0, 0, 0.075);
+}
+
+.products-grid-squares .grid-square,
+.about-grid-squares .grid-square,
+.gallery-grid-squares .grid-square {
+  fill: rgba(0, 0, 0, 0.06);
+}
+
+/* Hover Link Preview Styles */
+.hover-link-preview {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-origin: center;
+}
+
+.hover-link-preview img {
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Enhanced link styles for preview-enabled links */
+a[data-preview] {
+  position: relative;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+  text-decoration-color: #2563eb;
+  text-underline-offset: 2px;
+}
+
+a[data-preview]:hover {
+  text-decoration-color: #1d4ed8;
+  color: #1d4ed8;
+}
+    </style>
+</head>
+
+<body class="bg-gray-100">
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo Section -->
+            <div class="flex-shrink-0 flex items-center">
+                <img src="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png" 
+                     alt="Elven Technologies Logo" 
+                     class="h-10 w-auto mr-3">
+                <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#our-material" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">Our Material</a>
+                <a href="#custom-projects" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">Custom Projects</a>
+                <a href="#our-products" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">Our Products</a>
+                <a href="#about" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">About Us</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+            </nav>
+            
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <div class="px-2 pt-2 pb-4 space-y-1 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
+                <a href="#our-material" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Our Material</a>
+                <a href="#custom-projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Custom Projects</a>
+                <a href="#our-products" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Our Products</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About Us</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <img src="https://static.wixstatic.com/media/847d72_41495c0d2bf84a3a903f386b4a319064~mv2.png" 
+             alt="Fireproof technology" 
+             class="absolute inset-0 w-full h-full object-cover hero-image">
+        
+        <div class="relative z-20 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">Advanced Fireproof Solutions</h1>
+            <p class="text-xl text-gray-200 mb-8 fade-in delay-1">Cutting-edge solutions that protect against extreme fire and heat in transportation, construction and specialized applications.</p>
+            <div class="fade-in delay-2 flex justify-center">
+                <a href="#our-material" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Explore Solutions</a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 text-center z-20">
+            <a href="#our-material" class="text-white animate-bounce">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Our Material Section -->
+    <section id="our-material" class="py-20 bg-white relative overflow-hidden">
+        <!-- Animated Grid Pattern Background -->
+        <div class="animated-grid-pattern">
+            <svg class="absolute inset-0">
+                <defs>
+                    <pattern id="material-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#material-grid-pattern)"/>
+                <g class="material-grid-squares"></g>
+            </svg>
+        </div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col md:flex-row items-center mb-16">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">World only Flexible, Inexpensive, Lightweight and Fireproof Composite Material</h2>
+                <p class="text-gray-600 mb-6">Elven FireGuard™ is our next-generation fireproof composite, developed to meet the toughest safety and performance demands. Lightweight, flexible, and cost-effective, it withstands extreme temperatures up to 2000°C (3600°F) while maintaining exceptional 3D formability. Available in several tailored versions, FireGuard™ is redefining fire protection across construction, aerospace, EVs, and other high-risk industries.</p>
+                
+                <!-- Material links -->
+                <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 justify-center md:justify-start">
+                    <a href="https://youtu.be/zAVy6fuHl0Q" target="_blank" 
+                       data-preview="images/Material Video.jpg"
+                       data-preview-alt="Material demonstration video"
+                       class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Material Video</a>
+                    <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 fade-in delay-1">
+                <!-- Fix the swipeable gallery -->
+                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden h-80" data-lenis-prevent>
+                    <div id="construction-slider" class="flex transition-transform duration-500 ease-in-out h-full">
+                        <div class="w-full flex-shrink-0 h-full">
+                            <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
+                                 alt="Construction site with fireproof materials" 
+                                 class="w-full h-full object-cover cursor-pointer">
+                        </div>
+                        <div class="w-full flex-shrink-0 h-full">
+                            <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
+                                 alt="Elven Sheet Application" 
+                                 class="w-full h-full object-cover cursor-pointer">
+                        </div>
+                        <div class="w-full flex-shrink-0 h-full">
+                            <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
+                                 alt="Elven Sheet Installation" 
+                                 class="w-full h-full object-cover cursor-pointer">
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Dots -->
+                    <div id="construction-dots" class="construction-dots absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                        <!-- Dots will be dynamically generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-layer-group text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Material Datasheet</h3>
+                <p class="text-gray-600">For detailed specifications and performance data, download the FireGuard™ technical datasheet <a href="https://docsend.com/view/tj4eu4nxgmeq6daa" target="_blank" 
+                   data-preview="images/Data Sheet.png"
+                   data-preview-alt="Technical datasheet preview"
+                   class="text-green-600 hover:underline">here</a>.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-shield-alt text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Test Results</h3>
+                <p class="text-gray-600">Explore our latest test results, with new data added regularly to reflect ongoing performance validation — <a href="#" 
+                   data-preview="images/uniform test.jpg"
+                   data-preview-alt="Test results preview"
+                   class="text-green-600 hover:underline">click here to view them</a>.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
+                <div class="text-green-600 mb-4">
+                    <i class="fas fa-building text-4xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Case Studies</h3>
+                <p class="text-gray-600">See how FireGuard™ is being applied across industries — from construction and electric vehicles to aerospace and military — in our growing collection of real-world case studies. <a href="https://www.youtube.com/watch?v=77Ugb5_7BNA&t=3s" target="_blank" 
+                   data-preview="images/Case Studies.png"
+                   data-preview-alt="FireGuard storage containers case study"
+                   class="text-green-600 hover:underline">Click here to explore.</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Custom Projects Section -->
+    <section id="custom-projects" class="py-20 bg-white relative overflow-hidden">
+        <!-- Animated Grid Pattern Background -->
+        <div class="animated-grid-pattern">
+            <svg class="absolute inset-0">
+                <defs>
+                    <pattern id="custom-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#custom-grid-pattern)"/>
+                <g class="custom-grid-squares"></g>
+            </svg>
+        </div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Custom Solutions</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Your unique challenges deserve tailored solutions. Our team works closely with you to develop fireproof solutions for specialized applications.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center mb-16">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">From Concept to Completion</h3>
+                <p class="text-gray-600 mb-6">Our customization process begins with understanding your specific requirements and ends with a solution that exceeds expectations.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-comments text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Consultation</h4>
+                            <p class="text-gray-600">We listen to understand your needs and challenges.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-flask text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Solution Development</h4>
+                            <p class="text-gray-600">Our scientists develop formulations tailored to your application.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-cogs text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Prototyping</h4>
+                            <p class="text-gray-600">We create prototypes for testing and refinement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-truck text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Delivery</h4>
+                            <p class="text-gray-600">Your custom solution is manufactured and delivered.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 fade-in delay-1">
+                <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
+                     alt="Custom fireproof solutions development in Estonia"
+                     class="rounded-lg shadow-xl w-full h-auto">
+            </div>
+        </div>
+        
+        <div class="mt-16">
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Success Stories</h3>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-car-battery text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Lithium-Ion Battery Containment</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">Elven's enclosure tests proved that, it is capable to contain unlikely event of catastrophic thermal runway event in our electric shuttles. <a href="https://www.youtube.com/watch?v=77Ugb5_7BNA&t=3s" target="_blank" 
+                       data-preview="images/test video.jpg"
+                       data-preview-alt="Battery containment test video"
+                       class="text-green-600 hover:text-green-700 underline">Watch test video</a></p>
+                    <div class="text-green-600 font-medium">- Auve Tech.</div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-fire-extinguisher text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Firefighter Protection Suit</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Our department equipped our specialized team with Elven's suits, allowing our firefighters to withstand extreme heat longer and operate more effectively during industrial fire emergencies." <a href="https://youtu.be/5F-MjqQZVWM" target="_blank" 
+                       data-preview="images/uniform test.jpg"
+                       data-preview-alt="Firefighter protection suit demonstration"
+                       class="text-green-600 hover:text-green-700 underline">Watch demonstration</a></p>
+                    <div class="text-green-600 font-medium">- Georgian Emergency Management Service</div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-film text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Film Industry Safety Gear</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The lightweight fireproof suits from Elven have revolutionized our stunt work. Our performers now have unprecedented protection during complex fire scenes while maintaining full mobility." <a href="https://youtu.be/tIW49YZmGNU" target="_blank" 
+                       data-preview="images/stunt man.jpg"
+                       data-preview-alt="Film industry stunt demonstration"
+                       class="text-green-600 hover:text-green-700 underline">Watch stunt demonstration</a></p>
+                    <div class="text-green-600 font-medium">- Georgian Stunts Academy</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Our Products Section -->
+    <section id="our-products" class="py-20 bg-gray-100 relative overflow-hidden">
+        <!-- Animated Grid Pattern Background -->
+        <div class="animated-grid-pattern">
+            <svg class="absolute inset-0">
+                <defs>
+                    <pattern id="products-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#products-grid-pattern)"/>
+                <g class="products-grid-squares"></g>
+            </svg>
+        </div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Products</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Innovative fireproof storage solutions designed for maximum safety and versatility across various applications.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center mb-16">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in order-2 md:order-1">
+                <img src="https://static.wixstatic.com/media/847d72_6a5907bee6ff47a8a6610653c13a6984~mv2.jpeg" 
+                     alt="Fireproof storage containers" 
+                     class="rounded-lg shadow-xl w-full h-auto">
+            </div>
+            <div class="md:w-1/2 fade-in delay-1 mb-mobile-6 text-center-mobile order-1 md:order-2">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">FireGuard™ Storage Containers</h3>
+                <p class="text-gray-600 mb-6">Our flagship storage containers are engineered with advanced FireGuard™ composite materials to provide unparalleled protection for hazardous materials storage. Currently undergoing extensive testing for transportation applications, these containers represent the next evolution in fire-safe storage solutions.</p>
+                <ul class="space-y-3 mb-8 text-left">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Withstands temperatures up to 2000°C (3600°F)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Modular design for various storage capacities</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Pending certification for transportation use</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Lightweight yet incredibly durable construction</span>
+                    </li>
+                </ul>
+                <div class="text-center md:text-left">
+                    <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+
+    <!-- About Us & Team Section -->
+    <section id="about" class="py-20 bg-gray-100 relative overflow-hidden">
+        <!-- Animated Grid Pattern Background -->
+        <div class="animated-grid-pattern">
+            <svg class="absolute inset-0">
+                <defs>
+                    <pattern id="about-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#about-grid-pattern)"/>
+                <g class="about-grid-squares"></g>
+            </svg>
+        </div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col md:flex-row items-center mb-20">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Elven Technologies</h2>
+                <p class="text-gray-600 mb-6">Founded in October 2022, Elven Technologies began with a vision to create revolutionary fireproof solutions. Our name draws inspiration from elves and fantasy—where "advanced technology is indistinguishable from magic."</p>
+                <p class="text-gray-600 mb-8">What started as a small team working in a 15m² garage has evolved into a groundbreaking company developing solutions that withstand temperatures up to 2000°C. Our flagship technology provides critical protection for lithium-ion batteries in electric vehicles and transportation chains, preventing catastrophic fires from becoming disasters.</p>
+                <p class="text-gray-600 mb-8">After extensive laboratory testing with Underwriters Laboratories (UL) in the United States and numerous real-world trials, our composite solutions have consistently outperformed conventional alternatives. Even our most basic models demonstrate exceptional fire resistance that only solutions like concrete can match.</p>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">2000°C</div>
+                        <div class="text-gray-600">Heat Resistance</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">10+</div>
+                        <div class="text-gray-600">Test Cycles Passed</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">20</div>
+                        <div class="text-gray-600">Patents Pending</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-green-600 text-3xl font-bold mb-2">24/7</div>
+                        <div class="text-gray-600">Support Available</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 fade-in delay-1">
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Our Mission</h3>
+                    <p class="text-gray-600 mb-6">To develop fireproof solutions that not only meet but exceed safety standards, providing peace of mind for our clients and end-users in high-risk environments.</p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 mt-8">Core Values</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-shield-alt text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Safety First</h4>
+                                <p class="text-gray-600">Every decision we make prioritizes human safety and property protection.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-lightbulb text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Innovation Driven</h4>
+                                <p class="text-gray-600">We continuously push the boundaries of solution science to develop better alternatives.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-hands-helping text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Client Focused</h4>
+                                <p class="text-gray-600">Your challenges become our challenges, and we won't rest until we've solved them.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team Section -->
+        <div class="mt-20">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Leadership Team</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Meet the experts behind Elven Technologies' innovative fireproof solutions.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Farid - CEO -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <img src="https://static.wixstatic.com/media/847d72_559fc9c2396545219cba28dd3f59456a~mv2.jpg/v1/crop/x_0,y_0,w_3924,h_4411/fill/w_287,h_306,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/DSC_2322.jpg" 
+                         alt="Farid Ismayilzada" 
+                         class="w-full h-64 object-cover" style="object-position: center 30%;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Farid Ismayilzada</h3>
+                        <p class="text-green-600 font-medium mb-4">Chief Executive Officer</p>
+                        <p class="text-gray-600 mb-4">Leading Elven's strategic vision and global expansion with over 15 years of experience in solution science and business development.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.linkedin.com/in/fismayilzada/" 
+                               class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:farid@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vamekh - CTO (2nd position) -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in delay-1">
+                    <img src="https://static.wixstatic.com/media/847d72_b72ee956cc0f46d3a7715a97bacc1c80~mv2.jpg" 
+                         alt="Vamekh Kherkheulidze" 
+                         class="w-full h-64 object-cover" style="object-position: center 20%;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Vamekh Kherkheulidze</h3>
+                        <p class="text-green-600 font-medium mb-4">Chief Technology Officer</p>
+                        <p class="text-gray-600 mb-4">Leading technological innovation and R&D initiatives to develop next-generation fireproof solutions and compounds.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.linkedin.com/in/vamekhkherkheulidze/" 
+                               class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:vk@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sandro -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in delay-2">
+                    <img src="https://static.wixstatic.com/media/847d72_2b32a661bcf24953900b38b4391ec513~mv2.jpg/v1/crop/x_0,y_0,w_2000,h_2130/fill/w_287,h_306,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/RFE04239_edited.jpg" 
+                         alt="Aleksandr Chubinidze" 
+                         class="w-full h-64 object-cover" style="object-position: center 30%;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Aleksandr (Sandro) Chubinidz</h3>
+                        <p class="text-green-600 font-medium mb-4">Chief Scientist</p>
+                        <p class="text-gray-600 mb-4">Pioneering scientific research in solution science to develop breakthrough fireproof technologies and compounds.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.linkedin.com/in/sandroatelven/" 
+                               class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:sandro@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bella -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <img src="https://static.wixstatic.com/media/847d72_e1c259e92f21400ab4cfe1c0ccba8c71~mv2.jpg/v1/crop/x_0,y_418,w_4000,h_4497/fill/w_287,h_306,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/RFE04197.jpg" 
+                         alt="Bella Butskhrikidze" 
+                         class="w-full h-64 object-cover" style="object-position: center 30%;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Bella Butskhrikidze</h3>
+                        <p class="text-green-600 font-medium mb-4">Head of Design & Manufacturing</p>
+                        <p class="text-gray-600 mb-4">Overseeing product design and manufacturing operations, ensuring both functionality and production efficiency of all Elven solutions.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.linkedin.com/in/bela-butskhrikidze-857804227/" 
+                               class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:bela.butskhrikidze@gmail.com" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- George - Chief Engineer (5th position) -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in delay-1">
+                    <img src="https://static.wixstatic.com/media/847d72_0c403041b08344fc9753e2bcfc2902a0~mv2.jpg/v1/crop/x_0,y_70,w_4000,h_4497/fill/w_287,h_306,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/RFE04188.jpg" 
+                         alt="Giorgi Gabarashvili" 
+                         class="w-full h-64 object-cover" style="object-position: center 30%;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Giorgi Gabarashvili</h3>
+                        <p class="text-green-600 font-medium mb-4">Chief Engineer</p>
+                        <p class="text-gray-600 mb-4">Responsible for engineering processes and implementation of fireproof solutions across diverse industrial applications.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.linkedin.com/in/gabarashvili-giorgi-a26ab7a6/" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:giorgi.gabarashvili2013@yahoo.com" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shio - Creative Director -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in delay-2">
+                    <img src="https://static.wixstatic.com/media/847d72_0bdae337d9144ffdae8de9f6e95c72b9~mv2.jpg" 
+                         alt="Shio Khidasheli" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Shio Khidasheli</h3>
+                        <p class="text-green-600 font-medium mb-4">Creative Director</p>
+                        <p class="text-gray-600 mb-4">Leading creative initiatives and brand strategy, ensuring Elven's innovative solutions are effectively communicated across all platforms and markets.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://linkedin.com/in/elventechnologies" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:info@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Levan - Business Development Assistant -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
+                    <img src="https://static.wixstatic.com/media/847d72_04fe6ee182874afdb6d7fbc70ba574e0~mv2.jpg" 
+                         alt="Levan Bichinashvili" 
+                         class="w-full h-64 object-cover" style="object-position: center 20%;">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Levan Bichinashvili</h3>
+                        <p class="text-green-600 font-medium mb-4">Business Development Assistant</p>
+                        <p class="text-gray-600 mb-4">Supporting business development initiatives and client relations, helping to expand Elven's market presence and forge strategic partnerships worldwide.</p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.linkedin.com/in/levan-bichinashvili-225331213/" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:info@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#contact" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300">Join Our Team</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section with 1080x1080 frames -->
+<section id="gallery" class="py-12 md:py-20 bg-gray-100 relative overflow-hidden">
+    <!-- Animated Grid Pattern Background -->
+    <div class="animated-grid-pattern">
+        <svg class="absolute inset-0">
+            <defs>
+                <pattern id="gallery-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
+                    <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#gallery-grid-pattern)"/>
+            <g class="gallery-grid-squares"></g>
+        </svg>
+    </div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-8 md:mb-16">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Gallery</h2>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Explore our materials, applications, and testing processes through our gallery of images.</p>
+        </div>
+        
+        <div class="relative overflow-hidden rounded-lg shadow-xl max-w-4xl mx-auto">
+            <div id="gallery-slider" class="flex transition-transform duration-500 ease-in-out">
+                <!-- Gallery Slide 1 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" 
+                             alt="Thermal Containment System" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 2 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
+                             alt="Fire Resistance Demonstration" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 3 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
+                             alt="Laboratory Testing Setup" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 5 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_b06fdf188aba43bfabe5e4465acbed1d~mv2.jpg" 
+                             alt="Material Testing Process" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 6 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_3c0ded7900284c35b0c4887492f5b7c9~mv2.jpg" 
+                             alt="High-Temperature Resistance Testing" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 7 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_de7ea8ac964045d9985eaf0059f3d3d8~mv2.jpg" 
+                             alt="Industrial Application" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 8 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_e01695cf8e984453a7037fcc4600deee~mv2.jpg" 
+                             alt="Manufacturing Process" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 9 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_3bb2f22ee8a945df8b382551d39bd4c3~mv2.jpg" 
+                             alt="Quality Control" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 10 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_cdc7de5c170d4c69afe0aa6f26b319b3~mv2.jpg" 
+                             alt="Research and Development" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 11 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_87fa8ea89c8e472688cf7f88679254fb~mv2.jpg" 
+                             alt="Safety Equipment Testing" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 12 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_d138c41343c2479cbbca49def323c9ad~mv2.jpg" 
+                             alt="Field Applications" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 13 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_e76d223e12e9473ca4b99b11dfca4ff6~mv2.jpg" 
+                             alt="Performance Validation" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 14 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_39120af9fa6e47de80a9db0f71e6fa25~mv2.jpg" 
+                             alt="Technical Innovation" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 15 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_2ed625a520784cab842eb56b65e9c369~mv2.jpg" 
+                             alt="Laboratory Analysis" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 16 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_6fe43f7438fd4ee59a9fa3652d2dcc0b~mv2.jpg" 
+                             alt="Final Product Testing" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 17 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
+                             alt="Elven Sheet Application" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Gallery Slide 18 -->
+                <div class="w-full flex-shrink-0 relative">
+                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
+                        <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
+                             alt="Elven Sheet Installation" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white relative overflow-hidden">
+        <!-- Animated Grid Pattern Background -->
+        <div class="animated-grid-pattern">
+            <svg class="absolute inset-0">
+                <defs>
+                    <pattern id="contact-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#contact-grid-pattern)"/>
+                <g class="contact-grid-squares"></g>
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contact Elven Technologies</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Have questions about our products or services? Our team is ready to assist you with expert advice and solutions.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2 fade-in">
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-gray-700 font-medium mb-2">Company</label>
+                                <input type="text" id="company" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="interest" class="block text-gray-700 font-medium mb-2">I'm interested in</label>
+                            <select id="interest" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                                <option value="">Select an option</option>
+                                <option value="construction">Construction Solutions</option>
+                                <option value="transportation">Transportation Solutions</option>
+                                <option value="custom">Custom Projects</option>
+                                <option value="samples">Product Samples</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2 fade-in delay-1">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md h-full">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Get in Touch</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Location</h4>
+                                    <p class="text-gray-600">Sacramento, California, USA</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600">info@elventech.net</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-bold text-gray-800 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://linkedin.com/company/elventechnologies" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://twitter.com/elventechnologies" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://facebook.com/elventechnologies" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/elventechnet/" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.youtube.com/@elventechnet" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 relative overflow-hidden">
+        <!-- Background Image -->
+        <div class="footer-background"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-3 gap-8 mb-12 justify-items-center text-center md:text-left">
+                <div>
+                    <img src="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png" 
+                         alt="Elven Technologies Logo" 
+                         class="h-12 w-auto mb-4 mx-auto md:mx-0">
+                    <h3 class="text-xl font-bold mb-4">Elven Technologies</h3>
+                    <p class="text-gray-400 mb-4">Innovating fireproof solutions for construction, transportation, and specialized applications worldwide.</p>
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <a href="https://linkedin.com/company/elventechnologies" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://twitter.com/elventechnologies" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://facebook.com/elventechnologies" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/elventechnet/" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@elventechnet" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#our-material" class="text-gray-400 hover:text-green-400 transition duration-300">Our Material</a></li>
+                        <li><a href="#our-products" class="text-gray-400 hover:text-green-400 transition duration-300">Our Products</a></li>
+                        <li><a href="#custom-projects" class="text-gray-400 hover:text-green-400 transition duration-300">Custom Solutions</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-green-400 transition duration-300">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-green-400 transition duration-300">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center relative z-10">
+                <p class="text-gray-400">© 2025 Elven Technologies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact CTA Button -->
+    <div id="floating-contact-cta" class="fixed bottom-6 right-6 z-40">
+        <a href="#contact" class="contact-cta bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center" data-lenis-prevent>
+            <i class="fas fa-envelope mr-2"></i>Contact Us
+        </a>
+    </div>
+
+    <!-- Sample Form Modal -->
+    <div id="sample-form-container" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden">
+        <div id="sample-form" class="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Order Material Samples</h3>
+                    <button id="close-sample-form" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="sample-order-form" class="space-y-4">
+                    <div>
+                        <label for="sample-name" class="block text-gray-700 font-medium mb-2">Full Name *</label>
+                        <input type="text" id="sample-name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                    </div>
+                    
+                    <div>
+                        <label for="sample-email" class="block text-gray-700 font-medium mb-2">Email Address *</label>
+                        <input type="email" id="sample-email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                    </div>
+                    
+                    <div>
+                        <label for="sample-company" class="block text-gray-700 font-medium mb-2">Company/Organization</label>
+                        <input type="text" id="sample-company" name="company" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                    </div>
+                    
+                    <div>
+                        <label for="sample-phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="sample-phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                    </div>
+                    
+                    <div>
+                        <label for="sample-type" class="block text-gray-700 font-medium mb-2">Sample Type *</label>
+                        <select id="sample-type" name="sample_type" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                            <option value="">Select sample type</option>
+                            <option value="fireguard-basic">FireGuard™ Basic Sheet</option>
+                            <option value="fireguard-flexible">FireGuard™ Flexible Material</option>
+                            <option value="fireguard-advanced">FireGuard™ Advanced Composite</option>
+                            <option value="custom-application">Custom Application Sample</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="sample-application" class="block text-gray-700 font-medium mb-2">Intended Application *</label>
+                        <select id="sample-application" name="application" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                            <option value="">Select application</option>
+                            <option value="construction">Construction & Building</option>
+                            <option value="automotive">Automotive & Transportation</option>
+                            <option value="aerospace">Aerospace & Aviation</option>
+                            <option value="battery-storage">Battery Storage & EV</option>
+                            <option value="industrial">Industrial Applications</option>
+                            <option value="research">Research & Development</option>
+                            <option value="other">Other (please specify)</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="sample-message" class="block text-gray-700 font-medium mb-2">Additional Requirements</label>
+                        <textarea id="sample-message" name="message" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300" placeholder="Please describe your specific requirements, testing conditions, or any other details..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="sample-address" class="block text-gray-700 font-medium mb-2">Shipping Address *</label>
+                        <textarea id="sample-address" name="address" rows="3" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300" placeholder="Please provide your complete shipping address including postal code and country..."></textarea>
+                    </div>
+                    
+                    <div class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                        <p><strong>Note:</strong> Sample requests are processed within 3-5 business days. Shipping costs may apply for international orders. Our team will contact you to confirm details and provide tracking information.</p>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                        Submit Sample Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You Message Modal -->
+    <div id="thank-you-message" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 text-center">
+            <div class="text-green-600 mb-4">
+                <i class="fas fa-check-circle text-5xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Thank You!</h3>
+            <p class="text-gray-600 mb-6">Your sample request has been submitted successfully. We'll contact you within 24 hours to confirm the details and shipping information.</p>
+            <button id="close-thank-you" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.19/dist/lenis.min.js"></script>
+    <script src="hover-preview-fixed.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function() {
+      emailjs.init("qAFa7520_W9R7h2HK");
+   })();
+</script>
+<script src="sample-form.js"></script>
+<script src="fixed-script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Directly target all sample buttons
+    const sampleButtons = document.querySelectorAll('.sample-cta');
+    const sampleFormContainer = document.getElementById('sample-form-container');
+    const sampleForm = document.getElementById('sample-form');
+    const closeSampleForm = document.getElementById('close-sample-form');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const closeThankYou = document.getElementById('close-thank-you');
+    
+    // Function to open sample form - simplified
+    function openSampleForm(e) {
+        if (e) e.preventDefault();
+        console.log("Opening sample form");
+        
+        if (sampleFormContainer) {
+            sampleFormContainer.classList.remove('hidden');
+            setTimeout(() => {
+                if (sampleForm) {
+                    sampleForm.classList.add('active');
+                }
+            }, 10);
+        }
+    }
+    
+    // Function to close sample form - simplified
+    function closeSampleFormFunc() {
+        if (sampleForm) {
+            sampleForm.classList.remove('active');
+            setTimeout(() => {
+                if (sampleFormContainer) {
+                    sampleFormContainer.classList.add('hidden');
+                }
+            }, 300);
+        }
+    }
+    
+    // Add click handlers to ALL sample buttons
+    sampleButtons.forEach(button => {
+        button.addEventListener('click', openSampleForm);
+        console.log("Added click handler to button:", button);
+    });
+    
+    // Also add specific handler for the floating button
+    const floatingSampleCta = document.getElementById('floating-sample-cta');
+    if (floatingSampleCta) {
+        floatingSampleCta.addEventListener('click', openSampleForm);
+        console.log("Added click handler to floating button");
+    }
+    
+    // Close button handler
+    if (closeSampleForm) {
+        closeSampleForm.addEventListener('click', closeSampleFormFunc);
+    }
+    
+    // Close when clicking outside
+    if (sampleFormContainer) {
+        sampleFormContainer.addEventListener('click', (e) => {
+            if (e.target === sampleFormContainer) {
+                closeSampleFormFunc();
+            }
+        });
+    }
+    
+// Form submission with EmailJS
+const sampleFormElement = document.querySelector('#sample-order-form');
+if (sampleFormElement) {
+    sampleFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show thank you message
+        closeSampleFormFunc();
+        if (thankYouMessage) {
+            thankYouMessage.classList.remove('hidden');
+        }
+        
+        // Send email using EmailJS
+        if (window.emailjs) {
+            emailjs.send("service_anf05h6", "template_sample_request", {
+                from_name: document.getElementById('sample-name').value,
+                company: document.getElementById('sample-company').value,
+                reply_to: document.getElementById('sample-email').value,
+                phone: document.getElementById('sample-phone').value,
+                sample_type: document.getElementById('sample-type').value,
+                application: document.getElementById('sample-application').value,
+                shipping_address: document.getElementById('sample-address').value,
+                message: document.getElementById('sample-message').value,
+                to_name: "Elven Team",
+                to_email: "shio@elventech.net"
+            }).then(
+                function(response) {
+                    console.log("Sample request sent successfully", response);
+                },
+                function(error) {
+                    console.error("Sample request failed to send:", error);
+                    console.error("Error details:", JSON.stringify(error));
+                }
+            );
+        }
+    });
+}
+    
+    // Close thank you message
+    if (closeThankYou) {
+        closeThankYou.addEventListener('click', () => {
+            if (thankYouMessage) {
+                thankYouMessage.classList.add('hidden');
+            }
+        });
+    }
+});
+</script>
+<script>
+// Gallery functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const gallerySlider = document.getElementById('gallery-slider');
+    const galleryPrev = document.getElementById('gallery-prev');
+    const galleryNext = document.getElementById('gallery-next');
+    
+    let currentSlide = 0;
+    const totalSlides = 15; // Updated to match the actual number of slides
+    
+    // Update gallery display
+    function updateGallery() {
+        if (gallerySlider) {
+            gallerySlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    }
+    
+    // Previous slide
+    if (galleryPrev) {
+        galleryPrev.addEventListener('click', () => {
+            currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+            updateGallery();
+        });
+    }
+    
+    // Next slide
+    if (galleryNext) {
+        galleryNext.addEventListener('click', () => {
+            currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+            updateGallery();
+        });
+    }
+    
+    // Auto-slide every 5 seconds
+    setInterval(() => {
+        currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+        updateGallery();
+    }, 5000);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Contact form functionality
+    const contactForm = document.querySelector('#contact form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log("Contact form submitted");
+            
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            submitButton.disabled = true;
+            
+            // Send email using EmailJS
+            if (window.emailjs) {
+                emailjs.send("service_anf05h6", "template_contact_form", {
+                    from_name: document.getElementById('name').value,
+                    company: document.getElementById('company').value,
+                    reply_to: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    interest: document.getElementById('interest').value,
+                    message: document.getElementById('message').value,
+                    to_name: "Elven Team",
+                    to_email: "shio@elventech.net"
+                }).then(
+                    function(response) {
+                        console.log("Email sent successfully", response);
+                        
+                        // Show success message
+                        contactForm.innerHTML = `
+                            <div class="text-center py-8">
+                                <div class="text-green-500 text-6xl mb-4">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Thank You for Contacting Us!</h3>
+                                <p class="text-gray-600 mb-6">Your message has been sent successfully. Our team will get back to you shortly.</p>
+                            </div>
+                        `;
+                    },
+                    function(error) {
+                        console.error("Email failed to send:", error);
+                        
+                        // Restore button
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.disabled = false;
+                        
+                        // Show error message
+                        alert("There was a problem sending your message. Please try again or contact us directly at contact@elventech.net");
+                    }
+                );
+            }
+        });
+    }
+});
+</script>
+<script>
+// Enhanced gallery functionality for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // Gallery functionality - clean swipe-only interface
+    function initializeGallery() {
+        const gallerySlider = document.getElementById('gallery-slider');
+        
+        if (!gallerySlider) return;
+        
+        const slides = gallerySlider.children;
+        let currentSlide = 0;
+        
+        function updateSlide() {
+            gallerySlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
+        }
+        
+        // Enhanced touch/swipe support for clean mobile experience
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let isDragging = false;
+        
+        gallerySlider.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            currentX = startX;
+            currentY = startY;
+            isDragging = true;
+        }, { passive: true });
+        
+        gallerySlider.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            
+            currentX = e.touches[0].clientX;
+            currentY = e.touches[0].clientY;
+            
+            // Prevent default scrolling if horizontal swipe is detected
+            const deltaX = Math.abs(currentX - startX);
+            const deltaY = Math.abs(currentY - startY);
+            
+            if (deltaX > deltaY) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        gallerySlider.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            
+            const deltaX = currentX - startX;
+            const deltaY = Math.abs(currentY - startY);
+            
+            // Only trigger swipe if horizontal movement is greater than vertical
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > deltaY) {
+                if (deltaX > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+            }
+            
+            isDragging = false;
+        }, { passive: true });
+        
+        // Auto-advance gallery every 7 seconds
+        setInterval(nextSlide, 7000);
+    }
+    
+    // Initialize gallery with a small delay
+    setTimeout(initializeGallery, 200);
+    
+    // Initialize animated grid pattern for hero section
+    function initializeAnimatedGrid() {
+        const gridSvg = document.getElementById('hero-grid-svg');
+        const gridSquares = document.getElementById('hero-grid-squares');
+        
+        if (!gridSvg || !gridSquares) return;
+        
+        const squareWidth = 40;
+        const squareHeight = 40;
+        const numSquares = 50;
+        let squares = [];
+        
+        function getRandomPosition() {
+            const svgRect = gridSvg.getBoundingClientRect();
+            const maxX = Math.floor(svgRect.width / squareWidth);
+            const maxY = Math.floor(svgRect.height / squareHeight);
+            
+            return {
+                x: Math.floor(Math.random() * maxX),
+                y: Math.floor(Math.random() * maxY)
+            };
+        }
+        
+        function createSquare(index) {
+            const pos = getRandomPosition();
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            
+            rect.setAttribute('class', 'grid-square');
+            rect.setAttribute('width', squareWidth - 1);
+            rect.setAttribute('height', squareHeight - 1);
+            rect.setAttribute('x', pos.x * squareWidth + 1);
+            rect.setAttribute('y', pos.y * squareHeight + 1);
+            rect.setAttribute('fill', 'rgba(34, 197, 94, 0.6)');
+            rect.style.animationDelay = `${index * 0.1}s`;
+            
+            return { element: rect, pos };
+        }
+        
+        function updateSquarePosition(square, index) {
+            const newPos = getRandomPosition();
+            square.element.setAttribute('x', newPos.x * squareWidth + 1);
+            square.element.setAttribute('y', newPos.y * squareHeight + 1);
+            square.pos = newPos;
+            
+            // Reset animation
+            square.element.style.animation = 'none';
+            setTimeout(() => {
+                square.element.style.animation = `gridSquareAnimation ${3.5 + Math.random() * 1}s ease-in-out`;
+                square.element.style.animationDelay = `${index * 0.1}s`;
+            }, 10);
+        }
+        
+        // Create initial squares
+        for (let i = 0; i < numSquares; i++) {
+            const square = createSquare(i);
+            squares.push(square);
+            gridSquares.appendChild(square.element);
+            
+            // Set up animation end listener to reposition square
+            square.element.addEventListener('animationend', () => {
+                setTimeout(() => {
+                    updateSquarePosition(square, i);
+                }, Math.random() * 1000);
+            });
+        }
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            squares.forEach((square, index) => {
+                updateSquarePosition(square, index);
+            });
+        });
+    }
+    
+    // Initialize animated grid
+    initializeAnimatedGrid();
+    
+    // Initialize grid patterns for all sections
+    function initializeAllGrids() {
+        const sections = [
+            { id: 'our-material', containerClass: 'material-grid-squares', fillColor: 'rgba(0, 0, 0, 0.15)' },
+            { id: 'custom-projects', containerClass: 'custom-grid-squares', fillColor: 'rgba(0, 0, 0, 0.15)' },
+            { id: 'our-products', containerClass: 'products-grid-squares', fillColor: 'rgba(0, 0, 0, 0.12)' },
+            { id: 'about', containerClass: 'about-grid-squares', fillColor: 'rgba(0, 0, 0, 0.12)' },
+            { id: 'gallery', containerClass: 'gallery-grid-squares', fillColor: 'rgba(0, 0, 0, 0.12)' },
+            { id: 'contact', containerClass: 'contact-grid-squares', fillColor: 'rgba(0, 0, 0, 0.15)' }
+        ];
+        
+        sections.forEach(section => {
+            initializeSectionGrid(section.id, section.containerClass, section.fillColor);
+        });
+    }
+    
+    function initializeSectionGrid(sectionId, containerClass, fillColor) {
+        const section = document.getElementById(sectionId);
+        const gridSquares = section?.querySelector(`.${containerClass}`);
+        
+        if (!section || !gridSquares) return;
+        
+        const squareWidth = 40;
+        const squareHeight = 40;
+        const numSquares = 30; // Fewer squares for other sections
+        let squares = [];
+        
+        function getRandomPosition() {
+            const sectionRect = section.getBoundingClientRect();
+            const maxX = Math.floor(sectionRect.width / squareWidth);
+            const maxY = Math.floor(sectionRect.height / squareHeight);
+            
+            return {
+                x: Math.floor(Math.random() * maxX),
+                y: Math.floor(Math.random() * maxY)
+            };
+        }
+        
+        function createSquare(index) {
+            const pos = getRandomPosition();
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            
+            rect.setAttribute('class', 'grid-square');
+            rect.setAttribute('width', squareWidth - 1);
+            rect.setAttribute('height', squareHeight - 1);
+            rect.setAttribute('x', pos.x * squareWidth + 1);
+            rect.setAttribute('y', pos.y * squareHeight + 1);
+            rect.setAttribute('fill', fillColor);
+            rect.style.animationDelay = `${index * 0.15}s`;
+            
+            return { element: rect, pos };
+        }
+        
+        function updateSquarePosition(square, index) {
+            const newPos = getRandomPosition();
+            square.element.setAttribute('x', newPos.x * squareWidth + 1);
+            square.element.setAttribute('y', newPos.y * squareHeight + 1);
+            square.pos = newPos;
+            
+            // Reset animation
+            square.element.style.animation = 'none';
+            setTimeout(() => {
+                square.element.style.animation = `gridSquareAnimation ${4 + Math.random() * 2}s ease-in-out`;
+                square.element.style.animationDelay = `${index * 0.15}s`;
+            }, 10);
+        }
+        
+        // Create initial squares
+        for (let i = 0; i < numSquares; i++) {
+            const square = createSquare(i);
+            squares.push(square);
+            gridSquares.appendChild(square.element);
+            
+            // Set up animation end listener to reposition square
+            square.element.addEventListener('animationend', () => {
+                setTimeout(() => {
+                    updateSquarePosition(square, i);
+                }, Math.random() * 2000);
+            });
+        }
+    }
+    
+    // Initialize all section grids
+    initializeAllGrids();
+    
+    // Backup mobile menu functionality in case fixed-script.js doesn't load properly
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        console.log('Mobile menu elements found, adding event listeners');
+        
+        mobileMenuButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Mobile menu button clicked');
+            
+            mobileMenu.classList.toggle('active');
+            console.log('Mobile menu active class toggled. Current classes:', mobileMenu.className);
+        });
+        
+        // Close mobile menu when clicking on navigation links
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    } else {
+        console.log('Mobile menu elements not found');
+        console.log('Button element:', mobileMenuButton);
+        console.log('Menu element:', mobileMenu);
+    }
+});
+</script>
+<script src="fixed-script.js"></script>
+</body>
+</html>
