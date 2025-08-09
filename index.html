@@ -557,9 +557,10 @@ a[data-preview]:hover {
         <div class="flex items-center justify-between h-16">
             <!-- Logo Section -->
             <div class="flex-shrink-0 flex items-center">
-                <img src="./logo.png" 
+                <img src="logo.png" 
                      alt="Elven Technologies Logo" 
-                     class="h-10 w-auto mr-3">
+                     class="h-10 w-auto mr-3"
+                     onerror="console.error('Logo failed to load. Trying alternative path'); this.src='./logo.png';">
                 <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
             </div>
             
@@ -1473,6 +1474,10 @@ a[data-preview]:hover {
             
             <div class="border-t border-gray-800 pt-8 text-center relative z-10">
                 <p class="text-gray-400">© 2025 Elven Technologies. All rights reserved.</p>
+                <!-- Debug: Test logo link for Vercel deployment -->
+                <p class="text-xs text-gray-600 mt-2">
+                    Debug: <a href="logo.png" target="_blank" class="text-blue-400 hover:underline">Test Logo Link</a>
+                </p>
             </div>
         </div>
     </footer>
