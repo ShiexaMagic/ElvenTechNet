@@ -4,33 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elven Technologies - Fireproof Solutions</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"></script>
+    <!-- Browser compatibility styles -->
+    <style>
+        /* Spline viewer optimization for Edge */
+        spline-viewer {
+            display: block !important;
+            width: 100% !important;
+            height: 500px !important;
+            min-height: 400px !important;
+            border: none !important;
+            background: transparent;
+            overflow: hidden;
+        }
+        
+        /* Prevent scrolling issues in Edge */
+        spline-viewer canvas {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
     <!-- Hero image animation styles -->
     <style>
-    /* Custom animations */
+    /* Custom animations with better browser compatibility */
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        0% { 
+            opacity: 0; 
+            transform: translate3d(0, 20px, 0);
+            -webkit-transform: translate3d(0, 20px, 0);
+        }
+        100% { 
+            opacity: 1; 
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+        }
     }
     
     .fade-in {
         animation: fadeIn 1s ease-out forwards;
+        -webkit-animation: fadeIn 1s ease-out forwards;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
     
-    .delay-1 { animation-delay: 0.3s; }
-    .delay-2 { animation-delay: 0.6s; }
-    .delay-3 { animation-delay: 0.9s; }
+    .delay-1 { 
+        animation-delay: 0.3s; 
+        -webkit-animation-delay: 0.3s;
+    }
+    .delay-2 { 
+        animation-delay: 0.6s; 
+        -webkit-animation-delay: 0.6s;
+    }
+    .delay-3 { 
+        animation-delay: 0.9s; 
+        -webkit-animation-delay: 0.9s;
+    }
     
-    /* Hero image zoom animation */
+    /* Hero image zoom animation with better performance */
     @keyframes slowZoom {
-        0% { transform: scale(1); }
-        100% { transform: scale(1.5); }
+        0% { 
+            transform: scale3d(1, 1, 1);
+            -webkit-transform: scale3d(1, 1, 1);
+        }
+        100% { 
+            transform: scale3d(1.5, 1.5, 1);
+            -webkit-transform: scale3d(1.5, 1.5, 1);
+        }
     }
     
     .hero-image {
         animation: slowZoom 15s ease-in-out infinite alternate;
+        -webkit-animation: slowZoom 15s ease-in-out infinite alternate;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        will-change: transform;
     }
     
     /* Hero image overlay */
@@ -38,15 +96,25 @@
         background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
     }
     
-    /* Sample form transition */
+    /* Sample form transition with better browser support */
     .sample-form {
         transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(0, 20px, 0);
+        -webkit-transform: translate3d(0, 20px, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
     
     .sample-form.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
     
     .sample-form:not(.active) {
