@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elven Technologies - Fireproof Solutions</title>
     <!-- Favicon using Elven Technologies PNG logo -->
-    <link rel="icon" type="image/png" href="./logo.png">
-    <link rel="shortcut icon" href="./logo.png">
-    <link rel="apple-touch-icon" href="./logo.png">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="shortcut icon" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <meta name="theme-color" content="#10b981">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -557,10 +557,10 @@ a[data-preview]:hover {
         <div class="flex items-center justify-between h-16">
             <!-- Logo Section -->
             <div class="flex-shrink-0 flex items-center">
-                <img src="logo.png" 
+                <img src="images/logo.png" 
                      alt="Elven Technologies Logo" 
                      class="h-10 w-auto mr-3"
-                     onerror="console.error('Logo failed to load. Trying alternative path'); this.src='./logo.png';">
+                     onerror="console.error('Logo failed to load from images/logo.png. Trying root path'); this.src='logo.png';">
                 <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
             </div>
             
@@ -1476,7 +1476,8 @@ a[data-preview]:hover {
                 <p class="text-gray-400">© 2025 Elven Technologies. All rights reserved.</p>
                 <!-- Debug: Test logo link for Vercel deployment -->
                 <p class="text-xs text-gray-600 mt-2">
-                    Debug: <a href="logo.png" target="_blank" class="text-blue-400 hover:underline">Test Logo Link</a>
+                    Debug: <a href="images/logo.png" target="_blank" class="text-blue-400 hover:underline">Test Logo Link</a>
+                    | <a href="logo.png" target="_blank" class="text-blue-400 hover:underline">Root Logo</a>
                 </p>
             </div>
         </div>
