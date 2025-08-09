@@ -323,6 +323,79 @@
         display: none;
     }
     
+    /* Ensure logo is always visible and properly styled */
+    header .flex-shrink-0 img,
+    .logo-image {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        filter: none !important;
+        z-index: 100 !important;
+        max-height: 40px !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        position: relative !important;
+    }
+    
+    /* Ensure header elements are properly positioned */
+    header .flex-shrink-0 {
+        display: flex !important;
+        align-items: center !important;
+        z-index: 100 !important;
+    }
+    
+    header .max-w-7xl {
+        position: relative !important;
+        z-index: 50 !important;
+    }
+    
+    /* Debug styles for troubleshooting */
+    .debug-logo-container {
+        background-color: rgba(255, 0, 0, 0.1) !important;
+        border: 2px solid red !important;
+        min-width: 50px !important;
+        min-height: 50px !important;
+    }
+    </style>
+    
+    <!-- Logo debugging script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoImg = document.querySelector('.logo-image, header .flex-shrink-0 img');
+        console.log('Logo element found:', logoImg);
+        
+        if (logoImg) {
+            console.log('Logo src:', logoImg.src);
+            console.log('Logo computed styles:', window.getComputedStyle(logoImg));
+            console.log('Logo dimensions:', logoImg.offsetWidth, 'x', logoImg.offsetHeight);
+            console.log('Logo position:', logoImg.getBoundingClientRect());
+            
+            logoImg.onload = function() {
+                console.log('Logo loaded successfully');
+                console.log('Natural dimensions:', this.naturalWidth, 'x', this.naturalHeight);
+            };
+            
+            logoImg.onerror = function() {
+                console.error('Logo failed to load from:', this.src);
+                // Add a colored placeholder
+                this.style.backgroundColor = '#f3f4f6';
+                this.style.border = '2px solid #ef4444';
+                this.style.minWidth = '40px';
+                this.style.minHeight = '40px';
+                this.alt = 'Logo Load Error';
+            };
+        } else {
+            console.error('Logo element not found!');
+        }
+        
+        // Check for overlapping elements
+        const headerRect = document.querySelector('header').getBoundingClientRect();
+        console.log('Header position:', headerRect);
+    });
+    </script>
+    
     .aspect-w-1 img, .aspect-h-1 img, .aspect-w-16 img, .aspect-h-9 img {
         position: absolute;
         top: 0;
@@ -559,7 +632,9 @@ a[data-preview]:hover {
             <div class="flex-shrink-0 flex items-center">
                 <img src="./logo.png" 
                      alt="Elven Technologies Logo" 
-                     class="h-10 w-auto mr-3">
+                     class="h-10 w-auto mr-3 logo-image"
+                     style="display: block !important; opacity: 1 !important; visibility: visible !important; z-index: 999 !important; max-height: 40px !important;"
+                     onerror="console.error('Logo failed to load:', this.src); this.style.backgroundColor='#f3f4f6'; this.style.border='1px solid #d1d5db';">
                 <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
             </div>
             
