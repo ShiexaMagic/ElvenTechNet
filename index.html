@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elven Technologies - Fireproof Solutions</title>
-    <!-- Favicon using Elven Technologies PNG logo -->
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="shortcut icon" href="images/logo.png">
-    <link rel="apple-touch-icon" href="images/logo.png">
+    <!-- Favicon using Elven Technologies logo from Wix -->
+    <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <meta name="theme-color" content="#10b981">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -557,27 +557,9 @@ a[data-preview]:hover {
         <div class="flex items-center justify-between h-16">
             <!-- Logo Section -->
             <div class="flex-shrink-0 flex items-center">
-                <!-- Try multiple approaches for logo -->
-                <div class="h-10 w-10 mr-3 flex items-center justify-center">
-                    <!-- SVG fallback logo -->
-                    <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
-                        <defs>
-                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="50" cy="50" r="45" fill="url(#logoGradient)" stroke="#047857" stroke-width="2"/>
-                        <text x="50" y="58" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">ET</text>
-                    </svg>
-                    <!-- Try to load PNG logo over SVG -->
-                    <img src="images/logo.png" 
-                         alt="Elven Technologies Logo" 
-                         class="h-10 w-auto absolute"
-                         style="position: absolute; top: 0; left: 0; z-index: 1;"
-                         onload="console.log('PNG logo loaded successfully'); this.previousElementSibling.style.display='none';"
-                         onerror="console.error('PNG logo failed, using SVG fallback'); this.style.display='none';">
-                </div>
+                <img src="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png" 
+                     alt="Elven Technologies Logo" 
+                     class="h-10 w-auto mr-3">
                 <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
             </div>
             
@@ -1493,8 +1475,8 @@ a[data-preview]:hover {
                 <p class="text-gray-400">© 2025 Elven Technologies. All rights reserved.</p>
                 <!-- Debug: Test logo link for Vercel deployment -->
                 <p class="text-xs text-gray-600 mt-2">
-                    Debug: <a href="images/logo.png" target="_blank" class="text-blue-400 hover:underline">Test Logo Link</a>
-                    | <a href="logo.png" target="_blank" class="text-blue-400 hover:underline">Root Logo</a>
+                    Debug: <a href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png" target="_blank" class="text-blue-400 hover:underline">Test Wix Logo</a>
+                    | <a href="images/logo.png" target="_blank" class="text-blue-400 hover:underline">Local Logo</a>
                 </p>
             </div>
         </div>
