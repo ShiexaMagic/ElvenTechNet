@@ -557,10 +557,27 @@ a[data-preview]:hover {
         <div class="flex items-center justify-between h-16">
             <!-- Logo Section -->
             <div class="flex-shrink-0 flex items-center">
-                <img src="images/logo.png" 
-                     alt="Elven Technologies Logo" 
-                     class="h-10 w-auto mr-3"
-                     onerror="console.error('Logo failed to load from images/logo.png. Trying root path'); this.src='logo.png';">
+                <!-- Try multiple approaches for logo -->
+                <div class="h-10 w-10 mr-3 flex items-center justify-center">
+                    <!-- SVG fallback logo -->
+                    <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#logoGradient)" stroke="#047857" stroke-width="2"/>
+                        <text x="50" y="58" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">ET</text>
+                    </svg>
+                    <!-- Try to load PNG logo over SVG -->
+                    <img src="images/logo.png" 
+                         alt="Elven Technologies Logo" 
+                         class="h-10 w-auto absolute"
+                         style="position: absolute; top: 0; left: 0; z-index: 1;"
+                         onload="console.log('PNG logo loaded successfully'); this.previousElementSibling.style.display='none';"
+                         onerror="console.error('PNG logo failed, using SVG fallback'); this.style.display='none';">
+                </div>
                 <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
             </div>
             
