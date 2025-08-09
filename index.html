@@ -323,79 +323,6 @@
         display: none;
     }
     
-    /* Ensure logo is always visible and properly styled */
-    header .flex-shrink-0 img,
-    .logo-image {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        filter: none !important;
-        z-index: 100 !important;
-        max-height: 40px !important;
-        width: auto !important;
-        height: auto !important;
-        object-fit: contain !important;
-        position: relative !important;
-    }
-    
-    /* Ensure header elements are properly positioned */
-    header .flex-shrink-0 {
-        display: flex !important;
-        align-items: center !important;
-        z-index: 100 !important;
-    }
-    
-    header .max-w-7xl {
-        position: relative !important;
-        z-index: 50 !important;
-    }
-    
-    /* Debug styles for troubleshooting */
-    .debug-logo-container {
-        background-color: rgba(255, 0, 0, 0.1) !important;
-        border: 2px solid red !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-    }
-    </style>
-    
-    <!-- Logo debugging script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const logoImg = document.querySelector('.logo-image, header .flex-shrink-0 img');
-        console.log('Logo element found:', logoImg);
-        
-        if (logoImg) {
-            console.log('Logo src:', logoImg.src);
-            console.log('Logo computed styles:', window.getComputedStyle(logoImg));
-            console.log('Logo dimensions:', logoImg.offsetWidth, 'x', logoImg.offsetHeight);
-            console.log('Logo position:', logoImg.getBoundingClientRect());
-            
-            logoImg.onload = function() {
-                console.log('Logo loaded successfully');
-                console.log('Natural dimensions:', this.naturalWidth, 'x', this.naturalHeight);
-            };
-            
-            logoImg.onerror = function() {
-                console.error('Logo failed to load from:', this.src);
-                // Add a colored placeholder
-                this.style.backgroundColor = '#f3f4f6';
-                this.style.border = '2px solid #ef4444';
-                this.style.minWidth = '40px';
-                this.style.minHeight = '40px';
-                this.alt = 'Logo Load Error';
-            };
-        } else {
-            console.error('Logo element not found!');
-        }
-        
-        // Check for overlapping elements
-        const headerRect = document.querySelector('header').getBoundingClientRect();
-        console.log('Header position:', headerRect);
-    });
-    </script>
-    
     .aspect-w-1 img, .aspect-h-1 img, .aspect-w-16 img, .aspect-h-9 img {
         position: absolute;
         top: 0;
@@ -629,16 +556,10 @@ a[data-preview]:hover {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <!-- Logo Section -->
-            <div class="flex-shrink-0 flex items-center" style="background: rgba(0,255,0,0.1); min-height: 50px; padding: 5px;">
-                <!-- Multiple logo attempts with different paths -->
-                <div style="width: 40px; height: 40px; background: #f3f4f6; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; margin-right: 12px; position: relative;">
-                    <!-- Try multiple sources -->
-                    <img src="logo.png" 
-                         alt="Elven Technologies Logo" 
-                         style="max-width: 100%; max-height: 100%; display: block; object-fit: contain; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                         onload="console.log('Logo loaded successfully'); this.parentElement.style.background='transparent'; this.parentElement.style.border='none';"
-                         onerror="console.log('First logo failed, trying alternative'); this.src='./logo.png'; this.onerror=function(){ console.log('Second attempt failed'); this.parentElement.innerHTML='<span style=color:#10b981;font-size:10px;font-weight:bold;>ET</span>'; };">
-                </div>
+            <div class="flex-shrink-0 flex items-center">
+                <img src="./logo.png" 
+                     alt="Elven Technologies Logo" 
+                     class="h-10 w-auto mr-3">
                 <h1 class="text-2xl font-bold text-gray-900">Elven Technologies</h1>
             </div>
             
