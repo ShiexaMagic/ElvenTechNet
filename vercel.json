@@ -1,15 +1,1 @@
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
-}
+{"ssl": {"enabled": true, "redirects": [{"source": "/","destination": "https://www.example.com","permanent": true}]},"headers": {"X-Content-Type-Options": "nosniff","X-Frame-Options": "DENY","X-XSS-Protection": "1; mode=block"}}
