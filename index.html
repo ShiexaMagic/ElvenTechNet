@@ -13,6 +13,46 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"></script>
+    <!-- Spline Preloader Script -->
+    <script>
+        // Preload all Spline models
+        const splineUrls = [
+            'https://prod.spline.design/5uYXMxKhCeFnmLs6/scene.splinecode',
+            'https://prod.spline.design/RK57V6mMxqmFbozG/scene.splinecode',
+            'https://prod.spline.design/yS0J-LHQc66rdeJP/scene.splinecode'
+        ];
+
+        // Create preloader function
+        function preloadSplineModels() {
+            splineUrls.forEach(url => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = url;
+                document.head.appendChild(link);
+                
+                // Also try to fetch the model data
+                fetch(url, { mode: 'no-cors' }).catch(() => {
+                    // Ignore errors, this is just for preloading
+                });
+            });
+        }
+
+        // Start preloading as soon as possible
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', preloadSplineModels);
+        } else {
+            preloadSplineModels();
+        }
+
+        // Additional optimization: Set loading attribute for spline viewers
+        document.addEventListener('DOMContentLoaded', function() {
+            const splineViewers = document.querySelectorAll('spline-viewer');
+            splineViewers.forEach(viewer => {
+                viewer.setAttribute('loading', 'eager');
+                viewer.setAttribute('loading-anim-type', 'spinner-small-light');
+            });
+        });
+    </script>
     <!-- Browser compatibility styles -->
     <style>
         /* Spline viewer optimization for Edge */
@@ -670,7 +710,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="material-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.07)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#material-grid-pattern)"/>
@@ -680,7 +720,7 @@ a[data-preview]:hover {
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col md:flex-row items-center mb-16">
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">World only Flexible, Inexpensive, Lightweight and Fireproof Composite Material</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">World's Flexible, Inexpensive, Lightweight and Fireproof Composite Material</h2>
                 <p class="text-gray-600 mb-6">Elven FireGuard™ is our next-generation fireproof composite, developed to meet the toughest safety and performance demands. Lightweight, flexible, and cost-effective, it withstands extreme temperatures up to 2000°C (3600°F) while maintaining exceptional 3D formability. Available in several tailored versions, FireGuard™ is redefining fire protection across construction, aerospace, EVs, and other high-risk industries.</p>
                 
                 <!-- Material links -->
@@ -698,7 +738,9 @@ a[data-preview]:hover {
                 <div class="construction-main-gallery w-screen relative" data-lenis-prevent style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
                     <spline-viewer url="https://prod.spline.design/5uYXMxKhCeFnmLs6/scene.splinecode" 
                                    style="width: 100%; height: 350px; min-height: 300px; border: none;" 
-                                   class="sm:!h-[400px] overflow-hidden"></spline-viewer>
+                                   class="sm:!h-[400px] overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
                 </div>
             </div>
             
@@ -707,7 +749,9 @@ a[data-preview]:hover {
                 <div class="construction-main-gallery relative w-full" data-lenis-prevent>
                     <spline-viewer url="https://prod.spline.design/5uYXMxKhCeFnmLs6/scene.splinecode" 
                                    style="width: 100%; height: 350px; min-height: 300px; border: none;" 
-                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"></spline-viewer>
+                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
                 </div>
             </div>
         </div>
@@ -758,7 +802,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="custom-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.07)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#custom-grid-pattern)"/>
@@ -824,7 +868,9 @@ a[data-preview]:hover {
                 <div class="w-screen relative" data-lenis-prevent style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
                     <spline-viewer url="https://prod.spline.design/RK57V6mMxqmFbozG/scene.splinecode" 
                                    style="width: 100%; height: 350px; min-height: 300px; border: none;" 
-                                   class="sm:!h-[400px] overflow-hidden"></spline-viewer>
+                                   class="sm:!h-[400px] overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
                 </div>
             </div>
             
@@ -833,7 +879,9 @@ a[data-preview]:hover {
                 <div class="relative w-full" data-lenis-prevent>
                     <spline-viewer url="https://prod.spline.design/RK57V6mMxqmFbozG/scene.splinecode" 
                                    style="width: 100%; height: 350px; min-height: 300px; border: none;" 
-                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"></spline-viewer>
+                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
                 </div>
             </div>
         </div>
@@ -899,7 +947,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="products-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#products-grid-pattern)"/>
@@ -919,7 +967,9 @@ a[data-preview]:hover {
                     <div class="w-screen relative" data-lenis-prevent style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
                         <spline-viewer url="https://prod.spline.design/yS0J-LHQc66rdeJP/scene.splinecode" 
                                        style="width: 100%; height: 350px; min-height: 300px; border: none;" 
-                                       class="sm:!h-[400px] overflow-hidden"></spline-viewer>
+                                       class="sm:!h-[400px] overflow-hidden"
+                                       loading="eager"
+                                       loading-anim-type="spinner-small-light"></spline-viewer>
                     </div>
                 </div>
                 
@@ -927,7 +977,9 @@ a[data-preview]:hover {
                 <div class="hidden md:block relative" data-lenis-prevent>
                     <spline-viewer url="https://prod.spline.design/yS0J-LHQc66rdeJP/scene.splinecode" 
                                    style="width: 100%; height: 350px; min-height: 300px; border: none;" 
-                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"></spline-viewer>
+                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
                 </div>
             </div>
             <div class="md:w-1/2 fade-in delay-1 mb-mobile-6 text-center-mobile order-1 md:order-2">
@@ -968,7 +1020,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="about-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#about-grid-pattern)"/>
@@ -1211,7 +1263,7 @@ a[data-preview]:hover {
         <svg class="absolute inset-0">
             <defs>
                 <pattern id="gallery-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                    <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                    <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#gallery-grid-pattern)"/>
@@ -1389,7 +1441,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="contact-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.07)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#contact-grid-pattern)"/>
