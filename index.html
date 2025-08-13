@@ -775,10 +775,9 @@ a[data-preview]:hover {
                     <i class="fas fa-shield-alt text-4xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-3">Test Results</h3>
-                <p class="text-gray-600">Explore our latest test results, with new data added regularly to reflect ongoing performance validation — <a href="#" 
-                   data-preview="images/uniform test.jpg"
-                   data-preview-alt="Test results preview"
-                   class="text-green-600 hover:underline">click here to view them</a>.</p>
+                <p class="text-gray-600">Explore our comprehensive test results and certifications, with new data added regularly to reflect ongoing performance validation — <a href="#" 
+                   onclick="openTestResultsModal()"
+                   class="text-green-600 hover:underline font-semibold">click here to view all test documents</a>.</p>
             </div>
             
             <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
@@ -2393,6 +2392,327 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<!-- Test Results Modal -->
+<div id="testResultsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                Test Results & Certifications
+            </h2>
+            <button onclick="closeTestResultsModal()" class="text-gray-500 hover:text-gray-700 text-2xl font-bold">
+                &times;
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <div class="mb-6">
+                <p class="text-gray-600 mb-4">
+                    Access our comprehensive collection of test reports, certifications, and technical documentation. 
+                    All documents are regularly updated to reflect our ongoing performance validation and quality assurance processes.
+                </p>
+            </div>
+
+            <!-- Test Status Table matching Excel layout -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-clipboard-check text-green-600 mr-2"></i>
+                    Test Results & Status Overview
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border border-gray-300 bg-white text-sm">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-3 py-2 text-left font-semibold">Material</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">BETR UL</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">TaG UL</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM F2700</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM D6413</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM D149</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM D3755</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">UL 94</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM C1114</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM E1050</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Firefighter Uniform Material (old) -->
+                            <tr>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Firefighter Uniform Material (old)</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard Light -->
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard Light</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">N/A</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">N/A</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">Waiting</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">Waiting</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">Waiting</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">Waiting</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">Waiting</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard Reinforced -->
+                            <tr>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard Reinforced</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">N/A</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">N/A</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard PRO -->
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard PRO</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">N/A</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">N/A</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard Light (10mm) -->
+                            <tr>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard Light (10mm)</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded text-xs font-medium">Done</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PDF Download Links for Done Tests -->
+                <div class="mt-6">
+                    <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                        Available Test Reports (PDF Downloads)
+                    </h4>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <a href="pdf/Elven Tech FigreGuard PRO TaG test report.pdf" target="_blank" 
+                           class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <span class="text-sm text-gray-700">FireGuard PRO TaG Test</span>
+                        </a>
+                        <a href="pdf/FigreGuard PRO BETR test.pdf" target="_blank" 
+                           class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <span class="text-sm text-gray-700">FireGuard PRO BETR Test</span>
+                        </a>
+                        <a href="pdf/FigreGuard REINFORCED BETR test.pdf" target="_blank" 
+                           class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <span class="text-sm text-gray-700">FireGuard Reinforced BETR</span>
+                        </a>
+                        <a href="pdf/FigreGuard Reinforced TaG test report.pdf" target="_blank" 
+                           class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <span class="text-sm text-gray-700">FireGuard Reinforced TaG</span>
+                        </a>
+                        <a href="pdf/Fire Guard light 10mm TaG test.pdf" target="_blank" 
+                           class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <span class="text-sm text-gray-700">Fire Guard Light 10mm TaG</span>
+                        </a>
+                        <a href="pdf/FireGuard Light TaG test report.pdf" target="_blank" 
+                           class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <span class="text-sm text-gray-700">FireGuard Light TaG</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Excel File Download -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-file-excel text-green-600 mr-2"></i>
+                    Complete Test Schedule & Status
+                </h3>
+                <div class="bg-blue-50 rounded-lg border border-blue-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900 flex items-center mb-2">
+                                <i class="fas fa-table mr-2 text-green-600"></i>
+                                Master Test List (Excel Format)
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-4">Download the complete testing schedule with detailed status information, test methodologies, timeline tracking, and comprehensive documentation matrix</p>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                <span>Includes: Test protocols, status tracking, completion dates, and future test planning</span>
+                            </div>
+                        </div>
+                        <a href="pdf/elven Lab test list.xlsx" target="_blank" 
+                           class="bg-green-600 text-white px-6 py-3 rounded-lg text-sm hover:bg-green-700 transition flex items-center ml-6">
+                            <i class="fas fa-download mr-2"></i>
+                            Download Excel
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="bg-gray-50 rounded-lg p-4">
+                <div class="flex items-start">
+                    <i class="fas fa-info-circle text-blue-500 text-lg mr-3 mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">About Our Testing</h4>
+                        <p class="text-sm text-gray-600">
+                            All testing has been conducted in accordance with international standards and best practices. 
+                            Our comprehensive testing program includes fire resistance, structural integrity, and performance 
+                            validation across various environmental conditions. Results are regularly updated as new tests are completed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openTestResultsModal() {
+    document.getElementById('testResultsModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeTestResultsModal() {
+    document.getElementById('testResultsModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+document.getElementById('testResultsModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeTestResultsModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !document.getElementById('testResultsModal').classList.contains('hidden')) {
+        closeTestResultsModal();
+    }
+});
+</script>
+
 <script src="fixed-script.js"></script>
 </body>
 </html>
