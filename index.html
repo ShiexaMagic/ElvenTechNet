@@ -1205,26 +1205,6 @@ a[data-preview]:hover {
                     </div>
                 </div>
                 
-                <!-- Shio - Creative Director -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in delay-2">
-                    <img src="https://static.wixstatic.com/media/847d72_0bdae337d9144ffdae8de9f6e95c72b9~mv2.jpg" 
-                         alt="Shio Khidasheli" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-1">Shio Khidasheli</h3>
-                        <p class="text-green-600 font-medium mb-4">Creative Director</p>
-                        <p class="text-gray-600 mb-4">Leading creative initiatives and brand strategy, ensuring Elven's innovative solutions are effectively communicated across all platforms and markets.</p>
-                        <div class="flex space-x-3">
-                            <a href="https://linkedin.com/in/elventechnologies" class="text-gray-400 hover:text-green-600 transition duration-300">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="mailto:info@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
-                                <i class="far fa-envelope"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- Levan - Business Development Assistant -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
                     <img src="https://static.wixstatic.com/media/847d72_04fe6ee182874afdb6d7fbc70ba574e0~mv2.jpg" 
@@ -1253,182 +1233,97 @@ a[data-preview]:hover {
     </div>
 </section>
 
-<!-- Gallery Section with 1080x1080 frames -->
-<section id="gallery" class="py-12 md:py-20 bg-gray-100 relative overflow-hidden">
+<!-- Gallery Section with Infinite Scroll -->
+<section id="gallery" class="py-12 md:py-20 relative overflow-hidden">
+    <style>
+        @keyframes scroll-right {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .infinite-scroll {
+            animation: scroll-right 80s linear infinite;  /* Reduced speed by another 50% */
+        }
+
+        .scroll-container {
+            mask: linear-gradient(
+                90deg,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%
+            );
+            -webkit-mask: linear-gradient(
+                90deg,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%
+            );
+        }
+
+        .image-item {
+            transition: transform 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);  /* Added shadow */
+        }
+
+        .image-item:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);  /* Enhanced shadow on hover */
+        }
+    </style>
+
     <!-- Animated Grid Pattern Background -->
     <div class="animated-grid-pattern">
         <svg class="absolute inset-0">
             <defs>
                 <pattern id="gallery-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                    <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
+                    <rect width="2" height="2" fill="rgba(0, 0, 0, 0.06)" />
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#gallery-grid-pattern)"/>
             <g class="gallery-grid-squares"></g>
         </svg>
     </div>
+    
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-8 md:mb-16">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Gallery</h2>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Explore our materials, applications, and testing processes through our gallery of images.</p>
         </div>
         
-        <div class="relative overflow-hidden rounded-lg shadow-xl max-w-4xl mx-auto">
-            <div id="gallery-slider" class="flex transition-transform duration-500 ease-in-out">
-                <!-- Gallery Slide 1 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" 
-                             alt="Thermal Containment System" 
-                             class="w-full h-full object-cover">
+        <!-- Scrolling images container -->
+        <div class="relative z-10 w-full flex items-center justify-center py-8">
+            <div class="scroll-container w-full max-w-6xl">
+                <div class="infinite-scroll flex gap-6 w-max">
+                    <!-- First set of images -->
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" alt="Thermal Containment System" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 2 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
-                             alt="Fire Resistance Demonstration" 
-                             class="w-full h-full object-cover">
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_6fe43f7438fd4ee59a9fa3652d2dcc0b~mv2.jpg" alt="Final Product Testing" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 3 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
-                             alt="Laboratory Testing Setup" 
-                             class="w-full h-full object-cover">
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" alt="Elven Sheet Application" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 5 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_b06fdf188aba43bfabe5e4465acbed1d~mv2.jpg" 
-                             alt="Material Testing Process" 
-                             class="w-full h-full object-cover">
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" alt="Elven Sheet Installation" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 6 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_3c0ded7900284c35b0c4887492f5b7c9~mv2.jpg" 
-                             alt="High-Temperature Resistance Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 7 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_de7ea8ac964045d9985eaf0059f3d3d8~mv2.jpg" 
-                             alt="Industrial Application" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 8 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_e01695cf8e984453a7037fcc4600deee~mv2.jpg" 
-                             alt="Manufacturing Process" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 9 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_3bb2f22ee8a945df8b382551d39bd4c3~mv2.jpg" 
-                             alt="Quality Control" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 10 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_cdc7de5c170d4c69afe0aa6f26b319b3~mv2.jpg" 
-                             alt="Research and Development" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 11 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_87fa8ea89c8e472688cf7f88679254fb~mv2.jpg" 
-                             alt="Safety Equipment Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 12 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_d138c41343c2479cbbca49def323c9ad~mv2.jpg" 
-                             alt="Field Applications" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 13 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_e76d223e12e9473ca4b99b11dfca4ff6~mv2.jpg" 
-                             alt="Performance Validation" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 14 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_39120af9fa6e47de80a9db0f71e6fa25~mv2.jpg" 
-                             alt="Technical Innovation" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 15 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_2ed625a520784cab842eb56b65e9c369~mv2.jpg" 
-                             alt="Laboratory Analysis" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 16 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_6fe43f7438fd4ee59a9fa3652d2dcc0b~mv2.jpg" 
-                             alt="Final Product Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 17 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
-                             alt="Elven Sheet Application" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 18 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
-                             alt="Elven Sheet Installation" 
-                             class="w-full h-full object-cover">
+                    
+                    <!-- Duplicated images for seamless loop -->
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" alt="Thermal Containment System" class="w-full h-full object-cover" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
+        
+    </div>
 
 </section>
     <!-- Contact Section -->
@@ -1930,7 +1825,7 @@ if (sampleFormElement) {
                 shipping_address: document.getElementById('sample-address').value,
                 message: document.getElementById('sample-message').value,
                 to_name: "Elven Team",
-                to_email: "shio@elventech.net"
+                to_email: "info@elventech.net"
             }).then(
                 function(response) {
                     console.log("Sample request sent successfully", response);
@@ -2020,7 +1915,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     interest: document.getElementById('interest').value,
                     message: document.getElementById('message').value,
                     to_name: "Elven Team",
-                    to_email: "shio@elventech.net"
+                    to_email: "info@elventech.net"
                 }).then(
                     function(response) {
                         console.log("Email sent successfully", response);
