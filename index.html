@@ -635,6 +635,11 @@ a[data-preview]:hover {
 .video-icon {
   transition: all 0.3s ease;
 }
+    
+        /* Utility to hide the team section when needed */
+        .hidden-team {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -1093,8 +1098,8 @@ a[data-preview]:hover {
             </div>
         </div>
         
-        <!-- Team Section -->
-        <div class="mt-20">
+    <!-- Team Section -->
+    <div class="mt-20 hidden-team" id="team-section">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Leadership Team</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Meet the experts behind Elven Technologies' innovative fireproof solutions.</p>
