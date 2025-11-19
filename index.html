@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google reCAPTCHA v2 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- EmailJS for contact form -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"></script>
     <!-- Spline Preloader Script -->
     <script>
@@ -1926,8 +1928,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Send email using EmailJS
             if (window.emailjs) {
+                console.log("EmailJS is available, sending email...");
                 emailjs.send("service_anf05h6", "template_contact_form", {
                     from_name: document.getElementById('name').value,
+                    from_email: "website@elventech.net",
                     company: document.getElementById('company').value,
                     reply_to: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
@@ -1952,18 +1956,40 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     function(error) {
                         console.error("Email failed to send:", error);
+                        console.error("Error details:", JSON.stringify(error));
                         
                         // Reset reCAPTCHA
-                        grecaptcha.reset();
+                        if (typeof grecaptcha !== 'undefined') {
+                            grecaptcha.reset();
+                        }
                         
                         // Restore button
                         submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
                         
-                        // Show error message
-                        alert("There was a problem sending your message. Please try again or contact us directly at contact@elventech.net");
+                        // Show detailed error message
+                        let errorMessage = "There was a problem sending your message. ";
+                        if (error && error.text) {
+                            errorMessage += "Error: " + error.text + " ";
+                        }
+                        errorMessage += "Please try again or contact us directly at info@elventech.net";
+                        
+                        alert(errorMessage);
                     }
                 );
+            } else {
+                console.error("EmailJS not loaded");
+                
+                // Reset reCAPTCHA
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.reset();
+                }
+                
+                // Restore button
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                
+                alert("Email service not available. Please contact us directly at info@elventech.net");
             }
         });
     }
