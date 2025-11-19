@@ -1938,7 +1938,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     interest: document.getElementById('interest').value,
                     message: document.getElementById('message').value,
                     to_name: "Elven Team",
-                    to_email: "info@elventech.net"
+                    to_email: "info@elventech.net",
+                    'g-recaptcha-response': recaptchaResponse
                 }).then(
                     function(response) {
                         console.log("Email sent successfully", response);
