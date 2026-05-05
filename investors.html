@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Elven Technologies - Investor Opportunity</title>
+    <link rel="icon" type="image/x-icon" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -30px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 30px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translate3d(30px, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Card hover effects */
+        .metric-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: white !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Video container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 1rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 3px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            width: 2px;
+            height: 60px;
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        /* Stats counter animation */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        /* Accordion for FAQs */
+        .accordion-button {
+            background: transparent;
+            border: 1px solid rgba(107, 114, 128, 0.2);
+            padding: 1.5rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .accordion-button:hover {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .accordion-content.active {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        /* Pulse animation for CTA */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        /* Investor badge */
+        .investor-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #10b981;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <img src="images/logo.png" alt="Elven Technologies" class="h-8 w-8 object-contain">
+                    <span class="font-bold text-lg gradient-text">Elven Technologies</span>
+                </div>
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors text-sm">← Back to Main</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <!-- Background elements -->
+            <div class="absolute top-20 right-10 w-72 h-72 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-fade-down"></div>
+            <div class="absolute bottom-0 left-10 w-72 h-72 bg-emerald-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-fade-up delay-200"></div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-12 animate-fade-down">
+                    <div class="investor-badge justify-center mx-auto">
+                        <i class="fas fa-star mr-2"></i> Exclusive Investor Opportunity
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-gray-900">
+                        <span class="gradient-text">Revolutionary</span> Fireproof Technology
+                    </h1>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                        Join a $26 billion market opportunity. Elven Technologies is transforming battery safety and composite materials with breakthrough innovation.
+                    </p>
+                </div>
+
+                <!-- Key Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+                    <div class="metric-card p-6 rounded-lg bg-gradient-to-br from-white to-white animation-fade-up delay-100">
+                        <div class="stat-number">$26B</div>
+                        <p class="text-gray-600 mt-2">Total Market Size</p>
+                    </div>
+                    <div class="metric-card p-6 rounded-lg bg-gradient-to-br from-white to-white animation-fade-up delay-300">
+                        <div class="stat-number">2000°C</div>
+                        <p class="text-gray-600 mt-2">Heat Resistance (vs 6s for competitors)</p>
+                    </div>
+                    <div class="metric-card p-6 rounded-lg bg-gradient-to-br from-white to-white animation-fade-up delay-400">
+                        <div class="stat-number">3x</div>
+                        <p class="text-gray-600 mt-2">Expected Series A Valuation Growth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Opportunity -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">The Opportunity</h2>
+                <p class="text-xl text-gray-600">Two massive market segments with immediate adoption</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Market 1: EV Battery Enclosures -->
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-white to-white animate-fade-up delay-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-car text-emerald-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold ml-4">Battery Enclosures for EVs</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-emerald-400 font-semibold mb-2">Market Size</p>
+                            <p class="text-3xl font-bold text-gray-900">$16 Billion</p>
+                        </div>
+                        <p class="text-gray-700">Fireproof enclosures for lithium-ion batteries in electric vehicles. Already in development with <span class="font-semibold text-emerald-400">Tesla</span> and projected to be in every EV produced globally.</p>
+                        <ul class="space-y-3 mt-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-emerald-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Active partnership with Tesla on battery safety</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-emerald-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Proven containment of 2000°C fires safely</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-emerald-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Critical regulatory advantage as safety standards tighten</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Market 2: Battery Storage & Transport -->
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-white to-white animate-fade-up delay-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-box text-emerald-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold ml-4">Storage & Transport Containers</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-emerald-400 font-semibold mb-2">Market Size</p>
+                            <p class="text-3xl font-bold text-gray-900">$10 Billion</p>
+                        </div>
+                        <p class="text-gray-700">Regulatory-mandated fireproof containers for battery storage and transportation. EU and US regulations now require fireproof shipping containers for all batteries.</p>
+                        <ul class="space-y-3 mt-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-emerald-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>EU/US regulatory compliance driving immediate demand</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-emerald-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Already ordered by Tesla and major manufacturers</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-emerald-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Cyber Truck battery containers in active production</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Round Details -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-500/5 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Bridge Round • Series A Pipeline</h2>
+                <p class="text-xl text-gray-600">Your entry point to our growth stage</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-50 border border-emerald-500/20 p-8 rounded-lg animate-scale-in delay-100">
+                    <div class="text-2xl font-bold text-emerald-400 mb-2">$15M</div>
+                    <p class="text-sm text-gray-600">Current Valuation</p>
+                </div>
+
+                <div class="bg-gray-50 border border-emerald-500/20 p-8 rounded-lg animate-scale-in delay-200">
+                    <div class="text-2xl font-bold text-emerald-400 mb-2">$25K</div>
+                    <p class="text-sm text-gray-600">Minimum Investment</p>
+                </div>
+
+                <div class="bg-gray-50 border border-emerald-500/20 p-8 rounded-lg animate-scale-in delay-300">
+                    <div class="text-2xl font-bold text-emerald-400 mb-2">3X Growth</div>
+                    <p class="text-sm text-gray-600">Expected Series A Valuation</p>
+                </div>
+
+                <div class="bg-gray-50 border border-emerald-500/20 p-8 rounded-lg animate-scale-in delay-400">
+                    <div class="text-2xl font-bold text-emerald-400 mb-2">2-3 Months</div>
+                    <p class="text-sm text-gray-600">Timeline to Series A</p>
+                </div>
+            </div>
+
+            <!-- Why Now -->
+            <div class="mt-16 p-8 bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border border-emerald-500/20 rounded-xl">
+                <h3 class="text-2xl font-bold mb-6">Why This Bridge Round is Your Last Chance to Get in at Startup Valuation</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-rocket text-emerald-500 mt-1 mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-semibold mb-1">Imminent Mega Contracts</p>
+                            <p class="text-gray-600 text-sm">Tesla and LTA contracts about to close. Series A investors will have zero entry point for contract growth.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line text-emerald-500 mt-1 mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-semibold mb-1">Series A Timing (2-3 months)</p>
+                            <p class="text-gray-600 text-sm">Contract announcements + product delivery milestones will trigger 3X+ valuation increase.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-lock text-emerald-500 mt-1 mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-semibold mb-1">Last Angel Round</p>
+                            <p class="text-gray-600 text-sm">Series A will be VC-only with multi-million dollar checks. Bridge round is your final startup entrance.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-star text-emerald-500 mt-1 mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="font-semibold mb-1">$26B TAM with Early Execution</p>
+                            <p class="text-gray-600 text-sm">Active partnerships and deliverables prove this isn't speculation—it's de-risked growth.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Proof -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">The Technology</h2>
+                <p class="text-xl text-gray-600">Breakthrough performance vs. competing solutions</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-white to-white animate-fade-up delay-100">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="text-3xl mr-3">🔬</span> Elven's Composite
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>2000°C heat resistance</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>120+ seconds containment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Lightweight & flexible</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Fireproof matrix</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-white to-white animate-fade-up delay-200">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="text-3xl mr-3">🏭</span> DuPont Nomex
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-gray-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Similar heat resistance</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-gray-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>6 seconds only</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-gray-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>More rigid</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-gray-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Current industry standard</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-white to-white animate-fade-up delay-300">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="text-3xl mr-3">⚡</span> Competitive Advantage
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-emerald-400 mr-3 mt-1 flex-shrink-0"></i>
+                            <span><strong>20X longer</strong> fire containment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-emerald-400 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Patented formulation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-emerald-400 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Multi-industry applications</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-emerald-400 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Regulatory moat</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Traction -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Current Partnerships & Traction</h2>
+                <p class="text-xl text-gray-600">Active collaborations with industry leaders</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-gray-200 animate-fade-up delay-100">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-yellow-400 text-2xl mr-3"></i>
+                        <h3 class="text-2xl font-bold">Tesla</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Active development of fireproof battery enclosure systems. Partnership on $16B EV battery container market.
+                    </p>
+                    <p class="text-emerald-400 text-sm font-semibold">Status: In Development</p>
+                </div>
+
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-gray-200 animate-fade-up delay-200">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-yellow-400 text-2xl mr-3"></i>
+                        <h3 class="text-2xl font-bold">LTA (Gabriel's Company)</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Battery containers for electric flying vehicles. Critical for passenger transport safety in aviation.
+                    </p>
+                    <p class="text-emerald-400 text-sm font-semibold">Status: Under Contract</p>
+                </div>
+
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-gray-200 animate-fade-up delay-300">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-yellow-400 text-2xl mr-3"></i>
+                        <h3 class="text-2xl font-bold">Archer Aviation</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Urban air mobility vehicle battery safety. Next generation transportation solutions.
+                    </p>
+                    <p class="text-emerald-400 text-sm font-semibold">Status: In Discussion</p>
+                </div>
+
+                <div class="metric-card p-8 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-gray-200 animate-fade-up delay-400">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-yellow-400 text-2xl mr-3"></i>
+                        <h3 class="text-2xl font-bold">Redwood Materials</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Battery recycling and sustainability. Safe transport of recycled battery materials.
+                    </p>
+                    <p class="text-emerald-400 text-sm font-semibold">Status: In Discussion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Video Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 animate-fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">See the Technology in Action</h2>
+                <p class="text-xl text-gray-600">Watch CEO Farid demonstrate the fireproof material breakthrough</p>
+            </div>
+
+            <div class="video-container animate-fade-up">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5RmNx3k6iDQ" title="Elven Technologies Fireproof Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-gray-700">Direct link: <a href="https://www.youtube.com/watch?v=5RmNx3k6iDQ" target="_blank" class="text-emerald-600 hover:text-emerald-700 font-semibold">Watch on YouTube</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 animate-fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Investor FAQ</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="accordion-item">
+                    <button class="accordion-button group">
+                        <div class="flex items-center justify-between w-full">
+                            <span>What's the investment timeline?</span>
+                            <i class="fas fa-chevron-down group-hover:text-emerald-400 transition-colors"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        Bridge round closes within 4-6 weeks. Series A expected to launch in 2-3 months with significantly higher valuation (3X+). This bridge round is your last opportunity before institutional VC pricing.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button group">
+                        <div class="flex items-center justify-between w-full">
+                            <span>What are the key milestones before Series A?</span>
+                            <i class="fas fa-chevron-down group-hover:text-emerald-400 transition-colors"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <ul class="space-y-2">
+                            <li>• Tesla battery enclosure prototype validation</li>
+                            <li>• LTA flying vehicle battery container delivery</li>
+                            <li>• Manufacturing capacity increase to 1000+ units/month</li>
+                            <li>• Regulatory certifications (DOT, EU standards)</li>
+                            <li>• Initial revenue recognition from pre-orders</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button group">
+                        <div class="flex items-center justify-between w-full">
+                            <span>How is the $26B market segmented?</span>
+                            <i class="fas fa-chevron-down group-hover:text-emerald-400 transition-colors"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        $16B EV battery enclosures (Tesla, legacy OEMs, emerging EV manufacturers) + $10B storage/transport containers (regulatory mandate in all developed markets). Combined TAM grows with EV adoption trajectory.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button group">
+                        <div class="flex items-center justify-between w-full">
+                            <span>What's the competitive moat?</span>
+                            <i class="fas fa-chevron-down group-hover:text-emerald-400 transition-colors"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        Patented composite formulation with 20X superior fire containment vs existing solutions. Regulatory approval creates high switching costs. Early partnerships with category leaders (Tesla, premium OEMs) build switching cost. Manufacturing ramp-up creates scale advantage.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-button group">
+                        <div class="flex items-center justify-between w-full">
+                            <span>What happens if Series A valuation doesn't 3X?</span>
+                            <i class="fas fa-chevron-down group-hover:text-emerald-400 transition-colors"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        Even conservative 1.5-2X growth materializes our thesis. Contract signings with Tesla alone justify premium valuation in venture markets. The 3X is a realistic conservative estimate given contract pipeline and TAM expansion.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="animate-fade-up">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">Ready to Invest?</h2>
+                <p class="text-xl text-gray-700 mb-12 leading-relaxed">
+                    This is your last opportunity to invest in Elven Technologies at startup valuation before Series A institutional funding. Join us in transforming battery safety and creating $26B in market value.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="mailto:farid@elventech.net" class="cta-button pulse-glow px-8 py-4 rounded-lg font-bold text-white text-lg inline-block transition-all">
+                        <i class="fas fa-envelope mr-3"></i>Contact for Investment Details
+                    </a>
+                    <a href="index.html" class="px-8 py-4 rounded-lg font-bold text-white text-lg border-2 border-emerald-500 hover:bg-emerald-500/10 transition-all inline-block">
+                        <i class="fas fa-arrow-left mr-3"></i>Back to Main Site
+                    </a>
+                </div>
+
+                <!-- Contact Alternative -->
+                <div class="mt-12 p-8 bg-gray-50 border border-gray-200 rounded-lg">
+                    <p class="text-gray-600 mb-4">Prefer to get in touch directly?</p>
+                    <div class="space-y-2">
+                        <p class="text-gray-700"><i class="fas fa-user mr-3 text-emerald-500"></i><strong>Farid</strong> | CEO, Elven Technologies</p>
+                        <p class="text-gray-700"><i class="fas fa-envelope mr-3 text-emerald-500"></i><a href="mailto:farid@elventech.net" class="text-emerald-400 hover:text-emerald-300">farid@elventech.net</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">
+            <p>© 2026 Elven Technologies. Confidential - For Qualified Investors Only.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const isActive = content.classList.contains('active');
+
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content.active').forEach(item => {
+                    if (item !== content) item.classList.remove('active');
+                });
+
+                // Toggle current accordion
+                content.classList.toggle('active');
+            });
+        });
+
+        // Intersection Observer for staggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.metric-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

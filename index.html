@@ -4,32 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elven Technologies - Fireproof Solutions</title>
+    <!-- Favicon configuration -->
+    <link rel="icon" type="image/x-icon" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png">
+    <meta name="theme-color" content="#10b981">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- EmailJS for contact form -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.28/build/spline-viewer.js"></script>
+    <!-- Spline Preloader Script -->
+    <script>
+        // Preload all Spline models
+        const splineUrls = [
+            'https://prod.spline.design/5uYXMxKhCeFnmLs6/scene.splinecode',
+            'https://prod.spline.design/TDZrbMbgk7f0OuRr/scene.splinecode',
+            'https://prod.spline.design/yS0J-LHQc66rdeJP/scene.splinecode'
+        ];
+
+        // Create preloader function
+        function preloadSplineModels() {
+            splineUrls.forEach(url => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = url;
+                document.head.appendChild(link);
+                
+                // Also try to fetch the model data
+                fetch(url, { mode: 'no-cors' }).catch(() => {
+                    // Ignore errors, this is just for preloading
+                });
+            });
+        }
+
+        // Start preloading as soon as possible
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', preloadSplineModels);
+        } else {
+            preloadSplineModels();
+        }
+
+        // Additional optimization: Set loading attribute for spline viewers
+        document.addEventListener('DOMContentLoaded', function() {
+            const splineViewers = document.querySelectorAll('spline-viewer');
+            splineViewers.forEach(viewer => {
+                viewer.setAttribute('loading', 'eager');
+                viewer.setAttribute('loading-anim-type', 'spinner-small-light');
+            });
+        });
+    </script>
+    <!-- Browser compatibility styles -->
+    <style>
+        /* Spline viewer optimization for Edge */
+        spline-viewer {
+            display: block !important;
+            width: 100% !important;
+            height: 350px !important;
+            min-height: 300px !important;
+            border: none !important;
+            background: transparent;
+            overflow: hidden;
+            border-radius: 0;
+        }
+        
+        /* Mobile-first approach - ensure full width on mobile */
+        @media (max-width: 767px) {
+            spline-viewer {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                border-radius: 0 !important;
+                transform: translateX(0) !important;
+            }
+            
+            /* iPhone specific fixes */
+            @supports (-webkit-touch-callout: none) {
+                spline-viewer {
+                    width: 100vw !important;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                }
+            }
+        }
+        
+        /* Responsive heights for spline viewer */
+        @media (min-width: 640px) {
+            spline-viewer {
+                height: 400px !important;
+                min-height: 350px !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            spline-viewer {
+                height: 450px !important;
+                min-height: 400px !important;
+                border-radius: 0.5rem !important;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            spline-viewer {
+                height: 500px !important;
+                min-height: 450px !important;
+            }
+        }
+        
+        /* Prevent scrolling issues in Edge */
+        spline-viewer canvas {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
     <!-- Hero image animation styles -->
     <style>
-    /* Custom animations */
+    /* Custom animations with better browser compatibility */
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        0% { 
+            opacity: 0; 
+            transform: translate3d(0, 20px, 0);
+            -webkit-transform: translate3d(0, 20px, 0);
+        }
+        100% { 
+            opacity: 1; 
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+        }
     }
     
     .fade-in {
         animation: fadeIn 1s ease-out forwards;
+        -webkit-animation: fadeIn 1s ease-out forwards;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
     }
     
-    .delay-1 { animation-delay: 0.3s; }
-    .delay-2 { animation-delay: 0.6s; }
-    .delay-3 { animation-delay: 0.9s; }
+    .delay-1 { 
+        animation-delay: 0.3s; 
+        -webkit-animation-delay: 0.3s;
+    }
+    .delay-2 { 
+        animation-delay: 0.6s; 
+        -webkit-animation-delay: 0.6s;
+    }
+    .delay-3 { 
+        animation-delay: 0.9s; 
+        -webkit-animation-delay: 0.9s;
+    }
     
-    /* Hero image zoom animation */
+    /* Hero image zoom animation with better performance */
     @keyframes slowZoom {
-        0% { transform: scale(1); }
-        100% { transform: scale(1.5); }
+        0% { 
+            transform: scale3d(1, 1, 1);
+            -webkit-transform: scale3d(1, 1, 1);
+        }
+        100% { 
+            transform: scale3d(1.5, 1.5, 1);
+            -webkit-transform: scale3d(1.5, 1.5, 1);
+        }
     }
     
     .hero-image {
         animation: slowZoom 15s ease-in-out infinite alternate;
+        -webkit-animation: slowZoom 15s ease-in-out infinite alternate;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        will-change: transform;
     }
     
     /* Hero image overlay */
@@ -37,15 +189,25 @@
         background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
     }
     
-    /* Sample form transition */
+    /* Sample form transition with better browser support */
     .sample-form {
         transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(0, 20px, 0);
+        -webkit-transform: translate3d(0, 20px, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
     
     .sample-form.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
     
     .sample-form:not(.active) {
@@ -477,6 +639,11 @@ a[data-preview]:hover {
 .video-icon {
   transition: all 0.3s ease;
 }
+    
+        /* Utility to hide the team section when needed */
+        .hidden-team {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -552,7 +719,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="material-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.07)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#material-grid-pattern)"/>
@@ -562,7 +729,7 @@ a[data-preview]:hover {
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col md:flex-row items-center mb-16">
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in text-center-mobile">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">World only Flexible, Inexpensive, Lightweight and Fireproof Composite Material</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">World's #1 Flexible, Inexpensive, Lightweight and Fireproof Composite&nbsp;Material</h2>
                 <p class="text-gray-600 mb-6">Elven FireGuard™ is our next-generation fireproof composite, developed to meet the toughest safety and performance demands. Lightweight, flexible, and cost-effective, it withstands extreme temperatures up to 2000°C (3600°F) while maintaining exceptional 3D formability. Available in several tailored versions, FireGuard™ is redefining fire protection across construction, aerospace, EVs, and other high-risk industries.</p>
                 
                 <!-- Material links -->
@@ -574,35 +741,32 @@ a[data-preview]:hover {
                     <a href="#contact" class="bg-transparent hover:bg-gray-100 text-green-700 font-bold py-3 px-6 border-2 border-green-600 rounded-lg transition duration-300">Contact Us</a>
                 </div>
             </div>
-            <div class="md:w-1/2 fade-in delay-1">
-                <!-- Fix the swipeable gallery -->
-                <div class="construction-main-gallery relative rounded-lg shadow-xl overflow-hidden h-80" data-lenis-prevent>
-                    <div id="construction-slider" class="flex transition-transform duration-500 ease-in-out h-full">
-                        <div class="w-full flex-shrink-0 h-full">
-                            <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
-                                 alt="Construction site with fireproof materials" 
-                                 class="w-full h-full object-cover cursor-pointer">
-                        </div>
-                        <div class="w-full flex-shrink-0 h-full">
-                            <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
-                                 alt="Elven Sheet Application" 
-                                 class="w-full h-full object-cover cursor-pointer">
-                        </div>
-                        <div class="w-full flex-shrink-0 h-full">
-                            <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
-                                 alt="Elven Sheet Installation" 
-                                 class="w-full h-full object-cover cursor-pointer">
-                        </div>
-                    </div>
-                    
-                    <!-- Navigation Dots -->
-                    <div id="construction-dots" class="construction-dots absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                        <!-- Dots will be dynamically generated by JavaScript -->
-                    </div>
+            
+            <!-- Mobile: Full width Spline viewer outside container -->
+            <div class="md:hidden fade-in delay-1 mt-6">
+                <div class="construction-main-gallery w-screen relative" data-lenis-prevent style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
+                    <spline-viewer url="https://prod.spline.design/5uYXMxKhCeFnmLs6/scene.splinecode" 
+                                   style="width: 100%; height: 350px; min-height: 300px; border: none;" 
+                                   class="sm:!h-[400px] overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
+                </div>
+            </div>
+            
+            <!-- Desktop: Normal flex layout -->
+            <div class="hidden md:block md:w-1/2 fade-in delay-1">
+                <div class="construction-main-gallery relative w-full" data-lenis-prevent>
+                    <spline-viewer url="https://prod.spline.design/5uYXMxKhCeFnmLs6/scene.splinecode" 
+                                   style="width: 100%; height: 350px; min-height: 300px; border: none;" 
+                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
                 </div>
             </div>
         </div>
         
+        <!-- Mobile spacing after Spline viewer -->
+        <div class="md:hidden mb-8"></div>
         <div class="grid md:grid-cols-3 gap-8 mt-16">
             <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in">
                 <div class="text-green-600 mb-4">
@@ -620,10 +784,9 @@ a[data-preview]:hover {
                     <i class="fas fa-shield-alt text-4xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-3">Test Results</h3>
-                <p class="text-gray-600">Explore our latest test results, with new data added regularly to reflect ongoing performance validation — <a href="#" 
-                   data-preview="images/uniform test.jpg"
-                   data-preview-alt="Test results preview"
-                   class="text-green-600 hover:underline">click here to view them</a>.</p>
+                <p class="text-gray-600">Explore our comprehensive test results and certifications, with new data added regularly to reflect ongoing performance validation — <a href="#" 
+                   onclick="openTestResultsModal()"
+                   class="text-green-600 hover:underline font-semibold">click here to view all test documents</a>.</p>
             </div>
             
             <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in delay-2">
@@ -647,7 +810,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="custom-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.07)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#custom-grid-pattern)"/>
@@ -667,51 +830,67 @@ a[data-preview]:hover {
                 
                 <div class="space-y-6">
                     <div class="flex items-start">
-                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0 mt-0.5 w-12 h-12 flex items-center justify-center">
                             <i class="fas fa-comments text-green-600 text-xl"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Consultation</h4>
-                            <p class="text-gray-600">We listen to understand your needs and challenges.</p>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-gray-800 leading-tight">Consultation</h4>
+                            <p class="text-gray-600 mt-1">We listen to understand your needs and challenges.</p>
                         </div>
                     </div>
                     
                     <div class="flex items-start">
-                        <div class="bg-green-100 p-3 rounded-full mr-4">
-                            <i class="fas fa-flask text-green-600 text-xl"></i>
+                        <div class="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0 mt-0.5 w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-lightbulb text-green-600 text-xl"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Solution Development</h4>
-                            <p class="text-gray-600">Our scientists develop formulations tailored to your application.</p>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-gray-800 leading-tight">Solution Development</h4>
+                            <p class="text-gray-600 mt-1">Our scientists develop formulations tailored to your application.</p>
                         </div>
                     </div>
                     
                     <div class="flex items-start">
-                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0 mt-0.5 w-12 h-12 flex items-center justify-center">
                             <i class="fas fa-cogs text-green-600 text-xl"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Prototyping</h4>
-                            <p class="text-gray-600">We create prototypes for testing and refinement.</p>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-gray-800 leading-tight">Prototyping</h4>
+                            <p class="text-gray-600 mt-1">We create prototypes for testing and refinement.</p>
                         </div>
                     </div>
                     
                     <div class="flex items-start">
-                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0 mt-0.5 w-12 h-12 flex items-center justify-center">
                             <i class="fas fa-truck text-green-600 text-xl"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Delivery</h4>
-                            <p class="text-gray-600">Your custom solution is manufactured and delivered.</p>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-gray-800 leading-tight">Delivery</h4>
+                            <p class="text-gray-600 mt-1">Your custom solution is manufactured and delivered.</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="md:w-1/2 fade-in delay-1">
-                <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
-                     alt="Custom fireproof solutions development in Estonia"
-                     class="rounded-lg shadow-xl w-full h-auto">
+            <!-- Mobile: Full width Spline viewer outside container -->
+            <div class="md:hidden fade-in delay-1">
+                <div class="w-screen relative" data-lenis-prevent style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
+                    <spline-viewer url="https://prod.spline.design/TDZrbMbgk7f0OuRr/scene.splinecode" 
+                                   style="width: 100%; height: 350px; min-height: 300px; border: none;" 
+                                   class="sm:!h-[400px] overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
+                </div>
+            </div>
+            
+            <!-- Desktop: Normal flex layout -->
+            <div class="hidden md:block md:w-1/2 fade-in delay-1">
+                <div class="relative w-full" data-lenis-prevent>
+                    <spline-viewer url="https://prod.spline.design/TDZrbMbgk7f0OuRr/scene.splinecode" 
+                                   style="width: 100%; height: 350px; min-height: 300px; border: none;" 
+                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
+                </div>
             </div>
         </div>
         
@@ -776,7 +955,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="products-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#products-grid-pattern)"/>
@@ -789,13 +968,29 @@ a[data-preview]:hover {
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">Innovative fireproof storage solutions designed for maximum safety and versatility across various applications.</p>
         </div>
         
-        <div class="flex flex-col md:flex-row items-center mb-16">
-            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in order-2 md:order-1">
-                <img src="https://static.wixstatic.com/media/847d72_6a5907bee6ff47a8a6610653c13a6984~mv2.jpeg" 
-                     alt="Fireproof storage containers" 
-                     class="rounded-lg shadow-xl w-full h-auto">
+        <div class="flex flex-col md:flex-row items-center mb-8">
+            <div class="md:w-1/2 mb-6 md:mb-0 md:pr-10 fade-in order-2 md:order-1">
+                <!-- Mobile: Full width Spline viewer outside container -->
+                <div class="md:hidden fade-in delay-1 mb-4">
+                    <div class="w-screen relative" data-lenis-prevent style="margin-left: calc(40% - 50vw); margin-right: calc(60% - 50vw);">
+                        <spline-viewer url="https://prod.spline.design/yS0J-LHQc66rdeJP/scene.splinecode" 
+                                       style="width: 100%; height: 350px; min-height: 300px; border: none;" 
+                                       class="sm:!h-[400px] overflow-hidden"
+                                       loading="eager"
+                                       loading-anim-type="spinner-small-light"></spline-viewer>
+                    </div>
+                </div>
+                
+                <!-- Desktop: Normal container layout -->
+                <div class="hidden md:block relative" data-lenis-prevent>
+                    <spline-viewer url="https://prod.spline.design/yS0J-LHQc66rdeJP/scene.splinecode" 
+                                   style="width: 100%; height: 350px; min-height: 300px; border: none;" 
+                                   class="sm:!h-[400px] md:!h-[450px] lg:!h-[500px] rounded-lg overflow-hidden"
+                                   loading="eager"
+                                   loading-anim-type="spinner-small-light"></spline-viewer>
+                </div>
             </div>
-            <div class="md:w-1/2 fade-in delay-1 mb-mobile-6 text-center-mobile order-1 md:order-2">
+            <div class="md:w-1/2 fade-in delay-1 text-center-mobile order-1 md:order-2">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">FireGuard™ Storage Containers</h3>
                 <p class="text-gray-600 mb-6">Our flagship storage containers are engineered with advanced FireGuard™ composite materials to provide unparalleled protection for hazardous materials storage. Currently undergoing extensive testing for transportation applications, these containers represent the next evolution in fire-safe storage solutions.</p>
                 <ul class="space-y-3 mb-8 text-left">
@@ -821,19 +1016,17 @@ a[data-preview]:hover {
                 </div>
             </div>
         </div>
-        
-
     </div>
 </section>
 
-    <!-- About Us & Team Section -->
-    <section id="about" class="py-20 bg-gray-100 relative overflow-hidden">
+<!-- About Us & Team Section -->
+<section id="about" class="py-20 bg-gray-100 relative overflow-hidden">
         <!-- Animated Grid Pattern Background -->
         <div class="animated-grid-pattern">
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="about-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.06)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#about-grid-pattern)"/>
@@ -909,8 +1102,8 @@ a[data-preview]:hover {
             </div>
         </div>
         
-        <!-- Team Section -->
-        <div class="mt-20">
+    <!-- Team Section -->
+    <div class="mt-20 hidden-team" id="team-section">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Leadership Team</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Meet the experts behind Elven Technologies' innovative fireproof solutions.</p>
@@ -1021,26 +1214,6 @@ a[data-preview]:hover {
                     </div>
                 </div>
                 
-                <!-- Shio - Creative Director -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in delay-2">
-                    <img src="https://static.wixstatic.com/media/847d72_0bdae337d9144ffdae8de9f6e95c72b9~mv2.jpg" 
-                         alt="Shio Khidasheli" 
-                         class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-1">Shio Khidasheli</h3>
-                        <p class="text-green-600 font-medium mb-4">Creative Director</p>
-                        <p class="text-gray-600 mb-4">Leading creative initiatives and brand strategy, ensuring Elven's innovative solutions are effectively communicated across all platforms and markets.</p>
-                        <div class="flex space-x-3">
-                            <a href="https://linkedin.com/in/elventechnologies" class="text-gray-400 hover:text-green-600 transition duration-300">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="mailto:info@elventech.net" class="text-gray-400 hover:text-green-600 transition duration-300">
-                                <i class="far fa-envelope"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- Levan - Business Development Assistant -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
                     <img src="https://static.wixstatic.com/media/847d72_04fe6ee182874afdb6d7fbc70ba574e0~mv2.jpg" 
@@ -1069,182 +1242,97 @@ a[data-preview]:hover {
     </div>
 </section>
 
-<!-- Gallery Section with 1080x1080 frames -->
-<section id="gallery" class="py-12 md:py-20 bg-gray-100 relative overflow-hidden">
+<!-- Gallery Section with Infinite Scroll -->
+<section id="gallery" class="py-12 md:py-20 relative overflow-hidden">
+    <style>
+        @keyframes scroll-right {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .infinite-scroll {
+            animation: scroll-right 80s linear infinite;  /* Reduced speed by another 50% */
+        }
+
+        .scroll-container {
+            mask: linear-gradient(
+                90deg,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%
+            );
+            -webkit-mask: linear-gradient(
+                90deg,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%
+            );
+        }
+
+        .image-item {
+            transition: transform 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);  /* Added shadow */
+        }
+
+        .image-item:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);  /* Enhanced shadow on hover */
+        }
+    </style>
+
     <!-- Animated Grid Pattern Background -->
     <div class="animated-grid-pattern">
         <svg class="absolute inset-0">
             <defs>
                 <pattern id="gallery-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                    <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.04)" stroke-width="1"/>
+                    <rect width="2" height="2" fill="rgba(0, 0, 0, 0.06)" />
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#gallery-grid-pattern)"/>
             <g class="gallery-grid-squares"></g>
         </svg>
     </div>
+    
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-8 md:mb-16">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Gallery</h2>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Explore our materials, applications, and testing processes through our gallery of images.</p>
         </div>
         
-        <div class="relative overflow-hidden rounded-lg shadow-xl max-w-4xl mx-auto">
-            <div id="gallery-slider" class="flex transition-transform duration-500 ease-in-out">
-                <!-- Gallery Slide 1 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" 
-                             alt="Thermal Containment System" 
-                             class="w-full h-full object-cover">
+        <!-- Scrolling images container -->
+        <div class="relative z-10 w-full flex items-center justify-center py-8">
+            <div class="scroll-container w-full max-w-6xl">
+                <div class="infinite-scroll flex gap-6 w-max">
+                    <!-- First set of images -->
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" alt="Thermal Containment System" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 2 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_bc6ece636f0046c990f8e659322e2d2e~mv2.jpg" 
-                             alt="Fire Resistance Demonstration" 
-                             class="w-full h-full object-cover">
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_6fe43f7438fd4ee59a9fa3652d2dcc0b~mv2.jpg" alt="Final Product Testing" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 3 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_d14d56c56f2a44b49370b795ca17616f~mv2.png" 
-                             alt="Laboratory Testing Setup" 
-                             class="w-full h-full object-cover">
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" alt="Elven Sheet Application" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 5 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_b06fdf188aba43bfabe5e4465acbed1d~mv2.jpg" 
-                             alt="Material Testing Process" 
-                             class="w-full h-full object-cover">
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" alt="Elven Sheet Installation" class="w-full h-full object-cover" loading="lazy">
                     </div>
-                </div>
-                
-                <!-- Gallery Slide 6 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_3c0ded7900284c35b0c4887492f5b7c9~mv2.jpg" 
-                             alt="High-Temperature Resistance Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 7 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_de7ea8ac964045d9985eaf0059f3d3d8~mv2.jpg" 
-                             alt="Industrial Application" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 8 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_e01695cf8e984453a7037fcc4600deee~mv2.jpg" 
-                             alt="Manufacturing Process" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 9 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_3bb2f22ee8a945df8b382551d39bd4c3~mv2.jpg" 
-                             alt="Quality Control" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 10 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_cdc7de5c170d4c69afe0aa6f26b319b3~mv2.jpg" 
-                             alt="Research and Development" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 11 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_87fa8ea89c8e472688cf7f88679254fb~mv2.jpg" 
-                             alt="Safety Equipment Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 12 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_d138c41343c2479cbbca49def323c9ad~mv2.jpg" 
-                             alt="Field Applications" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 13 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_e76d223e12e9473ca4b99b11dfca4ff6~mv2.jpg" 
-                             alt="Performance Validation" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 14 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_39120af9fa6e47de80a9db0f71e6fa25~mv2.jpg" 
-                             alt="Technical Innovation" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 15 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_2ed625a520784cab842eb56b65e9c369~mv2.jpg" 
-                             alt="Laboratory Analysis" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 16 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_6fe43f7438fd4ee59a9fa3652d2dcc0b~mv2.jpg" 
-                             alt="Final Product Testing" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 17 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_f0cd4b8df3974cddbaac7993f3a30b33~mv2.png" 
-                             alt="Elven Sheet Application" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                
-                <!-- Gallery Slide 18 -->
-                <div class="w-full flex-shrink-0 relative">
-                    <div class="aspect-w-16 aspect-h-9 md:aspect-w-1 md:aspect-h-1">
-                        <img src="https://static.wixstatic.com/media/847d72_d33720c902ce47aebcbdadb276318ca3~mv2.png" 
-                             alt="Elven Sheet Installation" 
-                             class="w-full h-full object-cover">
+                    
+                    <!-- Duplicated images for seamless loop -->
+                    <div class="image-item flex-shrink-0 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl overflow-hidden shadow-2xl">
+                        <img src="https://static.wixstatic.com/media/847d72_9cba99a9edf043c7b3917ebef82264e3~mv2.jpg" alt="Thermal Containment System" class="w-full h-full object-cover" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
+        
+    </div>
 
 </section>
     <!-- Contact Section -->
@@ -1254,7 +1342,7 @@ a[data-preview]:hover {
             <svg class="absolute inset-0">
                 <defs>
                     <pattern id="contact-grid-pattern" width="30" height="30" patternUnits="userSpaceOnUse" x="-1" y="-1">
-                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.05)" stroke-width="1"/>
+                        <path d="M.5 30V.5H30" fill="none" stroke="rgba(0, 0, 0, 0.07)" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#contact-grid-pattern)"/>
@@ -1309,6 +1397,11 @@ a[data-preview]:hover {
                             <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300"></textarea>
                         </div>
                         
+                        <!-- reCAPTCHA widget -->
+                        <div class="flex justify-center">
+                            <div class="g-recaptcha" data-sitekey="6Lec0hEsAAAAAP6emjHuSvXhUHYssk5z2X5kTBxm"></div>
+                        </div>
+                        
                         <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300">Send Message</button>
                     </form>
                 </div>
@@ -1345,9 +1438,6 @@ a[data-preview]:hover {
                                 <a href="https://linkedin.com/company/elventechnologies" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="https://twitter.com/elventechnologies" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
                                 <a href="https://facebook.com/elventechnologies" target="_blank" class="bg-gray-200 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
@@ -1377,7 +1467,7 @@ a[data-preview]:hover {
         <div class="container mx-auto px-4 relative z-10">
             <div class="grid md:grid-cols-3 gap-8 mb-12 justify-items-center text-center md:text-left">
                 <div>
-                    <img src="https://static.wixstatic.com/media/847d72_b7a5d845504240afb0067e0d89543f48~mv2.png" 
+                    <img src="./logo.png" 
                          alt="Elven Technologies Logo" 
                          class="h-12 w-auto mb-4 mx-auto md:mx-0">
                     <h3 class="text-xl font-bold mb-4">Elven Technologies</h3>
@@ -1385,9 +1475,6 @@ a[data-preview]:hover {
                     <div class="flex space-x-4 justify-center md:justify-start">
                         <a href="https://linkedin.com/company/elventechnologies" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
                             <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://twitter.com/elventechnologies" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
-                            <i class="fab fa-twitter"></i>
                         </a>
                         <a href="https://facebook.com/elventechnologies" target="_blank" class="text-gray-400 hover:text-green-400 transition duration-300">
                             <i class="fab fa-facebook-f"></i>
@@ -1746,7 +1833,7 @@ if (sampleFormElement) {
                 shipping_address: document.getElementById('sample-address').value,
                 message: document.getElementById('sample-message').value,
                 to_name: "Elven Team",
-                to_email: "shio@elventech.net"
+                to_email: "info@elventech.net"
             }).then(
                 function(response) {
                     console.log("Sample request sent successfully", response);
@@ -1820,6 +1907,13 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             console.log("Contact form submitted");
             
+            // Check reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                alert("Please complete the reCAPTCHA verification.");
+                return;
+            }
+            
             // Show loading state
             const submitButton = this.querySelector('button[type="submit"]');
             const originalButtonText = submitButton.innerHTML;
@@ -1828,15 +1922,18 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Send email using EmailJS
             if (window.emailjs) {
+                console.log("EmailJS is available, sending email...");
                 emailjs.send("service_anf05h6", "template_contact_form", {
                     from_name: document.getElementById('name').value,
+                    from_email: "website@elventech.net",
                     company: document.getElementById('company').value,
                     reply_to: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
                     interest: document.getElementById('interest').value,
                     message: document.getElementById('message').value,
                     to_name: "Elven Team",
-                    to_email: "shio@elventech.net"
+                    to_email: "info@elventech.net",
+                    'g-recaptcha-response': recaptchaResponse
                 }).then(
                     function(response) {
                         console.log("Email sent successfully", response);
@@ -1854,15 +1951,40 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     function(error) {
                         console.error("Email failed to send:", error);
+                        console.error("Error details:", JSON.stringify(error));
+                        
+                        // Reset reCAPTCHA
+                        if (typeof grecaptcha !== 'undefined') {
+                            grecaptcha.reset();
+                        }
                         
                         // Restore button
                         submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
                         
-                        // Show error message
-                        alert("There was a problem sending your message. Please try again or contact us directly at contact@elventech.net");
+                        // Show detailed error message
+                        let errorMessage = "There was a problem sending your message. ";
+                        if (error && error.text) {
+                            errorMessage += "Error: " + error.text + " ";
+                        }
+                        errorMessage += "Please try again or contact us directly at info@elventech.net";
+                        
+                        alert(errorMessage);
                     }
                 );
+            } else {
+                console.error("EmailJS not loaded");
+                
+                // Reset reCAPTCHA
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.reset();
+                }
+                
+                // Restore button
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                
+                alert("Email service not available. Please contact us directly at info@elventech.net");
             }
         });
     }
@@ -2208,6 +2330,259 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<!-- Test Results Modal -->
+<div id="testResultsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                Test Results & Certifications
+            </h2>
+            <button onclick="closeTestResultsModal()" class="text-gray-500 hover:text-gray-700 text-2xl font-bold">
+                &times;
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <div class="mb-6">
+                <p class="text-gray-600 mb-4">
+                    Access our comprehensive collection of test reports, certifications, and technical documentation. 
+                    All documents are regularly updated to reflect our ongoing performance validation and quality assurance processes.
+                </p>
+            </div>
+
+            <!-- Test Status Table matching Excel layout -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-clipboard-check text-green-600 mr-2"></i>
+                    Test Results & Status Overview
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border border-gray-300 bg-white text-sm">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-3 py-2 text-left font-semibold">Material</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">BETR UL</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">TaG UL</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM F2700</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM D6413</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM D149</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM D3755</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">UL 94</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM E1225</th>
+                                <th class="border border-gray-300 px-2 py-2 text-center font-semibold text-xs">ASTM E1050</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Firefighter Uniform Material -->
+                            <tr>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Firefighter Uniform Material</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/Elven report thermal comfort 20230511.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/Elven report mechanical 20230511.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">not applicable</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard Light -->
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard Light</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/FireGuard Light TaG test report.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/FireGuard%20Light%20D149%20test%20report.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/FireGuard%20Light%20D3755%20test%20report.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded text-xs font-medium">Coming Soon</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/_opp_0026838_Infinita_Lab_Report.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/X25-016.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard Reinforced -->
+                            <tr>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard Reinforced</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/FigreGuard REINFORCED BETR test.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/FigreGuard Reinforced TaG test report.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard PRO -->
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard PRO</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/FigreGuard PRO BETR test.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/Elven Tech FigreGuard PRO TaG test report.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">not applicable</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+
+                            <!-- Fire Guard Light (10mm) -->
+                            <tr>
+                                <td class="border border-gray-300 px-3 py-2 font-medium">Fire Guard Light (10mm)</td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <a href="pdf/Fire Guard light 10mm TaG test.pdf" target="_blank" class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded text-xs font-medium hover:bg-blue-200 transition">Download</a>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                                <td class="border border-gray-300 px-2 py-2 text-center">
+                                    <span class="text-gray-400 text-xs">-</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="bg-gray-50 rounded-lg p-4">
+                <div class="flex items-start">
+                    <i class="fas fa-info-circle text-blue-500 text-lg mr-3 mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">About Our Testing</h4>
+                        <p class="text-sm text-gray-600">
+                            All testing has been conducted in accordance with international standards and best practices. 
+                            Our comprehensive testing program includes fire resistance, structural integrity, and performance 
+                            validation across various environmental conditions. Results are regularly updated as new tests are completed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openTestResultsModal() {
+    document.getElementById('testResultsModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeTestResultsModal() {
+    document.getElementById('testResultsModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+document.getElementById('testResultsModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeTestResultsModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !document.getElementById('testResultsModal').classList.contains('hidden')) {
+        closeTestResultsModal();
+    }
+});
+</script>
+
 <script src="fixed-script.js"></script>
 </body>
 </html>
